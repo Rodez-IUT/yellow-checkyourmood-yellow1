@@ -1,0 +1,11 @@
+.sass-cache/
+*.css.map
+*.sass.map
+*.scss.map
+*error.log
+Uwamp_2020/bin/apache/sessions/sess_ha8p7qpg2cria0tvrn8rdef7vei16vdp
+Uwamp_2020/bin/database/mysql-5.7.11/data/ib_logfile0
+Uwamp_2020/bin/database/mysql-5.7.11/data/ibdata1
+Uwamp_2020/bin/database/mysql-5.7.11/data/mysql/innodb_index_stats.ibd
+Uwamp_2020/bin/database/mysql-5.7.11/data/mysql/innodb_table_stats.ibd
+Uwamp_2020/bin/database/mysql-5.7.11/data/phpmyadmin/pma__recent.ibd

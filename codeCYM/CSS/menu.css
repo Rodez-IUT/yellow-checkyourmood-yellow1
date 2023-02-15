@@ -1,0 +1,48 @@
+h1 {
+    font-size: 1.75em;
+    text-align: center;
+    padding-top: 7%;
+}
+
+body {
+    background-image: url("../assets/images/background.png");
+    margin: 0 auto;
+    align-items: center;
+}
+.texteInscription {
+    text-align: center;
+    font-size: 1.3em;
+}
+
+.test {
+    background-color: black;
+}
+
+.liensTravaux {
+    color: #008062;
+}
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+@media (max-width:767px) {
+    .show-nav .container {
+        display: none;
+    }
+}
+
+.container {
+    padding-top: 7%;
+}
+
+.text-block {
+    width: 50%;
+    text-align: center;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    justify-items: center;
+    background-color: #95e9d589;
+    border-radius: 20px;
+}

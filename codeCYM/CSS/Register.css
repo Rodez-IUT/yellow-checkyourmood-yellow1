@@ -1,0 +1,160 @@
+body{
+    margin: 0 auto;
+    height: 100vh;
+}
+
+.error {
+    color: red;
+    font-size: 20px;
+    text-align: center;
+    padding-top: 2%;
+}
+
+.left:hover {
+    cursor: pointer;
+}
+
+.right:hover {
+    cursor: pointer;
+}
+
+.Main {
+    width: 100%;
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.Register-block {
+    width: 60%;
+    height: 75%;
+    border: solid #95E9D5;
+    border-radius: 25px;
+}
+.main-top {
+    width: 100%;
+    height: 20%;
+    font-size: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border-bottom: solid #95E9D5;
+}
+.main-top .left, .main-top .right{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+.main-top .left {
+    border-top-left-radius: 20px;
+}
+
+.main-top .right {
+    border-top-right-radius: 20px;
+}
+
+.selection {
+    border-right: solid #95E9D5;
+    background-color: #95E9D5;
+}
+
+.main-mid {
+    width: 100%;
+    height: 80%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+
+.input-label {
+    align-self: flex-start;
+    padding-left: 20%;
+}
+
+.input-text {
+    background-color: white;
+    border: solid #95E9D5;
+    border-radius: 25px;
+    width: 65%;
+    height: 12%;
+    padding-left: 10px;
+}
+
+.input-error {
+    background-color: white;
+    border: solid red;
+    border-radius: 25px;
+    width: 65%;
+    height: 12%;
+    padding-left: 10px;
+}
+
+.display-none {
+    display: none;
+}
+
+.input-button {
+    border-radius: 25px;
+    background-color: #95E9D5;
+    width: 20%;
+    border: solid #95E9D5;
+    font-size: 15px;
+}
+.bot {
+    display: none;
+}
+@media (min-width:768px) and (max-width:970px) {
+    .Register-block {
+        width: 70%;
+    }
+}
+@media (max-width:767px) {
+    .Main {
+        height: 75vh;
+    }
+    .Register-block {
+        border: none;
+        width: 100%;
+        height: 80%;
+        display: flex;
+        align-items: center;
+    }
+    .Register-block .main-top{
+        display: none;
+    }
+    .bot {
+        width: 100%;
+        display: flex;
+        height: 10vh;
+        align-items: center;
+        justify-content: space-around;
+        border-top: solid #95E9D5;
+        font-size: 25px;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+    }
+    .bot .left, .bot .right {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .bot .left {
+        border-right: solid #95E9D5;
+    }
+    .input-button {
+        width: 50%;
+        font-size: 20px;
+    }
+    .show-nav .container {
+        display: none;
+        position: absolute;
+    }
+}

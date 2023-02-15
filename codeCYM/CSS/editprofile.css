@@ -1,0 +1,52 @@
+/* Ajoute un padding sur l'ensemble du contenu du profil et le contour est verts */
+.main {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20vh;
+    padding: 20px;
+    border: solid 1px #96E9D5;
+    border-radius: 10px;
+    align-items: center;
+}
+
+/* Modifie les boutons verts */
+.button {
+    margin: 10px;
+    width: 200px;
+    height: 54px;
+    border-radius: 25px;
+    background-color: #96E9D5;
+    border: none;
+    align-items: center;
+    text-align: center;
+}
+
+.button:hover {
+    background-color: #147760;
+}
+
+.enRouge {
+    border: 1px solid red;
+}
+
+.enRouge-text {
+    color: red;
+}
+
+.enRouge::placeholder {
+    color: red;
+}
+
+.enVert {
+    color: #147760;
+}
+
+.input-text {
+    background-color: white;
+    border: 1px solid darkgrey;
+    border-radius: 5px;
+    width: 100%;
+    height: 38px;
+    padding-left: 10px;
+}

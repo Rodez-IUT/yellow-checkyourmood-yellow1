@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300&display=swap');
+@media (min-width:768px) and (max-width:970px){
+    body header {
+        justify-content: space-between;
+    }
+    body .space {
+        margin-right: 0px;
+    }
+}
+@media (max-width:767px) {
+    body .burger-menu {
+        display: inline-flex;
+        align-items: center;
+        padding: 0px 25px;
+        font-size: 30px;
+    }
+    body .mobile {
+        display: none;
+    }
+    .nav-menu {
+        display: flex;
+        list-style: none;
+        flex-direction: column;
+        align-items: center;
+        border-left: solid #95E9D5 10px;
+        border-right: solid #95E9D5 10px;
+        border-bottom: solid #95E9D5 10px;
+        font-size: 20px;
+        height: 93vh;
+    }
+    
+    .show-nav .nav-menu {
+        display: flex;
+        list-style: none;
+        flex-direction: column;
+        align-items: center;
+        border-left: solid #95E9D5 10px;
+        border-right: solid #95E9D5 10px;
+        border-bottom: solid #95E9D5 10px;
+        font-size: 20px;
+        height: 93vh;
+    }
+    .burger {
+        display: flex;
+        width: 100%;
+        align-items: center;
+        justify-content: right;
+        font-size: 30px;
+        padding-right: 3%;
+        height: 7vh;
+        border-left: solid #95E9D5 10px;
+        border-right: solid #95E9D5 10px;
+        border-top: solid #95E9D5 5px;
+    }
+    .show-nav .burger {
+        display: flex;
+        width: 100%;
+        align-items: center;
+        justify-content: right;
+        font-size: 30px;
+        padding-right: 3%;
+        height: 7vh;
+        border-left: solid #95E9D5 10px;
+        border-right: solid #95E9D5 10px;
+        border-top: solid #95E9D5 5px;
+    }
+    
+    .show-nav .burger-menu, .show-nav header {
+        display: none;
+    }
+    
+}
+body {
+    margin: 0 auto;
+}
+header {
+    background-color: #95E9D5;
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    padding-left: 1%;
+}
+.h:hover {
+    background-color: #147760;
+}
+.burger-menu, .nav-menu, .burger {
+    display: none;
+}
+button {
+    padding: 20px 20px;
+    background-color: transparent;
+    border: none;
+}
+.space {
+    margin-right: auto;
+}
+.check {
+    font-family: 'Oswald', sans-serif;
+    font-size: 30px;
+    padding: 0;
+}
+* {
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 600;
+}

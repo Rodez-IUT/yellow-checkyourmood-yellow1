@@ -1,0 +1,267 @@
+h1 {
+    margin-top: 5vh;
+    text-align: center;
+}
+
+.table {
+    text-align: center;
+    border-color: #95e9d5;
+}
+
+tr {
+    border: 1px solid black;
+    border-radius: 25px;
+}
+
+td {
+    border: 1px solid black;
+}
+
+/* Div contenant les boutons de la pagination */
+.pagination {
+    width: 100%;
+    height: 5vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+/* Boutons permettant de changer de page */
+.page-button {
+    font-size: 25px;
+    border: solid #95e9d5;
+    width: 50px;
+    height: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: #78a79c;
+    box-shadow: 2px 2px #95e9d5;
+}
+.active .page-button {
+    background-color: #95e9d552;
+    color: #78a79c;
+    box-shadow: none;
+    cursor: default;
+}
+.page-button:hover {
+    background-color: #95e9d552;
+    color: #78a79c;
+    box-shadow: 0px 0px;
+}
+
+/* Logo et Numéro des pages sur les boutons */
+.page-button i {
+    font-size: 28px;
+    padding: 5px;
+}
+
+/* Fait disparaitre toute la page quand on clique sur le bouton du burger Menu pour la version téléphone */
+.show-nav .first-container{
+    display: none;
+}
+.first-container {
+    width: 95%;
+    align-items: center;
+    margin-left: 2.5%;
+}
+
+.sort-button {
+    background-color: rgb(255, 255, 255);
+    padding: 10px;
+    border: black solid 1px;
+    border-radius: 10px;
+}
+
+.sort-button:hover {
+    background-color: #95e9d5;
+}
+
+.sort-button:active {
+    background-color: #67a093;
+}
+
+.center-emoji {
+    padding-top: 5%;
+}
+
+.center-description {
+    padding-top: 2%;
+}
+.param {
+    border: solid 1px;
+    border-radius: 10px;
+    background-color: aliceblue;
+    font-size: 30px;
+    padding: 0;
+    padding-top: 7px;
+    padding-left: 10px;
+    padding-right: 10px;
+    box-shadow: 2px 2px black;
+}
+.param:hover {
+    background-color: rgb(171, 211, 247);
+}
+.param:active {
+    box-shadow: 0px 0px;
+}
+td {
+    font-size: 30px;
+}
+th {
+    font-size: 35px;
+}
+.title {
+    text-decoration: underline;
+    font-weight: 200;
+}
+.popuptext {
+    width: 60%;
+    height: 95vh;
+    background-color: antiquewhite;
+    position: absolute;
+    top: 7vh;
+    display: none;
+    left: 20%;
+    border: solid 2px;
+    border-radius: 10px;
+    overflow-y: hidden;
+}
+.popuptext.show{
+    padding-top: 2vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2vh;
+    padding-bottom: 2vh;
+}
+.description {
+    width: 80%;
+    height: 30%;
+    font-size: 20px;
+    text-align: center;
+}
+.cross-button {
+    width: 90%;
+    height: 5vh;
+    display: flex;
+    justify-content: flex-end;
+}
+.popDelete {
+    display: none;
+}
+
+.xMark {
+    border: solid 1px;
+    border-radius: 10px;
+    background-color: aliceblue;
+    font-size: 30px;
+    padding: 0;
+    padding-top: 8px;
+    padding-left: 17px;
+    padding-right: 17px;
+    box-shadow: 2px 2px black;
+    text-align: center;
+    font-size: 30px;
+}
+.xMark:hover {
+    background-color: rgb(255, 49, 49);
+}
+.xMark:active {
+    box-shadow: 0px 0px;
+}
+.delimiter-Row {
+    width: 85%;
+    border: solid 1px;
+    background-color: black;
+}
+.buttons {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.buttons .form-del {
+    width: 100%;
+    height: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.buttons .form-desc {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 5px;
+}
+.buttons form textarea {
+    width: 90%;
+    height: 160%;
+}
+.trash, .update {
+    width: 40%;
+    height: 5vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: solid 1px;
+    border-radius: 15px;
+}
+.trash {
+    background-color: rgb(255, 49, 49);
+    
+}
+.update {
+    background-color: #95e9d5;
+    margin-bottom: 5vh;
+}
+.time {
+    width: 55%;
+    height: 50%;
+    text-align: center;
+}
+.Sscreen-Emoji {
+    font-size: 10vh;
+}
+@media (max-width:767px) {
+    .first-container{
+        scale: 0.92;
+        display: flex;
+        align-items: center;
+        justify-content: start;
+        flex-direction: column;
+    }
+    .Property-Bscreen {
+        display: none;
+    }
+    .popuptext {
+        width: 90%;
+        left: 5%;
+    }
+    .description {
+        height: 30%;
+        font-size: 20px;
+        text-align: center;
+    }
+    .time {
+        width: 70%;
+    }
+}
+@media (min-width:768px) and (max-width:970px) {
+    .popuptext {
+        width: 90%;
+        left: 5%;
+    }
+    .time {
+        width: 45%;
+    }
+}

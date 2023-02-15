@@ -1,0 +1,141 @@
+* {
+    margin: 0px
+}
+
+table {
+    text-align: center;
+    height: 100%;
+    width: 100%;
+}
+.title {
+    height: 10%;
+}
+td.mid-const-part, td.top-const-part, td.bot-const-part {
+    border-left: solid 1px;
+    border-bottom: solid 1px;
+}
+.top-const-part {
+    background-color: #64c0aa;
+}
+
+td.mid-float-part, td.top-float-part, td.bot-float-part {
+    border-bottom: solid 1px;
+}
+.top-float-part {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.top-float-part .date-selector {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.top-float-part .date-selector input, select {
+    background-color: #64c0aa;
+    padding: 5px;
+    border: none;
+    height: 8vh;
+    width: 9vw;
+}
+.top-float-part .date-selector input::placeholder {
+    color: black;
+}
+.top-float-part .date-selector input:hover ,select:hover {
+    background-color: #147760;
+}
+.top-float-part {
+    background-color: #64c0aa;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.smiley {
+    width: 100%;
+    height: 30vh;
+    font-size: 20vh;
+}
+.mid-const-part {
+    width: 50%;
+    height: 25vh;
+}
+.chart-container {
+    margin-left: auto;
+    margin-right: auto;
+    width: 30vw;
+}
+.low-part {
+    display: none;
+}
+@media (max-width:767px) {
+    .donu-line-Chart {
+        margin-left: auto;
+        margin-right: auto;
+        height: 100%;
+        width: 80vw;
+    }
+    .chart-container {
+        width: 100%;
+        height: 60%;
+    }
+    .mid-float-part {
+        height: 50vh;
+    }
+    .smiley {
+        width: 100%;
+        height: 15vh;
+        font-size: 10vh;
+    }
+    .low-part .chart-container {
+        width: 100%;
+        height: 100%;
+    }
+    .low-part-don {
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+        height: 100%;
+    }
+    .const {
+        display: none;
+    }
+    .low-part {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+    .top-const-part.low-part {
+        width: 100%;
+    }
+    .top-float-part .date-selector input, select {
+        background-color: #64c0aa;
+        padding: 5px;
+        border: none;
+        height: 8vh;
+        width: 22vw;
+    }
+    td.mid-const-part, td.top-const-part, td.bot-const-part {
+        border-left: none;
+        border-bottom: solid 1px;
+    }
+    .top-float-part {
+        width: 100%;
+    }
+    .show-nav table {
+        display: none;
+    }
+    td.bot-const-part {
+        height: 40vh;
+        width: 100%;
+    }
+}
+.bouton {
+    font-weight: 700;
+}
