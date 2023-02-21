@@ -25,12 +25,12 @@ class StatsController {
      * @return $view  la vue de la page
      */
     public function index($pdo) {
-        $view = new View("CheckYourMood/codeCYM/views/Stats");
+        $view = new View("/yellow-checkyourmood-yellow1/codeCYM/views/Stats");
         $startDate = HttpHelper::getParam("startDate");
         $endDate = HttpHelper::getParam("endDate");
         $humeurs = HttpHelper::getParam("humeurs");
         if (!isset($_SESSION['UserID'])) {
-            $view = new View("CheckYourMood/codeCYM/views/Register");
+            $view = new View("/yellow-checkyourmood-yellow1/codeCYM/views/Register");
         } else {
             $MaxHum = $this->statsService->getMaxHumeur($pdo, $_SESSION['UserID']);
             $MaxHum2 = $this->statsService->getMaxHumeur($pdo, $_SESSION['UserID']);
@@ -76,9 +76,9 @@ class StatsController {
      * @return $view  la vue de la page
      */
     public function historyVal($pdo) {
-        $view = new View("CheckYourMood/codeCYM/views/history");
+        $view = new View("/yellow-checkyourmood-yellow1/codeCYM/views/history");
         if (!isset($_SESSION['UserID'])) {
-            $view = new View("CheckYourMood/codeCYM/views/Register");
+            $view = new View("/yellow-checkyourmood-yellow1/codeCYM/views/Register");
         } else {
             $pagination = HttpHelper::getParam('page');
             $resultats = $this->statsService->getHistorique($pdo, $pagination,  $_SESSION['UserID']);
@@ -96,7 +96,7 @@ class StatsController {
      * @return $view  la vue de la page avec l'option sélectionnée
      */
     public function optionSelected($pdo) {
-        $view = new View("CheckYourMood/codeCYM/views/Stats");
+        $view = new View("/yellow-checkyourmood-yellow1/codeCYM/views/Stats");
         $startDate = HttpHelper::getParam("startDate");
         $endDate = HttpHelper::getParam("endDate");
         $humeurs = HttpHelper::getParam("humeurs");
@@ -157,7 +157,7 @@ class StatsController {
      */
 
     public function deleteHumeur($pdo) {
-        $view = new View("CheckYourMood/codeCYM/views/history");
+        $view = new View("/yellow-checkyourmood-yellow1/codeCYM/views/history");
         $pagination = HttpHelper::getParam('page');
         $time = HttpHelper::getParam("time");
         $libelle = HttpHelper::getParam("libelle");
@@ -173,7 +173,7 @@ class StatsController {
      * Est utiliser pour la modification des données d'une humeur
      */
     public function update($pdo) {
-        $view = new View("CheckYourMood/codeCYM/views/history");
+        $view = new View("/yellow-checkyourmood-yellow1/codeCYM/views/history");
         $pagination = HttpHelper::getParam('page');
         $time = HttpHelper::getParam("time");
         $libelle = HttpHelper::getParam("libelle");

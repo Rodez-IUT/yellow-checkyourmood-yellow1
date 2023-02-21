@@ -5,12 +5,12 @@ class headerComponent extends HTMLElement {
     constructor() {
         super()
         this.innerHTML = `
-        <link rel="stylesheet" href="/CheckYourMood/codeCYM/CSS/header-component.css">
-        <link rel="stylesheet" href="/CheckYourMood/codeCYM/third-party/fontawesome-free-6.2.0-web/css/all.css">
+        <link rel="stylesheet" href="/yellow-checkyourmood-yellow1/codeCYM/CSS/header-component.css">
+        <link rel="stylesheet" href="/yellow-checkyourmood-yellow1/codeCYM/third-party/fontawesome-free-6.2.0-web/css/all.css">
         
         <header>
             <div class="burger-menu"><i class="fa-solid fa-bars"></i></div>
-            <img src="/CheckYourMood/codeCYM/assets/images/logoCYM.png" height="70px">
+            <img src="/yellow-checkyourmood-yellow1/codeCYM/assets/images/logoCYM.png" height="70px">
             &nbsp; &nbsp;
             <form action="#" method="get" class="space">
                 <input hidden name="action" value="index">

@@ -4,18 +4,18 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/CheckYourMood/codeCYM/CSS/Register.css">
-    <link href="/CheckYourMood/codeCYM/third-party/bootstrap/css/bootstrap.css" rel="stylesheet"/>
-    <link rel="apple-touch-icon" sizes="180x180" href="/CheckYourMood/codeCYM/assets/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/CheckYourMood/codeCYM/assets/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/CheckYourMood/codeCYM/assets/favicon/favicon-16x16.png">
+    <link rel="stylesheet" href="/yellow-checkyourmood-yellow1/codeCYM/CSS/Register.css">
+    <link href="/yellow-checkyourmood-yellow1/codeCYM/third-party/bootstrap/css/bootstrap.css" rel="stylesheet"/>
+    <link rel="apple-touch-icon" sizes="180x180" href="/yellow-checkyourmood-yellow1/codeCYM/assets/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/yellow-checkyourmood-yellow1/codeCYM/assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/yellow-checkyourmood-yellow1/codeCYM/assets/favicon/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
-    <link rel="mask-icon" href="/CheckYourMood/codeCYM/assets/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="mask-icon" href="/yellow-checkyourmood-yellow1/codeCYM/assets/favicon/safari-pinned-tab.svg" color="#5bbad5">
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
-    <script src="/CheckYourMood/codeCYM/third-party/JQuery/jquery-3.6.1.js"></script>
-    <script src="/CheckYourMood/codeCYM/JS/register.js" defer></script>
-    <script src="/CheckYourMood/codeCYM/JS/header-component.js" defer></script>
+    <script src="/yellow-checkyourmood-yellow1/codeCYM/third-party/JQuery/jquery-3.6.1.js"></script>
+    <script src="/yellow-checkyourmood-yellow1/codeCYM/JS/register.js" defer></script>
+    <script src="/yellow-checkyourmood-yellow1/codeCYM/JS/header-component.js" defer></script>
     <title>Inscription / Connexion</title>
 </head>
 <body>

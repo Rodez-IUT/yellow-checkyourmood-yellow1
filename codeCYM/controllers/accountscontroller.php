@@ -22,7 +22,7 @@ class AccountsController {
      */
     public function index($pdo) {
         $id = $_SESSION['UserID'];
-        $view = new View("CheckYourMood/codeCYM/views/Account");
+        $view = new View("/yellow-checkyourmood-yellow1/codeCYM/views/Account");
         /* récupère dans la base de données les infos de l'utilisateur */
         $resultats = $this->accountsService->getProfile($pdo, $id); 
 
@@ -46,7 +46,7 @@ class AccountsController {
     public function editProfile($pdo) {
 
         /* création de la vue pour modifier son profil */
-        $view = new View("CheckYourMood/codeCYM/views/editprofile");
+        $view = new View("/yellow-checkyourmood-yellow1/codeCYM/views/editprofile");
 
         /* Création d'un objet profil contenant tous les paramètres lié au profil de l'utilisateur (mdp, email...) */
         /* créer un objet "Profile" qui stock tous les paramètres lié au profil de l'utilisateur envoyé par le formulaire */
@@ -248,7 +248,7 @@ class AccountsController {
     public function editPassword($pdo) {
         $id = $_SESSION['UserID'];
         /* Création d'une nouvele vue */
-        $view = new View("CheckYourMood/codeCYM/views/editpassword");
+        $view = new View("/yellow-checkyourmood-yellow1/codeCYM/views/editpassword");
 
         /* Contrôle le champs ancien mot de passe */
         $view->setVar('resetPwd', 0);
@@ -285,13 +285,13 @@ class AccountsController {
     public function deleteAccount($pdo) {
         $id = $_SESSION['UserID'];
         /* Chargement de la vue de la page pour supprimer son compte */
-        $view = new View("CheckYourMood/codeCYM/views/deleteaccount");
+        $view = new View("/yellow-checkyourmood-yellow1/codeCYM/views/deleteaccount");
         $delete = HttpHelper::getParam("delete");
 
         /* Si le bouton du formulaire à été cliqué alors on supprime le compte */
         if(!empty($delete)) {
             $this->accountsService->deleteProfile($pdo, $id);
-            $view = new View("CheckYourMood/codeCYM/views/accountdeleted");
+            $view = new View("/yellow-checkyourmood-yellow1/codeCYM/views/accountdeleted");
             session_destroy();
         } 
 
@@ -310,7 +310,7 @@ class AccountsController {
         session_destroy();
 
         /* Chargement de la vue de la page d'accueil du site */
-        $view = new View("CheckYourMood/codeCYM/views/index");
+        $view = new View("/yellow-checkyourmood-yellow1/codeCYM/views/index");
 
         return $view;
     }

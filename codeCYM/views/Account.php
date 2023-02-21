@@ -2,18 +2,18 @@
     <html lang="fr">
     <head>
         <meta charset="UTF-8">
-        <link href="/CheckYourMood/codeCYM/third-party/bootstrap/css/bootstrap.css" rel="stylesheet"/>
-        <link href="/CheckYourMood/codeCYM/CSS/Account.css" rel="stylesheet"/>
-        <link rel="apple-touch-icon" sizes="180x180" href="/CheckYourMood/codeCYM/assets/favicon/apple-touch-icon.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="/CheckYourMood/codeCYM/assets/favicon/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/CheckYourMood/codeCYM/assets/favicon/favicon-16x16.png">
+        <link href="/yellow-checkyourmood-yellow1/codeCYM/third-party/bootstrap/css/bootstrap.css" rel="stylesheet"/>
+        <link href="/yellow-checkyourmood-yellow1/codeCYM/CSS/Account.css" rel="stylesheet"/>
+        <link rel="apple-touch-icon" sizes="180x180" href="/yellow-checkyourmood-yellow1/codeCYM/assets/favicon/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/yellow-checkyourmood-yellow1/codeCYM/assets/favicon/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/yellow-checkyourmood-yellow1/codeCYM/assets/favicon/favicon-16x16.png">
         <link rel="manifest" href="/site.webmanifest">
-        <link rel="mask-icon" href="/CheckYourMood/codeCYM/assets/favicon/safari-pinned-tab.svg" color="#5bbad5">
+        <link rel="mask-icon" href="/yellow-checkyourmood-yellow1/codeCYM/assets/favicon/safari-pinned-tab.svg" color="#5bbad5">
         <meta name="msapplication-TileColor" content="#da532c">
         <meta name="theme-color" content="#ffffff">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
-        <script src="/CheckYourMood/codeCYM/JS/header-component.js" defer></script>
-        <script src="/CheckYourMood/codeCYM/JS/accounts.js" defer></script>
+        <script src="/yellow-checkyourmood-yellow1/codeCYM/JS/header-component.js" defer></script>
+        <script src="/yellow-checkyourmood-yellow1/codeCYM/JS/accounts.js" defer></script>
         <title>Account</title>
     </head>
     <body>

@@ -11,7 +11,7 @@ class HomeController {
     }
 
     public function index() {
-        $view = new View("CheckYourMood/codeCYM/views/index");
+        $view = new View("/yellow-checkyourmood-yellow1/codeCYM/views/index");
         return $view;
     }
 

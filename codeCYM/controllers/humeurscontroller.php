@@ -23,11 +23,11 @@ class HumeursController {
      * @return $view  la vue de la page
      */
     public function index($pdo) {
-        $view = new View("CheckYourMood/codeCYM/views/Humeurs");
+        $view = new View("/yellow-checkyourmood-yellow1/codeCYM/views/Humeurs");
         $listeHumeurs = $this->humeursService->getListeHumeurs();
         $view->setVar('listeHumeurs',$listeHumeurs);
         if (!isset($_SESSION['UserID'])) {
-            $view = new View("CheckYourMood/codeCYM/views/Register");
+            $view = new View("/yellow-checkyourmood-yellow1/codeCYM/views/Register");
         }
         if(isset($_SESSION['msgHumeur'])) {
             $view->setVar('msgHumeur', $_SESSION['msgHumeur']);
@@ -40,7 +40,7 @@ class HumeursController {
      * sinon ne l'insère pas et indique à l'utilisateur que l'humeur est incorrecte
      */
     public function setHumeur($pdo) {
-        $view = new View("CheckYourMood/codeCYM/views/Humeurs");
+        $view = new View("/yellow-checkyourmood-yellow1/codeCYM/views/Humeurs");
         $id = $_SESSION['UserID'];
         $description = HttpHelper::getParam("description");
         $humeur = HttpHelper::getParam("humeur");

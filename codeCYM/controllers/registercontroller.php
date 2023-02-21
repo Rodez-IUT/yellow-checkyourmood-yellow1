@@ -26,7 +26,7 @@ class RegisterController {
      */
     public function index($pdo) {
         if (isset($_SESSION['UserID'])) {
-            $view = new View("CheckYourMood/codeCYM/views/Account");
+            $view = new View("/yellow-checkyourmood-yellow1/codeCYM/views/Account");
             $resultats = $this->accountService->getProfile($pdo, $_SESSION['UserID']);
             while($row = $resultats->fetch()) {
                 $view->setVar('mail', $row->User_Email);
@@ -36,7 +36,7 @@ class RegisterController {
                 $view->setVar('gender', $row->User_Gender);
             }
         } else {
-            $view = new View("CheckYourMood/codeCYM/views/Register");
+            $view = new View("/yellow-checkyourmood-yellow1/codeCYM/views/Register");
         }
         return $view;
     }
@@ -49,7 +49,7 @@ class RegisterController {
      */
     public function register($pdo) {
         new User();
-        $view = new View("CheckYourMood/codeCYM/views/Register");
+        $view = new View("/yellow-checkyourmood-yellow1/codeCYM/views/Register");
 
         if (User::$username != null && User::$email != null && User::$birthDate != null && User::$gender != "Choisissez votre genre" && User::$password != null && User::$confirmPassword != null) {
             $error = $this->registerService->insertUserValues($pdo, User::$username, User::$email, User::$birthDate, User::$gender, User::$password, User::$confirmPassword);
@@ -75,14 +75,14 @@ class RegisterController {
      */
     public function login($pdo) {
         new User();
-        $view = new View("CheckYourMood/codeCYM/views/Register");
+        $view = new View("/yellow-checkyourmood-yellow1/codeCYM/views/Register");
         if (isset($_SESSION['UserID'])) {
-            $view = new View("CheckYourMood/codeCYM/views/Account");
+            $view = new View("yellow-checkyourmood-yellow1/codeCYM/views/Account");
         } else if (User::$username != null && User::$password != null && User::$login == 1) {
             $result = $this->registerService->getLoginIn($pdo, User::$username, User::$password);
             if (is_integer($result)) {
                 $_SESSION['UserID'] = $result;
-                $view = new View("CheckYourMood/codeCYM/views/index");
+                $view = new View("/yellow-checkyourmood-yellow1/codeCYM/views/index");
                 header('Location: ?action=index&controller=home#');
                 return $view;
             }
