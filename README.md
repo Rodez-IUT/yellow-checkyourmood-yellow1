@@ -16,3 +16,4 @@ L'application peut être utilisé depuis un appareil android.
 <br>Zenhub : https://github.com/romainT1/SAE-S4---Developpement-d-une-application-complexe
 <br>Google Drive : https://drive.google.com/drive/folders/1FVGxRFx3SEnhJ3f3EOX7bIu8tWV5dWM4?usp=share_link
 <br>Figma : https://www.figma.com/file/aXjhgUIYtthm3Y66jjcypp/Untitled?node-id=0%3A1&t=JhxEerwRko5OPkbC-1
+<br>Audit : https://docs.google.com/document/d/1b9W7Cu4nR-KA9h0AZZFVyAeYTlAHGViN2p13FbUpIbY/edit?usp=share_link
