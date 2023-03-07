@@ -31,20 +31,30 @@ class RegisterService
      */
     public static function insertUserValues($pdo, $username, $email, $birthDate, $gender, $password, $confirmPassword) {
         try {
-            $insert = $pdo->prepare('INSERT INTO user (User_Name,User_Email,User_BirthDate,User_Gender,User_Password) 
-                                    VALUES (:username,:email,:birthDate,:gender,:pswd)');
+            // tout les caractères qui peuvent se trouver dans l'APIKEY
+            $chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            $string = '';
+            // boucle qui créer l'APIKEY
+            for($i=0; $i<10; $i++){
+                $string .= $chars[rand(0, strlen($chars)-1)];
+            }
+            $insert = $pdo->prepare('INSERT INTO user (User_Name,User_Email,User_BirthDate,User_Gender,User_Password,APIKEY) 
+                                    VALUES (:username,:email,:birthDate,:gender,:pswd,:cle)');
             if ($password != $confirmPassword) {
                 return "Les deux mots de passe ne sont pas identique";
             }
             /* cryptage du mot de passe en md5*/
             $password = md5($password);
-            $insert->execute(array('username'=>$username,'email'=>$email,'birthDate'=>$birthDate,'gender'=>$gender,'pswd'=>$password));
+            $crypate = md5($string);
+            $insert->execute(array('username'=>$username,'email'=>$email,'birthDate'=>$birthDate,'gender'=>$gender,'pswd'=>$password,'cle'=>$crypate));
             return "";
         } catch (PDOException $e) {
             $errorMessage = "création du compte impossible (le nom d'utilisateur est indisponible ou l'email est déjà utilisé) ou la base de données est inaccessible";
             return $errorMessage;
         }
     }
+
+    
 
     /**
      * Récupère l'ID de l'utilisateur si le nom d'utilisateur et le mot de passe sont correct

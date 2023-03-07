@@ -86,7 +86,7 @@
 			// cryptage du mot de passe 
 			$password = md5($password);
 			// requete mysql
-			$maRequete = 'SELECT * FROM user WHERE USER_Name = :leLogin AND USER_Password = :lePassword';
+			$maRequete = 'SELECT APIKEY FROM user WHERE USER_Name = :leLogin AND USER_Password = :lePassword';
 
 			// preparation de la requete
 			$stmt = $pdo->prepare($maRequete);
@@ -98,41 +98,21 @@
 			// execution de la requete
 			$stmt->execute();	
 			$nb = $stmt->rowCount();
+			while($apiKey = $stmt->fetch()) {
+				$aReturn = $apiKey['APIKEY'];
+			}
 
-			// si $nb != 0 alors le login et le mot de passe correspondent a un compte
-			if ($nb!=0) {
-				// génération de l'APIKEY
-				$apiKEY = creationAPIKEY();
-				// requete de stockage dans la bd
-				$stockage = 'UPDATE user SET APIKEY = :laAPIKEY WHERE USER_Name = :leLogin AND USER_Password = :lePassword ';
-				// preparation de la requete
-				$aExec = $pdo->prepare($stockage);
-			
-				// affectation des parametres pour sécuriser la requete
-				$aExec->bindParam("laAPIKEY", md5($apiKEY));
-				$aExec->bindParam("leLogin", $login);
-				$aExec->bindParam("lePassword", $password);
-
-				// execution de la requete
-				$aExec->execute();	
-				$nbRow = $aExec->rowCount();
-				if ($nbRow==0) {
-					// Si erreur dans l'ajout ou dans la modification
-					$infos['Statut']="KO";
-					$infos['Message']="Erreur lors de l'ajout ou de la modification";
-					sendJSON($infos, 400) ;
-				} else {
-					// Modification réalisée
-					$infos['Statut']="OK";
-					$infos['Message']="Modification effectuée";
-					$infos['CYMAPIKEY']=$apiKEY;
-					sendJSON($infos, 201) ;
-				}
-			} else {
+			// si $nb == 0 alors le login et le mot de passe ne correspondent pas a un compte
+			if ($nb==0) {
 				$infos['Statut']="KO";
 				$infos['Message']="Logins incorrects";
 				sendJSON($infos, 401) ;
 				die();
+			} else {
+				$infos['Statut']="OK";
+				$infos['Message']="Connexion reussi";
+				$infos['APIKEY']= $aReturn;
+				sendJSON($infos, 401) ;
 			}
 		} catch(PDOException $e){
 			$infos['Statut']="KO";
@@ -187,21 +167,6 @@
 			sendJSON($infos, 500) ;
 		}
 		
-	}
-	
-	/**
-     * Génère un chaine de caractère qui correspond a l'APIKEY
-	 * @param $length = 10 pour la longueur de l'APIKEY
-     */
-	function creationAPIKEY($length=10){
-		// tout les caractères qui peuvent se trouver dans l'APIKEY
-		$chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-		$string = '';
-		// boucle qui créer l'APIKEY
-		for($i=0; $i<$length; $i++){
-			$string .= $chars[rand(0, strlen($chars)-1)];
-		}
-		return $string;
 	}
 	
 	/**

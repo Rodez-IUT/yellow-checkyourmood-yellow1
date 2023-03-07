@@ -66,7 +66,7 @@
 							addHumeurToAnAccount($donnees,$url[1] );
 						} else {
 							$infos['Statut']="KO";
-							$infos['message']="Vous n'avez pas renseigné le No de code barre.";
+							$infos['message']="Vous n'avez pas renseigné de code User";
 							sendJSON($infos, 400) ;
 						}
 						
