@@ -33,6 +33,7 @@ class RegisterService
      */
     public static function insertUserValues($pdo, $username, $email, $birthDate, $gender, $password, $confirmPassword) {
         try {
+            $date = date("Y-m-d");
             // tout les caractères qui peuvent se trouver dans l'APIKEY
             $chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
             $string = '';
@@ -44,6 +45,9 @@ class RegisterService
                                     VALUES (:username,:email,:birthDate,:gender,:pswd,:cle)');
             if ($password != $confirmPassword) {
                 return "Les deux mots de passe ne sont pas identique";
+            }
+            if ($birthDate >= $date) {
+                return "Date de naissance supérieur ou égale à la date du jour";
             }
             /* cryptage du mot de passe en md5*/
             $password = md5($password);
