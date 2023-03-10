@@ -38,6 +38,23 @@
 						// fonction qui génère et stock l'APIKEY dans la bd
 						verifLogin($login, $password);
 						break ;
+
+					case 'getCodeUser' : 
+						// affectation aux variables le login et le mot de passe
+						if (isset($url[1])) {
+							$login = $url[1];
+						} else {
+							$login = "";
+						}
+						if (isset($url[2])) {
+							$password = $url[2];
+						} else {
+							$password = "";
+						}
+						// fonction qui génère et stock l'APIKEY dans la bd
+						getCodeUser($login, $password);
+						break ;
+					
 						
 					default : 
 						$infos['Statut']="KO";

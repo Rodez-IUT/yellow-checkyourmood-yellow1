@@ -122,6 +122,56 @@
 	}
 
 	/**
+     * Verifie que le login et le mot de passe correspondent a un compte
+	 * Si c'est bon alors une  APIKEY est généré et stocké en bd 
+     * @param $login correspond au login du compte
+	 * @param $password correspond au password du compte
+     */
+	function getCodeUser($login, $password) {
+		try {
+			// connexion a la bd
+			$pdo = getPDO();
+			// cryptage du mot de passe 
+			$password = md5($password);
+			// requete mysql
+			$maRequete = 'SELECT User_ID FROM user WHERE USER_Name = :leLogin AND USER_Password = :lePassword';
+
+			// preparation de la requete
+			$stmt = $pdo->prepare($maRequete);
+			
+			// affectation des parametres pour sécuriser la requete
+			$stmt->bindParam("leLogin", $login);
+			$stmt->bindParam("lePassword", $password);
+
+			// execution de la requete
+			$stmt->execute();	
+			$nb = $stmt->rowCount();
+			while($row = $stmt->fetch()) {
+				$code = $row['User_ID'];
+			}
+
+			// si $nb == 0 alors le login et le mot de passe ne correspondent pas a un compte
+			if ($nb==0) {
+				$infos['Statut']="KO";
+				$infos['Message']="Logins incorrects";
+				sendJSON($infos, 401) ;
+				die();
+			} else {
+				$infos['Statut']="OK";
+				$infos['Message']="Login Correct";
+				$infos['Code_User']= $code;
+				sendJSON($infos, 401) ;
+			}
+		} catch(PDOException $e){
+			$infos['Statut']="KO";
+			$infos['message']=$e->getMessage();
+			sendJSON($infos, 500) ;
+		}
+	}
+
+	
+
+	/**
      * Verifie si l'APIKEY est correct
      */
 	function authentification($id) {
