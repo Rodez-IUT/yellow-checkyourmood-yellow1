@@ -78,6 +78,20 @@ class headerComponent extends HTMLElement {
 /* Crée un nouvel élément qui pourra être utilisé sur chaque page pour créer un header */
 customElements.define('header-component', headerComponent)
 
+function selectNavItem(navItem) {
+    
+    //TODO
+
+    // Sélectionner l'élément de la navbar
+    navItem.classList.add('link-selected');
+  }
+  
+  document.querySelectorAll('.link').forEach(navItem => {
+    navItem.addEventListener('click', () => {
+      selectNavItem(navItem);
+    });
+  });  
+
 /**
  * Change l'état de la classe 'show-nav' quand on clique sur le burger menu, en version mobile, pour l'afficher ou non
  */
