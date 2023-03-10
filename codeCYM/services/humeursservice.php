@@ -3,6 +3,8 @@
 namespace services;
 
 use PDOException;
+use PDOStatement;
+use PDO;
 
 class HumeursService
 {
@@ -19,28 +21,28 @@ class HumeursService
 
     /**
      * Permet d'obtenir la liste des humeurs depuis un fichier externes
-     * @return liste contenant toutes les humeurs 
+     * @return null ou PDOStatement liste contenant toutes les humeurs 
      */
     public function getListeHumeurs() {
         try {
             $nomficTypes= dirname(__FILE__)."\humeurs.csv";
             if ( !file_exists($nomficTypes) ) {
-                throw new Exception('Fichier '.$nomficTypes.' non trouvé.');
+                throw new PDOException('Fichier '.$nomficTypes.' non trouvé.');
             }
             $liste = file($nomficTypes, FILE_IGNORE_NEW_LINES);
             return $liste;
-        } catch ( Exception $e ) {
+        } catch ( PDOException $e ) {
             return null;
         }
     }
 
     /**
      * Permet l'insertion de l'humeur d'un utilisateur si elle est dans la liste des humeurs disponibles
-     * @param $pdo  la connexion à la base de données
-     * @param $humeur libellé de l'humeur
-     * @param $smiley smiley associé à l'humeur
-     * @param $description commentaire que peut saisir un utilisateur (facultatif)
-     * @return $isOk  true si l'humeur a bien été inséré, sinon false
+     * @param PDO $pdo  la connexion à la base de données
+     * @param String $humeur libellé de l'humeur
+     * @param String $smiley smiley associé à l'humeur
+     * @param String $description commentaire que peut saisir un utilisateur (facultatif)
+     * @return Boolean $isOk  true si l'humeur a bien été inséré, sinon false
      */
     public function setHumeur($pdo, $humeur, $smiley, $description, $id) {
         $isOk = false;

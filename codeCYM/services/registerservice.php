@@ -3,6 +3,8 @@
 namespace services;
 
 use PDOException;
+use PDO;
+use PDOStatement;
 
 class RegisterService
 {
@@ -19,13 +21,13 @@ class RegisterService
 
     /**
      * Création d'un compte, insertion des données de l'utilisateur
-     * @param $pdo  la connexion à la base de données
-     * @param $username  le nom de l'utilisateur
-     * @param $email  l'email de l'utilisateur
-     * @param $birthDate  la date de naissance de l'utilisateur au format préféfini par l'input correspondant
-     * @param $gender  le genre de l'utilisateur
-     * @param $password  le mot de passe de l'utilisateur
-     * @return chaîne vide si la création du compte a pu être réalisé avec succès
+     * @param PDO $pdo  la connexion à la base de données
+     * @param String $username  le nom de l'utilisateur
+     * @param String $email  l'email de l'utilisateur
+     * @param String $birthDate  la date de naissance de l'utilisateur au format préféfini par l'input correspondant
+     * @param String $gender  le genre de l'utilisateur
+     * @param String $password  le mot de passe de l'utilisateur
+     * @return String chaîne vide si la création du compte a pu être réalisé avec succès
      *                le message d'erreur correspondant à l'erreur renvoyé 
      *                par mySQL si la création n'a pas pu être faite.
      */
@@ -58,9 +60,10 @@ class RegisterService
 
     /**
      * Récupère l'ID de l'utilisateur si le nom d'utilisateur et le mot de passe sont correct
-     * @param $username nom d'utilisateur
-     * @param $password mot de passe
-     * @return l'id de l'utilisateur si le nom d'utilisateur et le mot de passe sont correct,
+     * @param PDO $pdo la connexion à la base de données
+     * @param String $username nom d'utilisateur
+     * @param String $password mot de passe
+     * @return String l'id de l'utilisateur si le nom d'utilisateur et le mot de passe sont correct,
      *              Un message d'erreur dans le cas contraire
      */
     public static function getLoginIn($pdo, $username, $password) {

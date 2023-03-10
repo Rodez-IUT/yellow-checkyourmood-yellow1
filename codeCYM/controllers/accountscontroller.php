@@ -4,6 +4,7 @@ namespace controllers;
 use yasmf\HttpHelper;
 use services\AccountsService;
 use yasmf\View;
+use PDO;
 
 class AccountsController {
 
@@ -17,8 +18,8 @@ class AccountsController {
 
     /**
      * Fonction de base du controlleur, récupère le profil de l'utilisateur courant et l'affiche
-     * @param $pdo  la connexion à la base de données
-     * @return $view  la vue de la page pour pouvoir afficher les informations de l'utilisateur
+     * @param PDO $pdo  la connexion à la base de données
+     * @return View $view  la vue de la page pour pouvoir afficher les informations de l'utilisateur
      */
     public function index($pdo) {
         $id = $_SESSION['UserID'];
@@ -40,8 +41,8 @@ class AccountsController {
 
     /**
      * permet de changer les informations du profil de l'utilisateur
-     * @param $pdo  la connexion à la base de données
-     * @return $view  la vue de la page d'édition du profile avec toutes les informations modifiable par l'utilisateur
+     * @param PDO $pdo  la connexion à la base de données
+     * @return View $view  la vue de la page d'édition du profile avec toutes les informations modifiable par l'utilisateur
      */
     public function editProfile($pdo) {
 
@@ -88,11 +89,15 @@ class AccountsController {
     /**
      * Récupère toutes les informations modifiable du profil de l'utilisateur 
      * pour la page de modification des informations
-     * @param $pdo  la connexion à la base de données
-     * @return $view  les informations de l'utilisateur à afficher
+     * @param PDO $pdo  la connexion à la base de données
+     * @return View $view  les informations de l'utilisateur à afficher
      */
     public function getDefaultProfile($pdo, $view) {
         $id = $_SESSION['UserID'];
+        $defaultEmail = '';
+        $defaultUsername = '';
+        $defaultBirthDate = '';
+        $defaultGender = '';
 
         /* récupère dans la base données les infos de l'utilisateur */
         $verif = $this->accountsService->getProfile($pdo, $id); 
@@ -114,11 +119,11 @@ class AccountsController {
 
     /**
      * Vérifie dans la base de données si l'email existe déjà
-     * @param $pdo  la connexion à la base de données
-     * @param $aTester  le mail à vérifier
-     * @return $sameEmail  true si l'email existe déjà dans la base de données, sinon false
+     * @param PDO $pdo  la connexion à la base de données
+     * @param String $aTester  le mail à vérifier
+     * @return Boolean $sameEmail  true si l'email existe déjà dans la base de données, sinon false
      */
-    public function checkSameEmail($pdo, $aTester) {
+    public function checkSameEmail( $pdo, $aTester) {
         
         $sameEmail = false;
 
@@ -133,9 +138,9 @@ class AccountsController {
 
     /**
      * Vérifie dans la base de données si le nom d'utilisateur existe déjà
-     * @param $pdo  la connexion à la base de données
-     * @param $aTester  le nom d'utilisateur à vérifier
-     * @return $sameUsername  true si le nom d'utilisateur existe déjà dans la base de données, sinon false
+     * @param PDO $pdo  la connexion à la base de données
+     * @param String $aTester  le nom d'utilisateur à vérifier
+     * @return Boolean $sameUsername  true si le nom d'utilisateur existe déjà dans la base de données, sinon false
      */
     public function checkSameUsername($pdo, $aTester) {
 
@@ -152,12 +157,12 @@ class AccountsController {
 
     /**
      * Modifie l'email de l'utilisateur courant
-     * @param $pdo  la connexion à la base de données
-     * @param $view  la view à modifier
-     * @param $email  la nouvelle adresse mail
-     * @param $defaultEmail  l'ancienne adresse mail
-     * @param $sameEmail  true si l'email est déjà existant, sinon false
-     * @return $view  le message à afficher si il y a une erreur de modification ou non
+     * @param PDO $pdo  la connexion à la base de données
+     * @param View $view  la view à modifier
+     * @param String $email  la nouvelle adresse mail
+     * @param String $defaultEmail  l'ancienne adresse mail
+     * @param Boolean $sameEmail  true si l'email est déjà existant, sinon false
+     * @return View $view  le message à afficher si il y a une erreur de modification ou non
      */
     public function updateEmail($pdo, $view, $email, $defaultEmail, $sameEmail) {
         $id = $_SESSION['UserID'];
@@ -174,12 +179,12 @@ class AccountsController {
 
     /**
      * Modifie le nom d'utilisateur de l'utilisateur courant
-     * @param $pdo  la connexion à la base de données
-     * @param $view  la view à modifier
-     * @param $username  le nouveau nom d'utilisateur
-     * @param $defaultUsername  l'ancien nom d'utilisateur
-     * @param $sameUsername  true si le nom d'utilisateur est déjà existant, sinon false
-     * @return $view  le message à afficher si il y a une erreur de modification ou non
+     * @param PDO $pdo  la connexion à la base de données
+     * @param View $view  la view à modifier
+     * @param String $username  le nouveau nom d'utilisateur
+     * @param String $defaultUsername  l'ancien nom d'utilisateur
+     * @param Boolean $sameUsername  true si le nom d'utilisateur est déjà existant, sinon false
+     * @return View $view  le message à afficher si il y a une erreur de modification ou non
      */
     public function updateUsername($pdo, $view, $username, $defaultUsername, $sameUsername) {
         $id = $_SESSION['UserID'];
@@ -197,11 +202,11 @@ class AccountsController {
 
     /**
      * Modifie la date de naissance de l'utilisateur courant
-     * @param $pdo  la connexion à la base de données
-     * @param $view  la view à modifier
-     * @param $birthDate  la nouvelle date de naissance
-     * @param $defaultBirthDate  l'ancienne date de naissance
-     * @return $view  le message à afficher si il y a une erreur de modification ou non
+     * @param PDO $pdo  la connexion à la base de données
+     * @param View $view  la view à modifier
+     * @param String $birthDate  la nouvelle date de naissance
+     * @param String $defaultBirthDate  l'ancienne date de naissance
+     * @return View $view  le message à afficher si il y a une erreur de modification ou non
      */
     public function updateBirthDate($pdo, $view, $birthDate, $defaultBirthDate) {
         $id = $_SESSION['UserID'];
@@ -219,11 +224,11 @@ class AccountsController {
 
     /**
      * Modifie le genre de l'utilisateur courant
-     * @param $pdo  la connexion à la base de données
-     * @param $view  la view à modifier
-     * @param $username  le nouveau genre
-     * @param $defaultUsername  l'ancien genre
-     * @return $view  le message à afficher si il y a une modification du genre
+     * @param PDO $pdo  la connexion à la base de données
+     * @param View $view  la view à modifier
+     * @param String $gender  le nouveau genre
+     * @param String $defaultGender  l'ancien genre
+     * @return View $view  le message à afficher si il y a une modification du genre
      */
     public function updateGender($pdo, $view, $gender, $defaultGender) {
         $id = $_SESSION['UserID'];
@@ -242,11 +247,12 @@ class AccountsController {
 
     /**
      * Change le mot de passe de l'utilisateur
-     * @param $pdo  la connexion à la base de données
-     * @return $view  le message à afficher si il y a une modification du mot de passe
+     * @param PDO $pdo  la connexion à la base de données
+     * @return View $view  le message à afficher si il y a une modification du mot de passe
      */
     public function editPassword($pdo) {
         $id = $_SESSION['UserID'];
+        $defaultPassword = '';
         /* Création d'une nouvele vue */
         $view = new View("/yellow-checkyourmood-yellow1/codeCYM/views/editpassword");
 
@@ -279,8 +285,8 @@ class AccountsController {
 
     /**
      * Supprime le compte de l'utilisateur courant
-     * @param $pdo  la connexion à la base de données
-     * @return $view  la page de la confirmation de la suppression du compte
+     * @param PDO $pdo  la connexion à la base de données
+     * @return View $view  la page de la confirmation de la suppression du compte
      */
     public function deleteAccount($pdo) {
         $id = $_SESSION['UserID'];
@@ -300,10 +306,9 @@ class AccountsController {
 
     /**
      * Déconnecte l'utilisateur courant
-     * @param $pdo  la connexion à la base de données
-     * @return $view  la page d'accueil du site
+     * @return View $view  la page d'accueil du site
      */
-    public function disconnect($pdo) {
+    public function disconnect() {
 
         /* Initialisation de la valeur de la session à null avant de la détruire */
         $_SESSION['UserID'] = null;

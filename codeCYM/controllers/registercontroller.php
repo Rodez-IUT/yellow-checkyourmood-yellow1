@@ -5,6 +5,7 @@ use services\RegisterService;
 use services\AccountsService;
 use yasmf\HttpHelper;
 use yasmf\View;
+use PDO;
 
 class RegisterController {
 
@@ -21,8 +22,8 @@ class RegisterController {
     /**
      * Fonction de base du controlleur, si l'utilisateur est connecté le renvoi sur la page du compte,
      * sinon affiche la page de connexion/inscription
-     * @param $pdo  la connexion à la base de données
-     * @return $view  la vue de la page
+     * @param PDO $pdo  la connexion à la base de données
+     * @return View $view  la vue de la page
      */
     public function index($pdo) {
         if (isset($_SESSION['UserID'])) {
@@ -44,8 +45,8 @@ class RegisterController {
     /**
      * vérifie que les champs soit tous remplis pour l'inscription de 
      * l'utilisateur et crée un utilisateur si tout est correct, sinon renvoi un message d'erreur
-     * @param $pdo  la connexion à la base de données
-     * @return $view  la vue de la page
+     * @param PDO $pdo  la connexion à la base de données
+     * @return View $view  la vue de la page
      */
     public function register($pdo) {
         new User();
@@ -70,8 +71,8 @@ class RegisterController {
     /**
      * vérifie que les champs soit tous remplis pour la connexion de 
      * l'utilisateur et connecte l'utilisateur si tout est correct, sinon renvoi un message d'erreur
-     * @param $pdo  la connexion à la base de données
-     * @return $view  la vue de la page
+     * @param PDO $pdo  la connexion à la base de données
+     * @return View $view  la vue de la page
      */
     public function login($pdo) {
         new User();

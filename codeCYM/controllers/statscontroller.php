@@ -5,10 +5,12 @@ use services\StatsService;
 use services\HumeursService;
 use yasmf\View;
 use yasmf\HttpHelper;
+use PDO;
 
 class StatsController {
 
     private $statsService;
+    private $humeursService;
 
     public function __construct()
     {
@@ -21,8 +23,8 @@ class StatsController {
      * Fonction de base du controlleur, si l'utilisateur n'est pas connecté 
      * le renvoi sur la page du connexion/inscription,
      * sinon affiche la page des statistiques de l'utilisateur
-     * @param $pdo  la connexion à la base de données
-     * @return $view  la vue de la page
+     * @param PDO $pdo  la connexion à la base de données
+     * @return View $view  la vue de la page
      */
     public function index($pdo) {
         $view = new View("/yellow-checkyourmood-yellow1/codeCYM/views/Stats");
@@ -72,8 +74,8 @@ class StatsController {
     /**
      * affiche la page de l'historique des valeurs de l'utilisateur
      * si l'utilisateur n'est pas connecté, le renvoi sur la page de connexion/inscription
-     * @param $pdo  la connexion à la base de données
-     * @return $view  la vue de la page
+     * @param PDO $pdo  la connexion à la base de données
+     * @return View $view  la vue de la page
      */
     public function historyVal($pdo) {
         $view = new View("/yellow-checkyourmood-yellow1/codeCYM/views/history");
@@ -92,8 +94,8 @@ class StatsController {
     /**
      * Affiche différentes informations et graphes sur l'humeur 
      * qui a été sélectionnée entre les dates sélectionnée
-     * @param $pdo  la connexion à la base de données
-     * @return $view  la vue de la page avec l'option sélectionnée
+     * @param PDO $pdo  la connexion à la base de données
+     * @return View $view  la vue de la page avec l'option sélectionnée
      */
     public function optionSelected($pdo) {
         $view = new View("/yellow-checkyourmood-yellow1/codeCYM/views/Stats");
@@ -154,6 +156,8 @@ class StatsController {
      * affiche le nombre de saisies d'une humeur par rapport au nombre total
      * de saisies de toutes les humeurs, ainsi qu'un pourcentage de saisie
      * de cette humeur
+     * @param PDO $pdo  la connexion à la base de données
+     * @return View $view  la vue de la page quand on est delete une humeur
      */
 
     public function deleteHumeur($pdo) {
@@ -171,6 +175,8 @@ class StatsController {
 
     /**
      * Est utiliser pour la modification des données d'une humeur
+     * @param PDO $pdo  la connexion à la base de données
+     * @return View $view  la vue de la page quand on update une humeur
      */
     public function update($pdo) {
         $view = new View("/yellow-checkyourmood-yellow1/codeCYM/views/history");

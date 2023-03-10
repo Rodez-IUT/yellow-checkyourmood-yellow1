@@ -4,6 +4,7 @@ namespace controllers;
 use services\HumeursService;
 use yasmf\HttpHelper;
 use yasmf\View;
+use PDO;
 
 class HumeursController {
 
@@ -19,8 +20,8 @@ class HumeursController {
     /**
      * Fonction de base du controlleur, récupère la liste des humeurs qui seront proposées,
      * si l'utilisateur n'est pas connecté renvoi sur la page de connexion/inscription
-     * @param $pdo  la connexion à la base de données
-     * @return $view  la vue de la page
+     * @param PDO $pdo  la connexion à la base de données
+     * @return View $view  la vue de la page
      */
     public function index($pdo) {
         $view = new View("/yellow-checkyourmood-yellow1/codeCYM/views/Humeurs");

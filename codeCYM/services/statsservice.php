@@ -2,15 +2,16 @@
 
 namespace services;
 
-use PDOException;
+use PDO;
+use PDOStatement;
 
 class StatsService
 {
     /**
      * Récupère l'historique de toutes les humeurs de l'utilisateur
-     * @param $pdo  la connexion à la base de données
-     * @param $pagination numéro de la page  
-     * @return $resultats  le résultat de la requête (toutes les humeurs entrées par un utilisateur)
+     * @param PDO $pdo  la connexion à la base de données
+     * @param Int $pagination numéro de la page  
+     * @return PDOStatement $resultats  le résultat de la requête (toutes les humeurs entrées par un utilisateur)
      */
     public function getHistorique($pdo, $pagination, $id) {
         $requete = 'SELECT Humeur_TimeConst, CODE_User, Humeur_Libelle, Humeur_Emoji, Humeur_Time, Humeur_Description FROM Humeur WHERE CODE_User = :id ORDER BY Humeur_Time DESC LIMIT 15 OFFSET :pagination';
@@ -22,8 +23,8 @@ class StatsService
     /**
      * Récupère l'humeur qui apparait le plus ainsi que 
      * le nombre de fois où l'humeur a été saisie 
-     * @param $pdo  la connexion à la base de données
-     * @return $req  le résultat de la requête
+     * @param PDO $pdo  la connexion à la base de données
+     * @return String $req le résultat de la requête
      */
     public function getMaxHumeur($pdo, $id) {
         $req =$pdo->prepare("SELECT Humeur_Libelle, COUNT(Humeur_Libelle) as compteur, Humeur_Emoji from humeur join user ON user.User_ID = humeur.CODE_USER WHERE CODE_User = :id GROUP BY Humeur_Libelle ORDER BY compteur DESC LIMIT 1");
@@ -36,8 +37,8 @@ class StatsService
 
     /**
      * Récupère le nombre total d'humeur saisie entre 2 intervales de temps
-     * @param $pdo  la connexion à la base de données
-     * @return $req  le résultat de la requête
+     * @param PDO $pdo  la connexion à la base de données
+     * @return String $req  le résultat de la requête
      */
     public function getAllValueBetweenDates($pdo, $startDate, $endDate, $id) {
         $req = $pdo->prepare("SELECT Humeur_Libelle, COUNT(Humeur_Libelle) as compteur from humeur join user ON user.User_ID = humeur.CODE_USER WHERE CODE_User = :id AND Humeur_Time BETWEEN :startDate AND :endDate GROUP BY Humeur_Libelle");
@@ -49,9 +50,8 @@ class StatsService
     }
 
     /**
-     * @param $pdo  la connexion à la base de données
-     * @return True si l'humeur à été saisie entre 2 intervales de temps
-     * @return False sinon
+     * @param PDO $pdo  la connexion à la base de données
+     * @return Boolean True ou False sinon
      */
     public function verifHumeurEstPresente($pdo, $startDate, $endDate, $humeur,$id) {
         $req =$pdo->prepare("SELECT * from humeur join user ON user.User_ID = humeur.CODE_USER WHERE CODE_User = :id AND Humeur_Libelle = :humeur AND Humeur_Time BETWEEN :startDate AND :endDate GROUP BY Humeur_Libelle");
@@ -69,9 +69,8 @@ class StatsService
 
     /**
      * Vérifie si une humeur a déja été saisie entre 2 intervalle de temps 
-     * @param $pdo  la connexion à la base de données
-     * @return True Si une humeur à déja été saisie
-     * @return False sinon
+     * @param PDO $pdo  la connexion à la base de données
+     * @return Boolean True ou False sinon
      */
     public function verifIsThere($pdo, $startDate, $endDate, $id) {
         $req =$pdo->prepare("SELECT * from humeur join user ON user.User_ID = humeur.CODE_USER WHERE CODE_User = :id AND Humeur_Time BETWEEN :startDate AND :endDate GROUP BY Humeur_Libelle");
@@ -88,8 +87,8 @@ class StatsService
 
     /**
      * Récupère le nombre de fois qu'un utilisateur à saisi chaque humeur
-     * @param $pdo  la connexion à la base de données
-     * @return $req  le résultat de la requête
+     * @param PDO $pdo  la connexion à la base de données
+     * @return PDOStatement $req  le résultat de la requête
      */
     public function getAllValue($pdo, $id) {
         $req = $pdo->prepare("SELECT Humeur_Libelle, COUNT(Humeur_Libelle) as compteur from humeur join user ON user.User_ID = humeur.CODE_USER WHERE CODE_User = :id GROUP BY Humeur_Libelle");
@@ -99,8 +98,8 @@ class StatsService
 
     /**
      * Récupère le nombre d'humeurs qu'un utilisateur a saisie
-     * @param $pdo  la connexion à la base de données
-     * @return $allRow  le résultat de la requête converti en int
+     * @param PDO $pdo  la connexion à la base de données
+     * @return Int $allRow  le résultat de la requête converti en int
      */
     public function getAllRow($pdo, $id) {
         $req = $pdo->prepare ("SELECT COUNT(*) AS allRow FROM humeur WHERE CODE_User = :id");
@@ -112,11 +111,11 @@ class StatsService
 
     /**
      * Récupère le nombre de fois qu'un utilisateur a eu une humeur entre 2 dates
-     * @param $pdo  la connexion à la base de données
-     * @param $startDate  la date de début choisit par l'utilisateur
-     * @param $endDate  la date de fin choisit par l'utilisateur
-     * @param $humeurs  l'humeur choisit par l'utilisateur
-     * @return $result  le résultat de la requête
+     * @param PDO $pdo  la connexion à la base de données
+     * @param String $startDate  la date de début choisit par l'utilisateur
+     * @param String $endDate  la date de fin choisit par l'utilisateur
+     * @param String $humeurs  l'humeur choisit par l'utilisateur
+    * @return array<int, mixed>|string $result  le résultat de la requête
      */
     public function getMostUsed($pdo, $startDate, $endDate, $humeurs, $id) {
         $result = "";
@@ -138,11 +137,11 @@ class StatsService
 
     /**
      * Récupère le nombre de fois qu'un utilisateur a eu une humeur entre 2 dates regroupé par jour
-     * @param $pdo  la connexion à la base de données
-     * @param $startDate  la date de début choisit par l'utilisateur
-     * @param $endDate  la date de fin choisit par l'utilisateur
-     * @param $humeurs  l'humeur choisit par l'utilisateur
-     * @return $req  le résultat de la requête
+     * @param PDO $pdo  la connexion à la base de données
+     * @param String $startDate  la date de début choisit par l'utilisateur
+     * @param String $endDate  la date de fin choisit par l'utilisateur
+     * @param String $humeurs  l'humeur choisit par l'utilisateur
+     * @return PDOStatement $req  le résultat de la requête
      */
     public function getHumeurByTime($pdo, $startDate, $endDate, $humeurs, $id) {
         $req = $pdo->prepare("SELECT count(*) as nombreHumeur, Humeur_Libelle, DATE_FORMAT(Humeur_Time, '%d/%m/%Y') as Date from humeur where code_User=:id AND Humeur_Libelle = :libelle and Humeur_Time BETWEEN :startDate AND :endDate and Humeur_time GROUP BY (SELECT DATE_FORMAT(Humeur_Time, '%d/%m/%y'))");
