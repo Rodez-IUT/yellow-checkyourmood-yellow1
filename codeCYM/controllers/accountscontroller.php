@@ -188,15 +188,19 @@ class AccountsController {
      */
     public function updateUsername($pdo, $view, $username, $defaultUsername, $sameUsername) {
         $id = $_SESSION['UserID'];
-        /* Si les données du formulaire sont envoyées et que le nom d'utilisateur n'est pas vide et qu'il n'existe pas */
-        /* le nom d'utilisateur est modifié sinon affiche une erreur */
-        if(!empty($username) && $username != $defaultUsername && $sameUsername == false) {
-            $this->accountsService->editUsername($pdo, $username, $id);
-            $view->setVar('message', "Votre nom d'utilisateur a bien été changé !");
-        } else if(!empty($username) && $username != $defaultUsername && $sameUsername == true) {
-            $view->setVar('erreur', "nom d'utilisateur déjà existant !");
-        }
 
+        if (strlen($username) > 25) {
+            $view->setVar('erreur', "Nom d'utilisateur supérieur à 25 caractères");
+        } else {
+            /* Si les données du formulaire sont envoyées et que le nom d'utilisateur n'est pas vide et qu'il n'existe pas */
+        /* le nom d'utilisateur est modifié sinon affiche une erreur */
+            if(!empty($username) && $username != $defaultUsername && $sameUsername == false) {
+                $this->accountsService->editUsername($pdo, $username, $id);
+                $view->setVar('message', "Votre nom d'utilisateur a bien été changé !");
+            } else if(!empty($username) && $username != $defaultUsername && $sameUsername == true) {
+                $view->setVar('erreur', "nom d'utilisateur déjà existant !");
+            }
+        }
         return $view;
     }
 
@@ -337,9 +341,9 @@ class Profile {
     public static $erreur;
 
     public function __construct() {
- 
-        Profile::$email = HttpHelper::getParam("email");
-        Profile::$username = HttpHelper::getParam("username");
+
+        Profile::$email = HttpHelper::getParam("email") != '' ||  HttpHelper::getParam("email") != null ? htmlspecialchars(HttpHelper::getParam("email")) : '';
+        Profile::$username = HttpHelper::getParam("username") != '' ||  HttpHelper::getParam("username") != null ? htmlspecialchars(HttpHelper::getParam("username")) : '';
         Profile::$birthDate = HttpHelper::getParam("birthDate");
         Profile::$gender = HttpHelper::getParam("genderSelect");
         Profile::$update = HttpHelper::getParam("envoyer");
@@ -378,10 +382,10 @@ class Passwords {
 
     public function __construct() {
 
-        Passwords::$update = HttpHelper::getParam("envoyer");
-        Passwords::$newPassword = HttpHelper::getParam("newPassword");
-        Passwords::$confirmPassword = HttpHelper::getParam("confirmPassword");
-        Passwords::$oldPassword = HttpHelper::getParam("oldPassword");
+        Passwords::$update = htmlspecialchars(HttpHelper::getParam("envoyer"));
+        Passwords::$newPassword = htmlspecialchars(HttpHelper::getParam("newPassword"));
+        Passwords::$confirmPassword = htmlspecialchars(HttpHelper::getParam("confirmPassword"));
+        Passwords::$oldPassword = htmlspecialchars(HttpHelper::getParam("oldPassword"));
         Passwords::$message = null;
         Passwords::$testNewPassword = !empty(Passwords::$newPassword) && !empty(Passwords::$confirmPassword) 
                                       && strcmp(Passwords::$newPassword, Passwords::$confirmPassword) == 0;
