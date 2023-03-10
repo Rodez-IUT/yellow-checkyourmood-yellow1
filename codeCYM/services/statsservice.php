@@ -27,7 +27,7 @@ class StatsService
      * @return String $req le résultat de la requête
      */
     public function getMaxHumeur($pdo, $id) {
-        $req =$pdo->prepare("SELECT Humeur_Libelle, COUNT(Humeur_Libelle) as compteur, Humeur_Emoji from humeur join user ON user.User_ID = humeur.CODE_USER WHERE CODE_User = :id GROUP BY Humeur_Libelle ORDER BY compteur DESC LIMIT 1");
+        $req =$pdo->prepare("SELECT Humeur_Libelle, COUNT(Humeur_Libelle) as compteur, Humeur_Emoji from humeur join user ON user.User_ID = humeur.CODE_USER WHERE CODE_User = :id GROUP BY Humeur_Libelle, Humeur_Emoji  ORDER BY compteur DESC LIMIT 1");
         $req->execute(['id'=>$id]);
         if($req->rowCount() == 0) {
             return "Vous n'avez saisi aucune humeur";
@@ -54,7 +54,11 @@ class StatsService
      * @return Boolean True ou False sinon
      */
     public function verifHumeurEstPresente($pdo, $startDate, $endDate, $humeur,$id) {
-        $req =$pdo->prepare("SELECT * from humeur join user ON user.User_ID = humeur.CODE_USER WHERE CODE_User = :id AND Humeur_Libelle = :humeur AND Humeur_Time BETWEEN :startDate AND :endDate GROUP BY Humeur_Libelle");
+        $req =$pdo->prepare("SELECT Humeur_Libelle, CODE_User FROM humeur 
+        JOIN user ON user.User_ID = humeur.CODE_USER 
+        WHERE CODE_User = :id AND Humeur_Libelle = :humeur 
+        AND Humeur_Time BETWEEN :startDate AND :endDate 
+        GROUP BY Humeur_Libelle, CODE_User");
         $req->bindParam('id', $id);
         $req->bindParam('startDate', $startDate);
         $req->bindParam('endDate', $endDate);
@@ -73,7 +77,7 @@ class StatsService
      * @return Boolean True ou False sinon
      */
     public function verifIsThere($pdo, $startDate, $endDate, $id) {
-        $req =$pdo->prepare("SELECT * from humeur join user ON user.User_ID = humeur.CODE_USER WHERE CODE_User = :id AND Humeur_Time BETWEEN :startDate AND :endDate GROUP BY Humeur_Libelle");
+        $req =$pdo->prepare("SELECT Humeur_Libelle from humeur join user ON user.User_ID = humeur.CODE_USER WHERE CODE_User = :id AND Humeur_Time BETWEEN :startDate AND :endDate GROUP BY Humeur_Libelle");
         $req->bindParam('id', $id);
         $req->bindParam('startDate', $startDate);
         $req->bindParam('endDate', $endDate);
@@ -144,7 +148,10 @@ class StatsService
      * @return PDOStatement $req  le résultat de la requête
      */
     public function getHumeurByTime($pdo, $startDate, $endDate, $humeurs, $id) {
-        $req = $pdo->prepare("SELECT count(*) as nombreHumeur, Humeur_Libelle, DATE_FORMAT(Humeur_Time, '%d/%m/%Y') as Date from humeur where code_User=:id AND Humeur_Libelle = :libelle and Humeur_Time BETWEEN :startDate AND :endDate and Humeur_time GROUP BY (SELECT DATE_FORMAT(Humeur_Time, '%d/%m/%y'))");
+        $req = $pdo->prepare("SELECT COUNT(*) as nombreHumeur, MIN(Humeur_Libelle) as Humeur_Libelle, DATE_FORMAT(Humeur_Time, '%d/%m/%Y') as Date
+        FROM humeur
+        WHERE code_User = :id AND Humeur_Libelle = :libelle AND Humeur_Time BETWEEN :startDate AND :endDate
+        GROUP BY DATE_FORMAT(Humeur_Time, '%d/%m/%Y'), Humeur_Libelle, Humeur_Time");
         $req->execute(['id'=>$id, 'libelle'=>$humeurs, 'startDate'=>$startDate, 'endDate'=>$endDate]);
         return $req;
     }
