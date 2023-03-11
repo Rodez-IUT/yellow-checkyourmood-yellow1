@@ -46,7 +46,7 @@
                             }
                         ?>">
                     </div>
-                    <select name="humeurs">
+                    <select name="humeurs" aria-label='Sélection humeur '>
                         <option>TOUS</option>
                         <?php 
                             foreach ($listeHumeurs as $row) {
@@ -62,7 +62,7 @@
                             }
                         ?>
                     </select>
-                    <div class="date-selector">
+                    <div class="date-selector"> <!-- TODO Bouton pas accessible avec tab -->
                         <input type="submit" class="btn bouton">
                     </div>
                 </form>

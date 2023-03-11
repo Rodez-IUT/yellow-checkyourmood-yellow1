@@ -73,16 +73,16 @@
                         echo '<input class="form-control" type=password id="confirmPassword" name="confirmPassword" placeholder="Confirmez votre mot de passe"></input>';
                     }
                     echo '<div class="checkbox">
-                            <input id="check" type="checkbox" name="check"> Afficher les Mots de passe
+                            <input id="check" type="checkbox" name="check" aria-label="Afficher les mots de passe"> Afficher les mots de passes
                         </div>';
-                    echo '<input class="button" name="envoyer" type="submit" value="Confirmer"></input>';
+                    echo '<input class="button" name="envoyer" type="submit" value="Confirmer" aria-label="Confirmer"></input>';
                     echo '<p class="enVert">'.$message.'</p>';
                 ?>
             </form>
         </div>
         <div clas="row">
             <form method="get" action="#">
-                <input type="submit" class="button" value="Retour">
+                <input type="submit" class="button" value="Retour" aria-label="Retour">
                 <input hidden name="action" value="index">
                 <input hidden name='controller' value='accounts'>
             </form>

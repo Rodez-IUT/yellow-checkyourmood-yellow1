@@ -62,9 +62,9 @@
                             $dayBefore = $timeStamp1 - 86400;
                             $minDate = date('Y-m-d H:i:s', $dayBefore);
                             echo "<tr>
-                                    <td class='Sscreen-Libelle'>".htmlspecialchars($ligne->Humeur_Libelle)."<br><form class='Property-Sscreen' action='#' method='post'><button name='pop' value='$i' id='$i' type='submit' class='param'><i class='fa-solid fa-gear'></i></button></form>
+                                    <td class='Sscreen-Libelle'>".htmlspecialchars($ligne->Humeur_Libelle)."<br><form class='Property-Sscreen' action='#' method='post'><button name='pop' value='$i' id='$i' type='submit' class='param' aria-label='Modifier Humeur'><i class='fa-solid fa-gear'></i></button></form>
                                         <div class='popuptext' id='myPopup$i'>
-                                            <div class='cross-button'><form action='#' method='post'><button type='submit' class='xMark'><i class='fa-solid fa-xmark'></i></button></form></div>
+                                            <div class='cross-button'><form action='#' method='post'><button type='submit' class='xMark' aria-label='Fermer la page'><i class='fa-solid fa-xmark'></i></button></form></div>
                                             <div class='desc-title'>Description :</div>
                                             <textarea class='description' disabled>".htmlspecialchars($ligne->Humeur_Description)."</textarea>
                                             <div class='delimiter-Row'></div>
@@ -84,7 +84,7 @@
                                                             <input hidden name='change-time' value='$ligne->Humeur_Time'>
                                                             <input type='text' value='$ligne->Humeur_Time' disabled>";
                                                     }
-                                                    echo "<button type='submit' name='del-humeur' val='$i' class='update'>
+                                                    echo "<button type='submit' name='del-humeur' val='$i' class='update' aria-label='Valider'>
                                                         Valider
                                                     </button>
                                                 </form>
@@ -93,7 +93,7 @@
                                                     <input hidden name='controller' value='stats'>
                                                     <input hidden name='time' value='$ligne->Humeur_Time'>
                                                     <input hidden name='libelle' value='$ligne->Humeur_Libelle'>
-                                                    <button type='submit' name='del-humeur' value='$i' class='trash'>
+                                                    <button type='submit' name='del-humeur' value='$i' class='trash' aria-label='Supprimer'>
                                                         Supprimer
                                                     </button>
                                                 </form>

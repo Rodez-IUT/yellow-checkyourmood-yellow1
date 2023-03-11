@@ -47,7 +47,7 @@
                         echo '<input class="form-control input-text" type="text" name="username" placeholder="Pseudo" value='.$defaultUsername.'></input>';
                         echo '<input class="form-control input-text" type="date" name="birthDate" placeholder="Pseudo" value='.$defaultBirthDate.'></input>';
                     }
-                    echo "<select class='input-text' name='genderSelect'>";
+                    echo "<select class='input-text' name='genderSelect' aria-label='Sélection du genre'>";
                     foreach($genderList as $i) {
                         if($genderChanged) {
                             if ($gender == $i) {
@@ -64,7 +64,7 @@
                         }
                     }
                     echo "</select>";
-                    echo '<input class="button" name="envoyer" type="submit" value="Confirmer"></input>';
+                    echo '<input class="button" name="envoyer" type="submit" value="Confirmer" aria-label="Valider"></input>';
                     echo "<p class='enVert'>$message</p>";
                     echo "<p class='enRouge-text'>$erreur</p>";
                 ?>
@@ -72,7 +72,7 @@
         </div>
         <div clas="row">
             <form method="get" action="#">
-                <input type="submit" class="button" value="Retour">
+                <input type="submit" class="button" value="Retour" aria-label="Retour">
                 <input hidden name="action" value="index">
                 <input hidden name='controller' value='accounts'>
             </form>

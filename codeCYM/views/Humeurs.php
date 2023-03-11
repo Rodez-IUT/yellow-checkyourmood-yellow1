@@ -59,7 +59,7 @@
                     <input name="smiley" id="smiley" readonly placeholder="❔">
                 </div>
                 <div class="col col-md-2 col-12 envoyer-zone">
-                    <button class="bouton-envoyer"><i class="fa-solid fa-location-arrow"></i></button>
+                    <button class="bouton-envoyer" aria-label='Valider humeur'><i class="fa-solid fa-location-arrow"></i></button>
                 </div>
                 <div class="col col-12 description-zone">
                     <textarea name="description" placeholder="Décrivez un contexte actuel (ex. Je viens de remporter l'euro million !)"></textarea>
