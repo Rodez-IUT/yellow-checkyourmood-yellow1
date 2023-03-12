@@ -43,7 +43,7 @@ class HumeursController {
     public function setHumeur($pdo) {
         $view = new View("/yellow-checkyourmood-yellow1/codeCYM/views/Humeurs");
         $id = $_SESSION['UserID'];
-        $description = HttpHelper::getParam("description");
+        $description = htmlspecialchars(HttpHelper::getParam("description"));
         $humeur = HttpHelper::getParam("humeur");
         $smiley = HttpHelper::getParam("smiley");
         $isOK = $this->humeursService->setHumeur($pdo, $humeur, $smiley, $description, $id);

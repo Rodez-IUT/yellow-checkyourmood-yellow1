@@ -382,10 +382,10 @@ class Passwords {
 
     public function __construct() {
 
-        Passwords::$update = htmlspecialchars(HttpHelper::getParam("envoyer"));
-        Passwords::$newPassword = htmlspecialchars(HttpHelper::getParam("newPassword"));
-        Passwords::$confirmPassword = htmlspecialchars(HttpHelper::getParam("confirmPassword"));
-        Passwords::$oldPassword = htmlspecialchars(HttpHelper::getParam("oldPassword"));
+        Passwords::$update = HttpHelper::getParam("envoyer");
+        Passwords::$newPassword = HttpHelper::getParam("newPassword") != '' || HttpHelper::getParam("newPassword") != null ? htmlspecialchars(HttpHelper::getParam("newPassword")) : '' ;
+        Passwords::$confirmPassword = HttpHelper::getParam("confirmPassword") != '' || HttpHelper::getParam("confirmPassword") != null ? htmlspecialchars(HttpHelper::getParam("confirmPassword")) : '' ; 
+        Passwords::$oldPassword = HttpHelper::getParam("oldPassword") != '' || HttpHelper::getParam("oldPassword") != null ? htmlspecialchars(HttpHelper::getParam("oldPassword")) : '' ;
         Passwords::$message = null;
         Passwords::$testNewPassword = !empty(Passwords::$newPassword) && !empty(Passwords::$confirmPassword) 
                                       && strcmp(Passwords::$newPassword, Passwords::$confirmPassword) == 0;

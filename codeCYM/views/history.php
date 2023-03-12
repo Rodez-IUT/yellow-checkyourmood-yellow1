@@ -120,7 +120,7 @@
                 }
             }
             $pages = $allRow / 15;
-            $valAcomparer = $pages % 15;
+            $valAcomparer = floor($pages) % 15;
             if ($pages > $valAcomparer && $pages >= 0) {
                 $pages++;
             }

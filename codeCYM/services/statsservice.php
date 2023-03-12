@@ -179,10 +179,13 @@ class StatsService
     }
     
     public function updateDesc($pdo, $time, $libelle, $desc, $id) {
+
+        $description = htmlspecialchars($desc);
+        
         $req = $pdo->prepare('UPDATE humeur SET Humeur_Description = :desc WHERE CODE_User = :id AND Humeur_Time = :time AND Humeur_Libelle = :libelle');
         $req->bindParam('time', $time);
         $req->bindParam('libelle', $libelle);
-        $req->bindParam('desc', $desc);
+        $req->bindParam('desc', $description);
         $req->bindParam('id', $id);
         $req->execute();
     }
