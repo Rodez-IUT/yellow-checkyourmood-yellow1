@@ -119,7 +119,7 @@ class StatsService
      * @param String $startDate  la date de début choisit par l'utilisateur
      * @param String $endDate  la date de fin choisit par l'utilisateur
      * @param String $humeurs  l'humeur choisit par l'utilisateur
-    * @return array<int, mixed>|string $result  le résultat de la requête
+    * @return array|string $result  le résultat de la requête
      */
     public function getMostUsed($pdo, $startDate, $endDate, $humeurs, $id) {
         $result = "";
