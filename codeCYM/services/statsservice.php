@@ -130,10 +130,11 @@ class StatsService
                 $result = [$row->NB_Humeur];
             }
         } else {
-            $req = $pdo->prepare ("SELECT COUNT(`Humeur_Libelle`) AS 'NB_Humeur', `Humeur_Emoji` AS 'Emoji' FROM `humeur` WHERE `CODE_User` = :id AND `Humeur_Libelle` = :libelle AND `Humeur_Time` <= :endDate AND `Humeur_Time` >= :startDate GROUP BY `Humeur_Libelle`");
+            $req = $pdo->prepare ("SELECT Humeur_Libelle, COUNT(`Humeur_Libelle`) AS 'NB_Humeur', `Humeur_Emoji` AS 'Emoji' FROM `humeur` WHERE `CODE_User` = :id AND `Humeur_Libelle` = :libelle AND `Humeur_Time` <= :endDate AND `Humeur_Time` >= :startDate GROUP BY `Humeur_Libelle`, `Humeur_Emoji`");
             $req->execute(['id'=>$id, 'libelle'=>$humeurs, 'startDate'=>$startDate, 'endDate'=>$endDate]);
+            $result = [];
             while ($row = $req->fetch()) {
-                $result = [$row->Emoji, $row->NB_Humeur];
+                $result[] = [$row->Emoji, $row->NB_Humeur];
             }
         }
         return $result;
