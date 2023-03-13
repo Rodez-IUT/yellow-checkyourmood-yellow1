@@ -108,12 +108,12 @@ class StatsController {
             $result = "<p>Veuillez selectionner la date de début ainsi que la date de fin.</p><p class='smiley'>🚫</p>";
         } else if ($endDate < $startDate) {
             $result = "<p>La date de début doit être antérieure à la date de fin.</p><p class='smiley'>🚫</p> ";
-        } else if ($emojiUsed == "") {
+        } else if ($emojiUsed == null) {
             $result = "<p>L'humeur " . $humeurs . " n'a jamais été saisie entre le ".$startDate." et le ".$endDate."</p>";
         } else if (count($emojiUsed) == 2) {
-            $result = "<p class='smiley'>".$emojiUsed[0]."</p><p> Vous avez eu l'humeur ".$emojiUsed[1]." fois entre le ".$startDate." et le ".$endDate."</p>";
+            $result = "<p class='smiley'>".$emojiUsed[0][0]."</p><p> Vous avez eu l'humeur ".$emojiUsed[0][1]." fois entre le ".$startDate." et le ".$endDate."</p>";
         } else {
-            $result = "<p class='smiley'>♾️</p><p>Vous avez utilisé un total de ".$emojiUsed[0]." humeurs entre le ".$startDate." et le ".$endDate."</p>";
+            $result = "<p class='smiley'>♾️</p><p>Vous avez utilisé un total de ".$emojiUsed[0][1]." humeurs entre le ".$startDate." et le ".$endDate."</p>";
         }
         $MaxHum = $this->statsService->getMaxHumeur($pdo,$_SESSION['UserID']);
         $MaxHum2 = $this->statsService->getMaxHumeur($pdo,$_SESSION['UserID']);

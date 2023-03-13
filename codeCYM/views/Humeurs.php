@@ -46,14 +46,14 @@
             <input hidden name="controller" value="humeurs">
             <div class="row border-form">
                 <div class="col col-md-8 col-9">
-                    <input class="humeurs-liste" list="humeurs-liste" name="humeur" oninput="getSmiley(this)" placeholder="Saisissez votre humeur (ex. Joie)">
-                    <datalist id="humeurs-liste">
+                    <select class="humeurs-liste text-center" list="humeurs-liste" name="humeur" oninput="getSmiley(this)">
+                        <option value="">Saisissez votre humeur (ex. Joie)</option>
                         <?php
                             foreach ($listeHumeurs as $i) {
-								echo "<option value='".$i."'></option>";
-							}
+                                echo "<option value='".$i."'>".$i."</option>";
+                            }
                         ?>
-                    </datalist>
+                    </select>
                 </div>
                 <div class="col col-md-2 col-3 smiley-zone">
                     <input name="smiley" id="smiley" readonly placeholder="❔">
