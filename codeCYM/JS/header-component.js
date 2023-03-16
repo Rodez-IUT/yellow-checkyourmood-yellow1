@@ -21,18 +21,18 @@ class headerComponent extends HTMLElement {
             <form action="" method="get" class="h">
                 <input hidden name="action" value="index">
                 <input hidden name="controller" value="stats">
-                <button type="submit" class="link mobile" aria-label="Statistiques">Statistiques</button>
+                <button type="submit" id="stats" class="link mobile" aria-label="Statistiques">Statistiques</button>
             </form>
             <form action="" method="get" class="h">
                 <input hidden name="action" value="historyVal">
                 <input hidden name="controller" value="stats">
                 <input hidden name="page" value="1">
-                <button type="submit" class="link mobile" aria-label="Historique">Historique</button>
+                <button type="submit" id="historique" class="link mobile" aria-label="Historique">Historique</button>
             </form>
             <form action="#" method="get" class="h">
                 <input hidden name="action" value="index">
                 <input hidden name="controller" value="humeurs">
-                <button type="submit" class="link mobile" aria-label="Humeurs">Humeurs</button>
+                <button type="submit" id="humeurs" class="link mobile" aria-label="Humeurs">Humeurs</button>
             </form>
             <form action="#" method="get" class="h">
                 <input hidden name="action" value="index">
@@ -79,19 +79,37 @@ class headerComponent extends HTMLElement {
 /* Crée un nouvel élément qui pourra être utilisé sur chaque page pour créer un header */
 customElements.define('header-component', headerComponent)
 
-function selectNavItem(navItem) {
-    
-    //TODO
+let stats = true;
+let humeurs = true; 
+let historique = true;
 
-    // Sélectionner l'élément de la navbar
-    navItem.classList.add('link-selected');
-  }
+function selectNavItem(navItem) {  
+    if (stats === true && navItem.id == "stats") {
+        stats = true;
+        humeurs = false; 
+        historique = false;
+        navItem.classList.add('link-selected');
+    }
+    if (humeurs === true && navItem.id == "humeurs") {
+        stats = false;
+        humeurs = true;
+        historique = false;
+        navItem.classList.add('link-selected');
+    }
+    if (historique === true && navItem.id == "historique") {
+        historique = true;
+        stats = false;
+        humeurs = false; 
+        navItem.classList.add('link-selected');
+    }   
+}
   
-  document.querySelectorAll('.link').forEach(navItem => {
+document.querySelectorAll('.link').forEach(navItem => {
     navItem.addEventListener('click', () => {
-      selectNavItem(navItem);
+        selectNavItem(navItem);
+    
     });
-  });  
+});  
 
 /**
  * Change l'état de la classe 'show-nav' quand on clique sur le burger menu, en version mobile, pour l'afficher ou non
