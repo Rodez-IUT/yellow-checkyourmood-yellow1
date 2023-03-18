@@ -79,37 +79,37 @@ class headerComponent extends HTMLElement {
 /* Crée un nouvel élément qui pourra être utilisé sur chaque page pour créer un header */
 customElements.define('header-component', headerComponent)
 
-let stats = true;
-let humeurs = true; 
-let historique = true;
+// let stats = true;
+// let humeurs = true; 
+// let historique = true;
 
-function selectNavItem(navItem) {  
-    if (stats === true && navItem.id == "stats") {
-        stats = true;
-        humeurs = false; 
-        historique = false;
-        navItem.classList.add('link-selected');
-    }
-    if (humeurs === true && navItem.id == "humeurs") {
-        stats = false;
-        humeurs = true;
-        historique = false;
-        navItem.classList.add('link-selected');
-    }
-    if (historique === true && navItem.id == "historique") {
-        historique = true;
-        stats = false;
-        humeurs = false; 
-        navItem.classList.add('link-selected');
-    }   
-}
+// function selectNavItem(navItem) {  
+//     if (stats === true && navItem.id == "stats") {
+//         stats = true;
+//         humeurs = false; 
+//         historique = false;
+//         navItem.classList.add('link-selected');
+//     }
+//     if (humeurs === true && navItem.id == "humeurs") {
+//         stats = false;
+//         humeurs = true;
+//         historique = false;
+//         navItem.classList.add('link-selected');
+//     }
+//     if (historique === true && navItem.id == "historique") {
+//         historique = true;
+//         stats = false;
+//         humeurs = false; 
+//         navItem.classList.add('link-selected');
+//     }   
+// }
   
-document.querySelectorAll('.link').forEach(navItem => {
-    navItem.addEventListener('click', () => {
-        selectNavItem(navItem);
+// document.querySelectorAll('.link').forEach(navItem => {
+//     navItem.addEventListener('click', () => {
+//         selectNavItem(navItem);
     
-    });
-});  
+//     });
+// });  
 
 /**
  * Change l'état de la classe 'show-nav' quand on clique sur le burger menu, en version mobile, pour l'afficher ou non

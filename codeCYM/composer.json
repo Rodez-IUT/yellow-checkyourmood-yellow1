@@ -1,12 +1,15 @@
 {
-    "require-dev": {
-        "phpstan/phpstan": "^0.9.3"
-    },
     "autoload": {
         "psr-4": {
             "controllers\\": "controllers/",
             "services\\": "services/",
             "yasmf\\": "yasmf"
         }
-    }
+    },
+    "require": {
+        "php": ">=8.0",
+        "phpunit/phpunit": "10.0.*",
+        "phpstan/phpstan": "1.10.*",
+        "ext-pdo": "*"
+      }
 }

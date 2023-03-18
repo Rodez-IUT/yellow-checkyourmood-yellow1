@@ -1,0 +1,38 @@
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+CREATE TABLE `humeur` (
+  `CODE_User` int NOT NULL,
+  `Humeur_Libelle` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Humeur_Emoji` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Humeur_Time` datetime NOT NULL,
+  `Humeur_Description` mediumtext COLLATE utf8mb4_unicode_ci,
+  `Humeur_TimeConst` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE `user` (
+  `User_ID` int NOT NULL,
+  `User_Name` varchar(25) NOT NULL,
+  `User_Email` varchar(50) NOT NULL,
+  `User_BirthDate` date NOT NULL,
+  `User_Gender` varchar(25) NOT NULL,
+  `User_Password` varchar(250) NOT NULL,
+  `APIKEY` varchar(50) 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+ALTER TABLE `humeur`
+  ADD KEY `CODE_User` (`CODE_User`);
+
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`User_ID`);
+
+ALTER TABLE `user`
+  MODIFY `User_ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+
+ALTER TABLE `humeur`
+  ADD CONSTRAINT `Humeur_ibfk_1` FOREIGN KEY (`CODE_User`) REFERENCES `user` (`User_ID`);
+COMMIT;
