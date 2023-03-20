@@ -1,9 +1,10 @@
 <?php
 
 use services\AccountsService;
+use yasmf\DataSource;
 require_once 'services/accountsservice.php';
 
-class AccountsTest extends TestCase
+class AccountsTest extends \PHPUnit\Framework\TestCase
 {
     private PDO $pdo;
     private AccountsService $accountsService;
@@ -31,7 +32,7 @@ class AccountsTest extends TestCase
         // Given the database initialized and  
         $this->pdo->beginTransaction();
         // When we check a specific account
-        $resultats = $accountsService->getProfile($pdoTest, 1);
+        $resultats = $this->accountsService->getProfile($this->pdo, 1);
         $stringTest = "";
         while ($row = $resultats->fetch()) {
             $stringTest .= $row->User_ID."/";
