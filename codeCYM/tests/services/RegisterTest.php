@@ -32,8 +32,9 @@ class RegisterTest extends \PHPUnit\Framework\TestCase {
             // GIVEN : Une connexion a une base de données 
             $this->pdo->beginTransaction();
 
-            // WHEN :
+            // WHEN : On insère un compte dans la base de données
             $this->registerService->insertUserValues($this->pdo, 'Max','Max.max@gmail.com', '2002-10-14', 'Homme', 'pwd', 'pwd');
+            // Et que l'on recherche ce compte
             $pwd = md5('pwd');
             $req = $this->pdo->query("SELECT * FROM user WHERE User_Name = 'Max' AND User_Email = 'Max.max@gmail.com'");
             $stringTest = "";
@@ -45,10 +46,11 @@ class RegisterTest extends \PHPUnit\Framework\TestCase {
                 $stringTest .= $resultats->User_Password;
             }
 
-            // THEN :
-            //$this->assertEquals($stringTest,"Max/Max.max@gmail.com/2002-10-14/Homme/$pwd");
-            $returnValue = $this->registerService->insertUserValues($this->pdo, 'Axel','Max.max@gmail.com', '2002-10-14', 'Homme', 'pwd', 'pwd');
+            // THEN : On retrouve bien le compte crée précédemment
+            $this->assertEquals($stringTest,"Max/Max.max@gmail.com/2002-10-14/Homme/$pwd");
+            //$returnValue = $this->registerService->insertUserValues($this->pdo, 'Axel','Max.max@gmail.com', '2002-10-14', 'Homme', 'pwd', 'pwd');
             //$this->assertEquals($returnValue,"création du compte impossible (le nom d'utilisateur est indisponible ou l'email est déjà utilisé) ou la base de données est inaccessible");
+            // WHEN : On veut créer un compte avec des mots de passe différents THEN : On retourne un message d'erreur
             $returnValue = $this->registerService->insertUserValues($this->pdo, 'Max','Max.max@gmail.com', '2002-10-14', 'Homme', 'd', 'pwd');
             $this->assertEquals($returnValue,"Les deux mots de passe ne sont pas identique");
 
@@ -63,9 +65,13 @@ class RegisterTest extends \PHPUnit\Framework\TestCase {
             // GIVEN : Une connexion a une base de données 
             $this->pdo->beginTransaction();
 
+            // WHEN : On veut récupérer un login à partir de l'username et du mot de passe 
             $returnValue = $this->registerService->getLoginIn($this->pdo, 'Edouard', '16d7a4fca7442dda3ad93c9a726597e4');
+            // THEN : On retrouve le login attendu
             $this->assertEquals($returnValue, '1');
+            // WHEN : On veut récupérer un login à partir de l'username et d'un mot de passe incorrect
             $returnValue = $this->registerService->getLoginIn($this->pdo, 'Max', 'test');
+            // THEN : On retourne un message d'erreur
             $this->assertEquals($returnValue, "Login invalide, identifiant ou mot de passe incorrect !");
 
             $this->pdo->rollBack();
@@ -75,9 +81,9 @@ class RegisterTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testGetDefaultRegisterService() {
-        $serviceRegister = new RegisterService; 
-
-        $returnValue = $serviceRegister->getDefaultRegisterService();
+        $returnValue = $this->registerService->getDefaultRegisterService();
+        // EXPECTED: new RegisterService
         $this->assertEquals($returnValue, new RegisterService());
+
     }
 }
