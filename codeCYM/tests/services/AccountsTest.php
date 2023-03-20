@@ -4,7 +4,7 @@ use services\AccountsService;
 use yasmf\DataSource;
 require_once 'services/accountsservice.php';
 
-class AccountTest extends \PHPUnit\Framework\TestCase {
+class AccountsTest extends \PHPUnit\Framework\TestCase {
 
     private PDO $pdo;
     private AccountsService $accountsService;
@@ -105,5 +105,119 @@ class AccountTest extends \PHPUnit\Framework\TestCase {
         } catch (PDOException) {
             $this->pdo->rollBack();
         }
+    }
+    
+    public function testEditPassword() {
+
+        try {
+            // GIVEN : Une connexion a une base de données , un nouveau mot de passe et un ID
+            $this->pdo->beginTransaction();
+            $newPassword = "test5";
+
+            // WHEN : on modifie le mot de passe avec le nouveau
+            $this->accountsService->editPassword($this->pdo, $newPassword, 1);
+            $resultats = $this->pdo->query("SELECT User_Password FROM user WHERE User_Password = 'e3d704f3542b44a621ebed70dc0efe13'");
+            $val = $resultats->fetchColumn();
+
+            // THEN : Me renvoie le nouveau mot de passe
+            $this->assertEquals(md5($newPassword), $val);
+            $this->pdo->rollBack();
+        } catch (PDOException) {
+            $this->pdo->rollBack();
+        }   
+    }
+    
+    public function testEditEmail() {
+        try {
+            // GIVEN : Une connexion a une base de données , un nouveau email et un ID
+            $this->pdo->beginTransaction();
+            $newMail = "cym@gmail.com";
+
+            // WHEN : on modifie l'email avec le nouveau
+            $this->accountsService->editMail( $this->pdo, $newMail, 1);
+            $resultats = $this->pdo->query("SELECT User_Email FROM user WHERE User_Email = 'cym@gmail.com'");
+            $val = $resultats->fetchColumn();
+
+            // THEN : Me renvoie le nouveau email
+            $this->assertEquals($newMail, $val);
+            $this->pdo->rollBack();
+        } catch (PDOException) {
+            $this->pdo->rollBack();
+        }   
+    }
+
+    public function testEditUserName() {
+        try {
+            // GIVEN : Une connexion a une base de données , un nouveau UserName et un ID
+            $this->pdo->beginTransaction();
+            $newUsername = "CYM";
+
+            // WHEN : on modifie le UserName avec le nouveau
+            $this->accountsService->editUsername( $this->pdo, $newUsername, 1);
+            $resultats = $this->pdo->query("SELECT User_Name FROM user WHERE User_Name = 'CYM'");
+            $val = $resultats->fetchColumn();
+
+            // THEN : Me renvoie le nouveau UserName
+            $this->assertEquals($newUsername, $val);
+            $this->pdo->rollBack();
+        } catch (PDOException) {
+            $this->pdo->rollBack();
+        }  
+    }
+
+    public function testEditBirthDate() {
+        try {
+            // GIVEN : Une connexion a une base de données , une nouvelle date de naissance et un ID
+            $this->pdo->beginTransaction();
+            $newBirthDate = "2007-01-05";
+
+            // WHEN : on modifie la date de naissance avec la nouvelle
+            $this->accountsService->editBirthDate( $this->pdo, $newBirthDate, 1);
+            $resultats = $this->pdo->query("SELECT User_BirthDate FROM user WHERE User_BirthDate = '2007-01-05'");
+            $val = $resultats->fetchColumn();
+
+            // THEN : Me renvoie la nouvelle date de naissance
+            $this->assertEquals($newBirthDate, $val);
+            $this->pdo->rollBack();
+        } catch (PDOException) {
+            $this->pdo->rollBack();
+        }  
+    }
+
+    public function testEditGender() {
+        try {
+            // GIVEN : Une connexion a une base de données , un nouveau genre et un ID
+            $this->pdo->beginTransaction();
+            $newGender = "Femme";
+
+            // WHEN : on modifie le genre avec le nouveau
+            $this->accountsService->editGender($this->pdo, $newGender, 1);
+            $resultats = $this->pdo->query("SELECT User_Gender FROM user WHERE User_Gender = 'Femme'");
+            $val = $resultats->fetchColumn();
+
+            // THEN : Me renvoie le nouveau genre
+            $this->assertEquals($newGender, $val);
+            $this->pdo->rollBack();
+        } catch (PDOException) {
+            $this->pdo->rollBack();
+        }  
+    }
+
+    public function testDeleteProfile() {
+        try {
+            // GIVEN : Une connexion a une base de données et un ID
+            $this->pdo->beginTransaction();
+
+            // WHEN : on supprime le compte
+            $this->accountsService->deleteProfile($this->pdo, 1);
+            $resultats = $this->pdo->query("SELECT * FROM user WHERE User_ID = 1");
+            $val = $resultats->rowCount();
+
+            // THEN : on renvoie 0 si le compte est supprimé
+            $this->assertEquals(0, $val);
+            $this->pdo->rollBack();
+        } catch (PDOException) {
+            $this->pdo->rollBack();
+        }  
     }
 }
