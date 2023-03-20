@@ -1,2 +1,14 @@
 INSERT INTO `user` (`User_ID`, `User_Name`, `User_Email`, `User_BirthDate`, `User_Gender`, `User_Password`, `APIKEY`) VALUES
-(1, 'Edouard', 'edouard.balladur@gmail.com', '1929-09-12', 'Homme', '16d7a4fca7442dda3ad93c9a726597e4', e55cf8791cf43b0b9d1d9901739370ac)
+(1, 'Edouard', 'edouard.balladur@gmail.com', '1929-09-12', 'Homme', '16d7a4fca7442dda3ad93c9a726597e4', 'e55cf8791cf43b0b9d1d9901739370ac')
+
+INSERT INTO `humeur` (`CODE_User`, `Humeur_Libelle`, `Humeur_Emoji`, `Humeur_Time`, `Humeur_Description`, `Humeur_TimeConst`) VALUES 
+(1, 'Joie', '😁', '2022-12-01 11:20:11', 'je me sentais bien', '2022-12-01 11:20:11')
+
+INSERT INTO `humeur` (`CODE_User`, `Humeur_Libelle`, `Humeur_Emoji`, `Humeur_Time`, `Humeur_Description`, `Humeur_TimeConst`) VALUES 
+(1, 'Anxiete', '😣', '2022-12-01 11:20:11', 'je me sentais bien', '2022-12-01 11:20:11')
+
+INSERT INTO `humeur` (`CODE_User`, `Humeur_Libelle`, `Humeur_Emoji`, `Humeur_Time`, `Humeur_Description`, `Humeur_TimeConst`) VALUES 
+(1, 'Degout', '🤢', '2022-12-02 11:31:11', 'je me sentais mal', '2022-12-02 11:31:11')
+
+INSERT INTO `humeur` (`CODE_User`, `Humeur_Libelle`, `Humeur_Emoji`, `Humeur_Time`, `Humeur_Description`, `Humeur_TimeConst`) VALUES 
+(1, 'Ennui', '🥱', '2022-12-12 08:53:13', '', '2022-12-12 08:53:13')
