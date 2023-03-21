@@ -28,33 +28,23 @@ class HumeursTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testGetDefaultHumeursService() {
-        try {
             $returnValue = $this->humeursService->getDefaultHumeursService();
             // EXPECTED: new HumeursService
             $this->assertEquals($returnValue, new HumeursService());
-        } catch (PDOException) {
-            $this->pdo->rollBack();
-        }
     }
 
     public function testGetListeHumeurs() {
-        try {
-            // GIVEN : Une connexion a une base de données
-            $this->pdo->beginTransaction();
 
-            // WHEN : Je veux récupérer la liste de toutes les humeurs
-            $resultats = $this->humeursService->getListeHumeurs();
-            $stringTest = "";
-            foreach ($resultats as $val) {
-                $stringTest .= $val."/";
-            }
-
-            // THEN : On recupère la liste des humeurs
-            $this->assertEquals($stringTest, 'Admiration/Adoration/Appréciation esthétique/Amusement/Colère/Anxiété/Émerveillement/Malaise/Ennui/Calme/Confusion/Envie/Dégoût/Douleur empathique/Intérêt étonné, intrigué/Excitation/Peur/Horreur/Intérêt/Joie/Nostalgie/Soulagement/Romance/Tristesse/Satisfaction/Désir sexuel/Surprise/');
-            $this->pdo->rollBack();
-        } catch (PDOException) {
-            $this->pdo->rollBack();
+        // WHEN : Je veux récupérer la liste de toutes les humeurs
+        $resultats = $this->humeursService->getListeHumeurs();
+        $stringTest = "";
+        foreach ($resultats as $val) {
+            $stringTest .= $val."/";
         }
+
+        // THEN : On recupère la liste des humeurs
+        $this->assertEquals($stringTest, 'Admiration/Adoration/Appréciation esthétique/Amusement/Colère/Anxiété/Émerveillement/Malaise/Ennui/Calme/Confusion/Envie/Dégoût/Douleur empathique/Intérêt étonné, intrigué/Excitation/Peur/Horreur/Intérêt/Joie/Nostalgie/Soulagement/Romance/Tristesse/Satisfaction/Désir sexuel/Surprise/');
+
     }
 
     public function testSetHumeur() {

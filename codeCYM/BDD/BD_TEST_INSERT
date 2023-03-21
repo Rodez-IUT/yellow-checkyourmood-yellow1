@@ -13,3 +13,6 @@ INSERT INTO `humeur` (`CODE_User`, `Humeur_Libelle`, `Humeur_Emoji`, `Humeur_Tim
 INSERT INTO `humeur` (`CODE_User`, `Humeur_Libelle`, `Humeur_Emoji`, `Humeur_Time`, `Humeur_Description`, `Humeur_TimeConst`) VALUES 
 (1, 'Ennui', '🥱', '2022-12-12 08:53:13', '', '2022-12-12 08:53:13');
 
+INSERT INTO `humeur` (`CODE_User`, `Humeur_Libelle`, `Humeur_Emoji`, `Humeur_Time`, `Humeur_Description`, `Humeur_TimeConst`) VALUES 
+(1, 'Joie', '😁', '2022-12-12 15:53:13', '', '2022-12-12 15:53:13');
+

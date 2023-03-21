@@ -92,7 +92,7 @@ class AccountsTest extends \PHPUnit\Framework\TestCase {
 
     public function testGetPassword() {
         try {
-            // GIVEN : Une connexion a une base de données et un ID de compe
+            // GIVEN : Une connexion a une base de données et un ID de compte
             $this->pdo->beginTransaction();
 
             // WHEN : je veux recupérer le mot de passe correspondant a un User_ID
@@ -192,7 +192,7 @@ class AccountsTest extends \PHPUnit\Framework\TestCase {
 
             // WHEN : on modifie le genre avec le nouveau
             $this->accountsService->editGender($this->pdo, $newGender, 1);
-            $resultats = $this->pdo->query("SELECT User_Gender FROM user WHERE User_Gender = 'Femme'");
+            $resultats = $this->pdo->query("SELECT User_Gender FROM user WHERE User_ID = '1'");
             $val = $resultats->fetchColumn();
 
             // THEN : Me renvoie le nouveau genre

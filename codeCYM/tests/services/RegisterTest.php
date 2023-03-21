@@ -89,6 +89,5 @@ class RegisterTest extends \PHPUnit\Framework\TestCase {
         $returnValue = $this->registerService->getDefaultRegisterService();
         // EXPECTED: new RegisterService
         $this->assertEquals($returnValue, new RegisterService());
-
     }
 }
