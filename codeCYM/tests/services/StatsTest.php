@@ -31,8 +31,10 @@ class StatsTest extends \PHPUnit\Framework\TestCase {
         try {
             // GIVEN : Une connexion a une base de données et un ID
             $this->pdo->beginTransaction();
+            $id = 1;
 
-            $returnValue = $this->statsService->getHistorique($this->pdo, 1, 1);
+            // WHEN : Je veux récupérer l'historique des humeurs correspondant a l'ID 1
+            $returnValue = $this->statsService->getHistorique($this->pdo, 1, $id);
             $stringTest = "";
             while ($resultats = $returnValue->fetch()) {
                 $stringTest .= $resultats->Humeur_Libelle."/";
@@ -41,6 +43,7 @@ class StatsTest extends \PHPUnit\Framework\TestCase {
                 $stringTest .= $resultats->Humeur_Time."/";
             }
 
+            // THEN : On retrouve bien l'historique des humeurs attendus
             $this->assertEquals($stringTest, "Joie/😁//2022-12-12 15:53:13/Ennui/🥱//2022-12-12 08:53:13/Degout/🤢/je me sentais mal/2022-12-02 11:31:11/Joie/😁/je me sentais bien/2022-12-01 11:20:11/Anxiete/😣/je me sentais bien/2022-12-01 11:20:11/");
             $this->pdo->rollBack();
         } catch (PDOException) {
@@ -50,17 +53,19 @@ class StatsTest extends \PHPUnit\Framework\TestCase {
 
     public function testGetMaxHumeur() {
         try {
-            // GIVEN : Une connexion a une base de données et un ID
+            // GIVEN : Une connexion a une base de données et un ID 
             $this->pdo->beginTransaction();
+            $id = 1;
 
-            $returnValue = $this->statsService->getMaxHumeur($this->pdo, 1);
+            // WHEN : Je veux récupérer l'humeur que l'utilisateur a rentré le plus 
+            $returnValue = $this->statsService->getMaxHumeur($this->pdo, $id);
             $stringTest = "";
             while ($resultats = $returnValue->fetch()) {
                 $stringTest .= $resultats->Humeur_Libelle."/";
                 $stringTest .= $resultats->compteur."/";
                 $stringTest .= $resultats->Humeur_Emoji;
             }
-
+            // THEN : On retrouve bien l'humeur attendu
             $this->assertEquals($stringTest,"Joie/2/😁");
 
             $this->pdo->rollBack();
@@ -71,17 +76,21 @@ class StatsTest extends \PHPUnit\Framework\TestCase {
 
     public function testGetAllValueBetweenDates() {
         try {
-            // GIVEN : Une connexion a une base de données et un ID
+            // GIVEN : Une connexion a une base de données, un ID et deux dates
             $this->pdo->beginTransaction();
+            $id = 1;
+            $dateDebut = '2022-12-01 11:20:11';
+            $dateFin = '2022-12-12 15:53:13';
 
-            $returnValue = $this->statsService->getAllValueBetweenDates($this->pdo, '2022-12-01 11:20:11', '2022-12-12 15:53:13', 1);
+            // WHEN : Je veux récupérer toutes les humeurs que l'utilisateur a rentré entre un intervalle de date
+            $returnValue = $this->statsService->getAllValueBetweenDates($this->pdo, $dateDebut, $dateFin, $id);
             $stringTest = "";
 
             while($resultats = $returnValue->fetch()) {
                 $stringTest .= $resultats->Humeur_Libelle."/";
                 $stringTest .= $resultats->compteur."/";
             }
-            
+            // THEN : On retrouve bien les humeurs attendu
             $this->assertEquals($stringTest, "Joie/2/Anxiete/1/Degout/1/Ennui/1/");
 
             $this->pdo->rollBack();
@@ -92,11 +101,16 @@ class StatsTest extends \PHPUnit\Framework\TestCase {
 
      public function testVerifHumeurEstPresente() {
         try {
-            // GIVEN : Une connexion a une base de données et un ID
+            // GIVEN : Une connexion a une base de données, un ID, une humeur et deux dates
             $this->pdo->beginTransaction();
+            $id = 1;
+            $humeur = 'Joie';
+            $dateDebut = '2022-12-01 11:20:11';
+            $dateFin = '2022-12-12 15:53:13';
 
-            $returnValue = $this->statsService->verifHumeurEstPresente($this->pdo, '2022-12-01 11:20:11', '2022-12-12 15:53:13','Joie', 1);
-
+            // WHEN : Je veux savoir si une humeur spécifique a été rentré entre un intervalle de date
+            $returnValue = $this->statsService->verifHumeurEstPresente($this->pdo, $dateFin, $dateFin, $humeur, $id);
+            // THEN : On retrouve bien que l'humeur est présente
             $this->assertTrue($returnValue);
 
             $this->pdo->rollBack();
@@ -107,11 +121,15 @@ class StatsTest extends \PHPUnit\Framework\TestCase {
 
     public function testVerifIsThere() {
         try {
-            // GIVEN : Une connexion a une base de données et un ID
+            // GIVEN : Une connexion a une base de données, un ID et deux dates
             $this->pdo->beginTransaction();
+            $id = 1;
+            $dateDebut = '2022-12-01 11:20:11';
+            $dateFin = '2022-12-12 15:53:13';
 
-            $returnValue = $this->statsService->verifIsThere($this->pdo, '2022-12-01 11:20:11', '2022-12-12 15:53:13', 1);
-
+            // WHEN : Je veux savoir si une humeur a été rentré entre un intervalle de date
+            $returnValue = $this->statsService->verifIsThere($this->pdo, $dateDebut, $dateFin, $id);
+            // THEN : On retrouve bien que au moins une humeur est présente
             $this->assertTrue($returnValue);
             
             $this->pdo->rollBack();
@@ -120,106 +138,27 @@ class StatsTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    // public function testGetAllValue() {
-    //     // GIVEN : Une connexion a une base de données et un ID
-    //     $this->pdo->beginTransaction();
+    public function testGetAllValue() {
+        try {
+        // GIVEN : Une connexion a une base de données et un ID
+        $this->pdo->beginTransaction();
+        $id = 1;
 
-    //     $returnValue = $statsService->getAllValue($pdo, 12);
-    //     $stringTest = "";
-    //     while($resultats = $returnValue->fetch()) {
-    //         $stringTest .= $resultats->Humeur_Libelle."/";
-    //         $stringTest .= $resultats->compteur."/";
-    //     }
+        // WHEN : Je veux récupérer toutes les humeurs que l'utilisateur a rentré 
+        $returnValue = $this->statsService->getAllValue($this->pdo, $id);
+        $stringTest = "";
+        while($resultats = $returnValue->fetch()) {
+            $stringTest .= $resultats->Humeur_Libelle."/";
+            $stringTest .= $resultats->compteur."/";
+        }
+        // THEN : On retrouve bien les humeurs attendu
+        $this->assertEquals($stringTest, "Joie/2/Anxiete/1/Degout/1/Ennui/1/");
 
-    //     $this->assertEquals($stringTest, "Joie/1/Colère/2/Nostalgie/1/");
+        $this->pdo->rollBack();
+        } catch (PDOException) {
+            $this->pdo->rollBack();
+        }
+    }
 
-    //     $pdo->rollBack();
-    // }
-
-    // public function testGetAllRow() {
-    //     // GIVEN : Une connexion a une base de données et un ID
-    //     $this->pdo->beginTransaction();
-
-    //     $returnValue = $statsService->getAllRow($pdo, 12);
-    //     $this->assertEquals($returnValue, 4);
-        
-    //     $pdo->rollBack();
-    // }
-
-    // public function testGetMostUsed() {
-    //     // GIVEN : Une connexion a une base de données et un ID
-    //     $this->pdo->beginTransaction();
-
-    //     $returnValue = $statsService->getMostUsed($pdo, '2023-01-12 09:06:00', '2023-01-12 09:09:00','Colère', 12);
-    //     $this->assertEquals($returnValue[1], 2);
-
-    //     $pdo->rollBack();
-    // }
-
-    // public function testGetHumeurByTime() {
-    //     // GIVEN : Une connexion a une base de données et un ID
-    //     $this->pdo->beginTransaction();
-
-    //     $returnValue = $statsService->getHumeurByTime($pdo, '2023-01-12 09:06:00', '2023-01-12 09:09:00','Colère', 12);
-    //     $stringTest = "";
-    //     while($resultats = $returnValue->fetch()) {
-    //         $stringTest .= $resultats->Humeur_Libelle."/"; 
-    //         $stringTest .= $resultats->nombreHumeur."/"; 
-    //         $stringTest .= $resultats->Date; 
-    //     }
-
-    //     $this->assertEquals($stringTest, "Colère/2/12/01/2023");
-
-    //     $pdo->rollBack();
-    // }
-
-    // public function testGetNombreSaisiesHumeurSelectionnee() {
-    //     // GIVEN : Une connexion a une base de données et un ID
-    //     $this->pdo->beginTransaction();
-
-    //     $returnValue = $statsService->getNombreSaisiesHumeurSelectionnee($pdo, 'Colère', 12);
-    //     $this->assertEquals($returnValue, 2);
-
-    //     $pdo->rollBack();
-    // }
-
-    // public function testDelHumeur() {
-    //     // GIVEN : Une connexion a une base de données et un ID
-    //     $this->pdo->beginTransaction();
-
-    //     $statsService->delHumeur($pdo, '2023-01-12 09:06:30', 'Joie', 12);
-    //     $req = $pdo->query("SELECT * FROM humeur WHERE Humeur_Libelle = 'Joie' AND CODE_User = 12");
-    //     $resultats = $req->rowCount();
-
-    //     $this->assertEquals($resultats, 0);
-
-    //     $pdo->rollBack();
-    // }
-    
-    // public function testUpdateDesc() {
-    //     // GIVEN : Une connexion a une base de données et un ID
-    //     $this->pdo->beginTransaction();
-
-    //     $statsService->updateDesc($pdo, '2023-01-12 09:06:30', 'Joie', 'Maintenant je suis joyeux !', 12);
-    //     $req = $pdo->query("SELECT Humeur_Description FROM Humeur WHERE Humeur_Libelle = 'Joie' AND CODE_User = 12");
-    //     $returnValue = $req->fetch();
-    //     $resultats = $returnValue->Humeur_Description;
-    //     $this->assertEquals($resultats, 'Maintenant je suis joyeux !');
-
-    //     $pdo->rollBack();
-    // }
-
-    // public function testUpdateTime() {
-    //     // GIVEN : Une connexion a une base de données et un ID
-    //     $this->pdo->beginTransaction();
-    
-    //     $statsService->updateTime($pdo, '2023-01-12 09:06:30', 'Joie', '2023-01-12 10:06:30', 12);
-    //     $req = $pdo->query("SELECT Humeur_Time FROM Humeur WHERE Humeur_Libelle = 'Joie' AND CODE_User = 12");
-    //     $returnValue = $req->fetch();
-    //     $resultats = $returnValue->Humeur_Time;
-    //     $this->assertEquals($resultats, '2023-01-12 10:06:30');
-        
-    //     $pdo->rollBack();
-    // }
 
 }
