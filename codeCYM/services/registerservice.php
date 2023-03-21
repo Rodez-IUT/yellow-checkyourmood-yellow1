@@ -9,16 +9,6 @@ use PDOStatement;
 class RegisterService
 {
 
-    /* Singleton d'instanciation */
-    private static $defaultRegisterService;
-    public static function getDefaultRegisterService()
-    {
-        if (RegisterService::$defaultRegisterService == null) {
-            RegisterService::$defaultRegisterService = new RegisterService();
-        }
-        return RegisterService::$defaultRegisterService;
-    }
-
     /**
      * Création d'un compte, insertion des données de l'utilisateur
      * @param PDO $pdo  la connexion à la base de données
@@ -77,7 +67,7 @@ class RegisterService
         $searchStmt->execute(['name'=>$username, 'pass'=>$password]);
         $id = null;
         while ($row = $searchStmt->fetch()) {
-            $id = $row->User_ID;
+            $id = $row["User_ID"];
         }
         if ($id == null) {
             return "Login invalide, identifiant ou mot de passe incorrect !";

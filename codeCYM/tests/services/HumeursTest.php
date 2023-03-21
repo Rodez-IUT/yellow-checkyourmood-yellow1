@@ -37,6 +37,7 @@ class HumeursTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
+    
     public function testGetListeHumeurs() {
         try {
             // GIVEN : Une connexion a une base de données
@@ -57,6 +58,7 @@ class HumeursTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
+    
     public function testSetHumeur() {
         try {
             // GIVEN : Une connexion a une base de données
