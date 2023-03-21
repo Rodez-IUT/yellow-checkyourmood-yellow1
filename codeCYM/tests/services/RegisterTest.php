@@ -48,11 +48,15 @@ class RegisterTest extends \PHPUnit\Framework\TestCase {
 
             // THEN : On retrouve bien le compte crée précédemment
             $this->assertEquals($stringTest,"Max/Max.max@gmail.com/2002-10-14/Homme/$pwd");
-            //$returnValue = $this->registerService->insertUserValues($this->pdo, 'Axel','Max.max@gmail.com', '2002-10-14', 'Homme', 'pwd', 'pwd');
-            //$this->assertEquals($returnValue,"création du compte impossible (le nom d'utilisateur est indisponible ou l'email est déjà utilisé) ou la base de données est inaccessible");
+            // WHEN : On veut créer une adresse mail déja existante THEN : On retourne un message d'erreur
+            $returnValue = $this->registerService->insertUserValues($this->pdo, 'Edouard','edouard.balladur@gmail.com', '2002-10-14', 'Homme', 'pwd', 'pwd');
+            $this->assertEquals($returnValue,"création du compte impossible (l'email est déjà utilisé) ou la base de données est inaccessible");
             // WHEN : On veut créer un compte avec des mots de passe différents THEN : On retourne un message d'erreur
             $returnValue = $this->registerService->insertUserValues($this->pdo, 'Max','Max.max@gmail.com', '2002-10-14', 'Homme', 'd', 'pwd');
             $this->assertEquals($returnValue,"Les deux mots de passe ne sont pas identique");
+            // WHEN : On veut créer un compte avec une date de naissance supérieur ou égale à la date du jour THEN : On retourne un message d'erreur
+            $returnValue = $this->registerService->insertUserValues($this->pdo, 'Jean','Jean.michel@gmail.com', '2048-06-05', 'Homme', 'pwd', 'pwd');
+            $this->assertEquals($returnValue,"Date de naissance supérieur ou égale à la date du jour");
 
             $this->pdo->rollBack();
         } catch (PDOException) {
@@ -65,8 +69,9 @@ class RegisterTest extends \PHPUnit\Framework\TestCase {
             // GIVEN : Une connexion a une base de données 
             $this->pdo->beginTransaction();
 
+            
             // WHEN : On veut récupérer un login à partir de l'username et du mot de passe 
-            $returnValue = $this->registerService->getLoginIn($this->pdo, 'Edouard', '16d7a4fca7442dda3ad93c9a726597e4');
+            $returnValue = $this->registerService->getLoginIn($this->pdo, 'Edouard', 'test1234');
             // THEN : On retrouve le login attendu
             $this->assertEquals($returnValue, '1');
             // WHEN : On veut récupérer un login à partir de l'username et d'un mot de passe incorrect

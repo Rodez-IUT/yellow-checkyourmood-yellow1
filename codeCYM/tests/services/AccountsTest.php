@@ -46,8 +46,7 @@ class AccountsTest extends \PHPUnit\Framework\TestCase {
             }
 
             // THEN : Me renvoie le bon compte
-            $pwd = md5('16d7a4fca7442dda3ad93c9a726597e4');
-            $this->assertEquals("1/Edouard/edouard.balladur@gmail.com/1929-09-12/Homme/".$pwd."/e55cf8791cf43b0b9d1d9901739370ac", $stringTest);
+            $this->assertEquals("1/Edouard/edouard.balladur@gmail.com/1929-09-12/Homme/16d7a4fca7442dda3ad93c9a726597e4/e55cf8791cf43b0b9d1d9901739370ac", $stringTest);
             $this->pdo->rollBack();
         } catch (PDOException) {
             $this->pdo->rollBack();
@@ -101,7 +100,7 @@ class AccountsTest extends \PHPUnit\Framework\TestCase {
             $val = $resultats->fetchColumn();
 
             // THEN : Renvoie le mdp sous la forme md5
-            $this->assertEquals(md5("16d7a4fca7442dda3ad93c9a726597e4"), $val);
+            $this->assertEquals("16d7a4fca7442dda3ad93c9a726597e4", $val);
             $this->pdo->rollBack();
         } catch (PDOException) {
             $this->pdo->rollBack();

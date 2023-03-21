@@ -16,7 +16,7 @@ CREATE TABLE `humeur` (
 CREATE TABLE `user` (
   `User_ID` int NOT NULL,
   `User_Name` varchar(25) NOT NULL,
-  `User_Email` varchar(50) NOT NULL,
+  `User_Email` varchar(50) NOT NULL UNIQUE,
   `User_BirthDate` date NOT NULL,
   `User_Gender` varchar(25) NOT NULL,
   `User_Password` varchar(250) NOT NULL,
@@ -31,7 +31,6 @@ ALTER TABLE `user`
 
 ALTER TABLE `user`
   MODIFY `User_ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
 
 ALTER TABLE `humeur`
   ADD CONSTRAINT `Humeur_ibfk_1` FOREIGN KEY (`CODE_User`) REFERENCES `user` (`User_ID`);
