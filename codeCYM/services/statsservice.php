@@ -127,14 +127,14 @@ class StatsService
             $req = $pdo->prepare ("SELECT COUNT(*) AS 'NB_Humeur' FROM `humeur` WHERE `CODE_User` = :id AND `Humeur_Time` <= :endDate AND `Humeur_Time` >= :startDate");
             $req->execute(['id'=>$id, 'startDate'=>$startDate, 'endDate'=>$endDate]);
             while ($row = $req->fetch()) {
-                $result = [$row->NB_Humeur];
+                $result = [$row["NB_Humeur"]];
             }
         } else {
             $req = $pdo->prepare ("SELECT Humeur_Libelle, COUNT(`Humeur_Libelle`) AS 'NB_Humeur', `Humeur_Emoji` AS 'Emoji' FROM `humeur` WHERE `CODE_User` = :id AND `Humeur_Libelle` = :libelle AND `Humeur_Time` <= :endDate AND `Humeur_Time` >= :startDate GROUP BY `Humeur_Libelle`, `Humeur_Emoji`");
             $req->execute(['id'=>$id, 'libelle'=>$humeurs, 'startDate'=>$startDate, 'endDate'=>$endDate]);
             $result = [];
             while ($row = $req->fetch()) {
-                $result[] = [$row->Emoji, $row->NB_Humeur];
+                $result[] = [$row["Emoji"], $row["NB_Humeur"]];
             }
         }
         return $result;
@@ -200,13 +200,4 @@ class StatsService
         $req->execute();
     }
 
-    /* Singleton d'instanciation */
-    private static $defaultStatsService ;
-    public static function getDefaultStatsService()
-    {
-        if (StatsService::$defaultStatsService == null) {
-            StatsService::$defaultStatsService = new StatsService();
-        }
-        return StatsService::$defaultStatsService;
-    }
 }

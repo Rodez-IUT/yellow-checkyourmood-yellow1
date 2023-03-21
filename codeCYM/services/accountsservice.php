@@ -135,14 +135,4 @@ class AccountsService
         $stmt = $pdo->prepare("DELETE FROM user WHERE User_ID = $id");
         $stmt->execute();
     }
-
-    /* Singleton d'instanciation */
-    private static $defaultAccountsService ;
-    public static function getDefaultAccountsService()
-    {
-        if (AccountsService::$defaultAccountsService == null) {
-            AccountsService::$defaultAccountsService = new AccountsService();
-        }
-        return AccountsService::$defaultAccountsService;
-    }
 }

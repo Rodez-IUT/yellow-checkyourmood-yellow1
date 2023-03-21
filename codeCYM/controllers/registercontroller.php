@@ -9,14 +9,14 @@ use PDO;
 
 class RegisterController {
 
-    private $registerService;
-    private $accountService;
+    private RegisterService $registerService;
+    private AccountsService $accountService;
 
-    public function __construct()
+    public function __construct(RegisterService $registerService, AccountsService $accountService)
     {
         session_start();
-        $this->registerService = RegisterService::getDefaultRegisterService();
-        $this->accountService = AccountsService::getDefaultAccountsService();
+        $this->registerService = $registerService;
+        $this->accountService = $accountService;
     }
 
     /**
@@ -27,17 +27,17 @@ class RegisterController {
      */
     public function index($pdo) {
         if (isset($_SESSION['UserID'])) {
-            $view = new View("/yellow-checkyourmood-yellow1/codeCYM/views/Account");
+            $view = new View("/views/Account");
             $resultats = $this->accountService->getProfile($pdo, $_SESSION['UserID']);
             while($row = $resultats->fetch()) {
-                $view->setVar('mail', $row->User_Email);
-                $view->setVar('username', $row->User_Name);
-                $view->setVar('password', $row->User_Password);
-                $view->setVar('birthDate', $row->User_BirthDate);
-                $view->setVar('gender', $row->User_Gender);
+                $view->setVar('mail', $row["User_Email"]);
+                $view->setVar('username', $row["User_Name"]);
+                $view->setVar('password', $row["User_Password"]);
+                $view->setVar('birthDate', $row["User_BirthDate"]);
+                $view->setVar('gender', $row["User_Gender"]);
             }
         } else {
-            $view = new View("/yellow-checkyourmood-yellow1/codeCYM/views/Register");
+            $view = new View("/views/Register");
         }
         return $view;
     }
@@ -50,7 +50,7 @@ class RegisterController {
      */
     public function register($pdo) {
         new User();
-        $view = new View("/yellow-checkyourmood-yellow1/codeCYM/views/Register");
+        $view = new View("/views/Register");
 
         if (User::$username != null && User::$email != null && User::$birthDate != null && User::$gender != "Choisissez votre genre" && User::$password != null && User::$confirmPassword != null) {
             $error = $this->registerService->insertUserValues($pdo, User::$username, User::$email, User::$birthDate, User::$gender, User::$password, User::$confirmPassword);
@@ -76,14 +76,14 @@ class RegisterController {
      */
     public function login($pdo) {
         new User();
-        $view = new View("/yellow-checkyourmood-yellow1/codeCYM/views/Register");
+        $view = new View("/views/Register");
         if (isset($_SESSION['UserID'])) {
-            $view = new View("yellow-checkyourmood-yellow1/codeCYM/views/Account");
+            $view = new View("/views/Account");
         } else if (User::$username != null && User::$password != null && User::$login == 1) {
             $result = $this->registerService->getLoginIn($pdo, User::$username, User::$password);
             if (is_integer($result)) {
                 $_SESSION['UserID'] = $result;
-                $view = new View("/yellow-checkyourmood-yellow1/codeCYM/views/index");
+                $view = new View("/views/index");
                 header('Location: ?action=index&controller=home#');
                 return $view;
             }

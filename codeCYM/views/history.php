@@ -49,7 +49,7 @@
                           <tr>";		
                     $i = 1;
                     while( $ligne = $historyValue->fetch() ) { 
-                            $date1 = $ligne->Humeur_TimeConst;
+                            $date1 = $ligne["Humeur_TimeConst"];
                             $timeStamp1 = strtotime($date1);
                             $finalDate = $timeStamp1 + 86400;
                             $finalDate1 = date('Y-m-d H:i:s', $finalDate);
@@ -62,37 +62,37 @@
                             $dayBefore = $timeStamp1 - 86400;
                             $minDate = date('Y-m-d H:i:s', $dayBefore);
                             echo "<tr>
-                                    <td class='Sscreen-Libelle'>".htmlspecialchars($ligne->Humeur_Libelle)."<br><form class='Property-Sscreen' action='#' method='post'><button name='pop' value='$i' id='$i' type='submit' class='param' aria-label='Modifier Humeur'><i class='fa-solid fa-gear'></i></button></form>
+                                    <td class='Sscreen-Libelle'>".htmlspecialchars($ligne["Humeur_Libelle"])."<br><form class='Property-Sscreen' action='#' method='post'><button name='pop' value='$i' id='$i' type='submit' class='param' aria-label='Modifier Humeur'><i class='fa-solid fa-gear'></i></button></form>
                                         <div class='popuptext' id='myPopup$i'>
                                             <div class='cross-button'><form action='#' method='post'><button type='submit' class='xMark' aria-label='Fermer la page'><i class='fa-solid fa-xmark'></i></button></form></div>
                                             <div class='desc-title'>Description :</div>
-                                            <textarea class='description' disabled>".$ligne->Humeur_Description."</textarea>
+                                            <textarea class='description' disabled>".$ligne['Humeur_Description']."</textarea>
                                             <div class='delimiter-Row'></div>
                                             <div>Nouvelle Description :<br></div>
                                             <div class='buttons'>
-                                                <form action='#' method='post' class='form-desc'>
+                                                <form action='#' method='get' class='form-desc'>
                                                     <input hidden name='action' value='update'>
                                                     <input hidden name='controller' value='stats'>
-                                                    <input hidden name='time' value='$ligne->Humeur_Time'>
-                                                    <input hidden name='libelle' value='$ligne->Humeur_Libelle'>
-                                                    <textarea name='desc' class='textarea' value='$ligne->Humeur_Description'>$ligne->Humeur_Description</textarea>";
+                                                    <input hidden name='time' value='".$ligne["Humeur_Time"]."'>
+                                                    <input hidden name='libelle' value='".$ligne["Humeur_Libelle"]."'>
+                                                    <textarea name='desc' class='textarea' value='".$ligne["Humeur_Description"]."'>".$ligne["Humeur_Description"]."</textarea>";
                                                     if ($actualFinalTimeStanp <= $finalDate1) {
                                                         echo "<label>Nouvelle Date : (Max -24H) </label>
-                                                            <input class='time' type='datetime-local' name='change-time' min='$minDate' max='$ligne->Humeur_TimeConst' value='$ligne->Humeur_Time'>";
+                                                            <input class='time' type='datetime-local' name='change-time' min='$minDate' max='".$ligne["Humeur_TimeConst"]."' value='".$ligne["Humeur_Time"]."'>";
                                                     } else {
                                                         echo "<label>Date non modifiable <br>(humeur créée il y a trop longtemps):</label>
-                                                            <input hidden name='change-time' value='$ligne->Humeur_Time'>
-                                                            <input type='text' value='$ligne->Humeur_Time' disabled>";
+                                                            <input hidden name='change-time' value='".$ligne["Humeur_Time"]."'>
+                                                            <input type='text' value='".$ligne["Humeur_Time"]."'> disabled>";
                                                     }
                                                     echo "<button type='submit' name='del-humeur' val='$i' class='update' aria-label='Valider'>
                                                         Valider
                                                     </button>
                                                 </form>
-                                                <form action='#' method='post' class='form-del'>
+                                                <form action='#' method='get' class='form-del'>
                                                     <input hidden name='action' value='deleteHumeur'>
                                                     <input hidden name='controller' value='stats'>
-                                                    <input hidden name='time' value='$ligne->Humeur_Time'>
-                                                    <input hidden name='libelle' value='$ligne->Humeur_Libelle'>
+                                                    <input hidden name='time' value='".$ligne["Humeur_Time"]."'>
+                                                    <input hidden name='libelle' value='".$ligne["Humeur_Libelle"]."'>
                                                     <button type='submit' name='del-humeur' value='$i' class='trash' aria-label='Supprimer'>
                                                         Supprimer
                                                     </button>
@@ -100,8 +100,8 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <td class='Sscreen-Emoji'>".htmlspecialchars($ligne->Humeur_Emoji)."</td>
-                                    <td class='Sscreen-Time'>".htmlspecialchars($ligne->Humeur_Time)."</td>";
+                                    <td class='Sscreen-Emoji'>".htmlspecialchars($ligne["Humeur_Emoji"])."</td>
+                                    <td class='Sscreen-Time'>".htmlspecialchars($ligne["Humeur_Time"])."</td>";
                                     
                             echo "</tr>";
                         /*}*/

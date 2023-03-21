@@ -41,7 +41,7 @@
                     <div class="left" id="test">S'inscrire</div>
                     <div class="right selection">Se connecter</div>
                 </div>
-                <form action="#" method="post" class="main-mid" id="form">
+                <form action="#" method="get" class="main-mid" id="form">
                     <input hidden id="action" name="action" value="login">
                     <input hidden name="controller" value="register">
                     <input type="text" placeholder="Nom d'utilisateur" class="input-text" name="username" id="username" required value=<?php if (isset($username)) echo '"'.$username.'"'?>>

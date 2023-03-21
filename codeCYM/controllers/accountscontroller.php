@@ -8,12 +8,12 @@ use PDO;
 
 class AccountsController {
 
-    private $accountsService;
+    private AccountsService $accountsService;
 
-    public function __construct()
+    public function __construct(AccountsService $accountsService)
     {
         session_start();
-        $this->accountsService = AccountsService::getDefaultAccountsService();
+        $this->accountsService = $accountsService;
     }
 
     /**
@@ -23,17 +23,17 @@ class AccountsController {
      */
     public function index($pdo) {
         $id = $_SESSION['UserID'];
-        $view = new View("/yellow-checkyourmood-yellow1/codeCYM/views/Account");
+        $view = new View("/views/Account");
         /* récupère dans la base de données les infos de l'utilisateur */
         $resultats = $this->accountsService->getProfile($pdo, $id); 
 
         /* met dans la view les données récupérées */
         while($row = $resultats->fetch()) {
-            $view->setVar('mail', $row->User_Email);
-            $view->setVar('username', $row->User_Name);
-            $view->setVar('password', $row->User_Password);
-            $view->setVar('birthDate', $row->User_BirthDate);
-            $view->setVar('gender', $row->User_Gender);
+            $view->setVar('mail', $row["User_Email"]);
+            $view->setVar('username', $row["User_Name"]);
+            $view->setVar('password', $row["User_Password"]);
+            $view->setVar('birthDate', $row["User_BirthDate"]);
+            $view->setVar('gender', $row["User_Gender"]);
         }
 
         return $view;
@@ -47,7 +47,7 @@ class AccountsController {
     public function editProfile($pdo) {
 
         /* création de la vue pour modifier son profil */
-        $view = new View("/yellow-checkyourmood-yellow1/codeCYM/views/editprofile");
+        $view = new View("/views/editprofile");
 
         /* Création d'un objet profil contenant tous les paramètres lié au profil de l'utilisateur (mdp, email...) */
         /* créer un objet "Profile" qui stock tous les paramètres lié au profil de l'utilisateur envoyé par le formulaire */
@@ -69,18 +69,18 @@ class AccountsController {
 
             /* si l'email n'est pas vide et qu'il n'existe pas alors l'email est modifié */
             $this->updateEmail($pdo, $view, Profile::$email, 
-                            $view->getParams("defaultEmail"), $sameEmail);
+                            $view->getVar("defaultEmail"), $sameEmail);
 
             /* si le nom d'utilisateur n'est pas vide et qu'il n'existe pas alors le nom d'utilisateur est changé */
             $this->updateUsername($pdo, $view, Profile::$username, 
-                                $view->getParams("defaultUsername"), $sameUsername);
+                                $view->getVar("defaultUsername"), $sameUsername);
 
             /* si la date de naissance n'est pas la même que celle stocké dans la base de données pour l'utilisateur courant */
             /* alors elle est modifiée */
-            $this->updateBirthDate($pdo, $view, Profile::$birthDate, $view->getParams("defaultBirthDate"));
+            $this->updateBirthDate($pdo, $view, Profile::$birthDate, $view->getVar("defaultBirthDate"));
 
             /* si le genre n'est pas le même que celui stocké dans la base de donnée alors il est modifié */
-            $this->updateGender($pdo, $view, Profile::$gender, $view->getParams("defaultGender"));
+            $this->updateGender($pdo, $view, Profile::$gender, $view->getVar("defaultGender"));
         }
 
         return $view;
@@ -104,10 +104,10 @@ class AccountsController {
 
         /* met dans la view les données récupérées */
         while($row = $verif->fetch()) {
-            $defaultEmail = $row->User_Email;
-            $defaultUsername = $row->User_Name;
-            $defaultBirthDate = $row->User_BirthDate;
-            $defaultGender = $row->User_Gender;
+            $defaultEmail = $row["User_Email"];
+            $defaultUsername = $row["User_Name"];
+            $defaultBirthDate = $row["User_BirthDate"];
+            $defaultGender = $row["User_Gender"];
         }
         $view->setVar('defaultEmail', $defaultEmail);
         $view->setVar('defaultUsername', $defaultUsername);
@@ -258,7 +258,7 @@ class AccountsController {
         $id = $_SESSION['UserID'];
         $defaultPassword = '';
         /* Création d'une nouvele vue */
-        $view = new View("/yellow-checkyourmood-yellow1/codeCYM/views/editpassword");
+        $view = new View("/views/editpassword");
 
         /* Contrôle le champs ancien mot de passe */
         $view->setVar('resetPwd', 0);
@@ -269,7 +269,7 @@ class AccountsController {
         /* Mot de passe actuel de l'utilisateur */
         $stmt = $this->accountsService->getPasswords($pdo, $id);
         while($row = $stmt->fetch()) {
-            $defaultPassword = $row->User_Password;
+            $defaultPassword = $row["User_Password"];
         }
         /* Vérification de l'ancien mot de passe */
         $testOldPassword = !empty(Passwords::$oldPassword) 
@@ -295,13 +295,13 @@ class AccountsController {
     public function deleteAccount($pdo) {
         $id = $_SESSION['UserID'];
         /* Chargement de la vue de la page pour supprimer son compte */
-        $view = new View("/yellow-checkyourmood-yellow1/codeCYM/views/deleteaccount");
+        $view = new View("/views/deleteaccount");
         $delete = HttpHelper::getParam("delete");
 
         /* Si le bouton du formulaire à été cliqué alors on supprime le compte */
         if(!empty($delete)) {
             $this->accountsService->deleteProfile($pdo, $id);
-            $view = new View("/yellow-checkyourmood-yellow1/codeCYM/views/accountdeleted");
+            $view = new View("/views/accountdeleted");
             session_destroy();
         } 
 
@@ -319,7 +319,7 @@ class AccountsController {
         session_destroy();
 
         /* Chargement de la vue de la page d'accueil du site */
-        $view = new View("/yellow-checkyourmood-yellow1/codeCYM/views/index");
+        $view = new View("/views/index");
 
         return $view;
     }

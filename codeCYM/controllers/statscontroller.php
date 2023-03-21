@@ -9,16 +9,16 @@ use PDO;
 
 class StatsController {
 
-    private $statsService;
-    private $humeursService;
+    private StatsService $statsService;
+    private HumeursService $humeursService;
 
-    public function __construct()
+    public function __construct(StatsService $statsService, HumeursService $humeursService)
     {
         session_start();
-        $this->statsService = StatsService::getDefaultStatsService();
-        $this->humeursService = HumeursService::getDefaultHumeursService();
+        $this->statsService = $statsService;
+        $this->humeursService = $humeursService;
     }
-
+    
     /**
      * Fonction de base du controlleur, si l'utilisateur n'est pas connecté 
      * le renvoi sur la page du connexion/inscription,
@@ -27,12 +27,12 @@ class StatsController {
      * @return View $view  la vue de la page
      */
     public function index($pdo) {
-        $view = new View("/yellow-checkyourmood-yellow1/codeCYM/views/Stats");
+        $view = new View("/views/Stats");
         $startDate = HttpHelper::getParam("startDate");
         $endDate = HttpHelper::getParam("endDate");
         $humeurs = HttpHelper::getParam("humeurs");
         if (!isset($_SESSION['UserID'])) {
-            $view = new View("/yellow-checkyourmood-yellow1/codeCYM/views/Register");
+            $view = new View("/views/Register");
         } else {
             $MaxHum = $this->statsService->getMaxHumeur($pdo, $_SESSION['UserID']);
             $MaxHum2 = $this->statsService->getMaxHumeur($pdo, $_SESSION['UserID']);
@@ -78,9 +78,9 @@ class StatsController {
      * @return View $view  la vue de la page
      */
     public function historyVal($pdo) {
-        $view = new View("/yellow-checkyourmood-yellow1/codeCYM/views/history");
+        $view = new View("/views/history");
         if (!isset($_SESSION['UserID'])) {
-            $view = new View("/yellow-checkyourmood-yellow1/codeCYM/views/Register");
+            $view = new View("/views/Register");
         } else {
             $pagination = HttpHelper::getParam('page');
             $resultats = $this->statsService->getHistorique($pdo, $pagination,  $_SESSION['UserID']);
@@ -98,7 +98,7 @@ class StatsController {
      * @return View $view  la vue de la page avec l'option sélectionnée
      */
     public function optionSelected($pdo) {
-        $view = new View("/yellow-checkyourmood-yellow1/codeCYM/views/Stats");
+        $view = new View("/views/Stats");
         $startDate = HttpHelper::getParam("startDate");
         $endDate = HttpHelper::getParam("endDate");
         $humeurs = HttpHelper::getParam("humeurs");
@@ -161,7 +161,7 @@ class StatsController {
      */
 
     public function deleteHumeur($pdo) {
-        $view = new View("/yellow-checkyourmood-yellow1/codeCYM/views/history");
+        $view = new View("/views/history");
         $pagination = HttpHelper::getParam('page');
         $time = HttpHelper::getParam("time");
         $libelle = HttpHelper::getParam("libelle");
@@ -179,7 +179,7 @@ class StatsController {
      * @return View $view  la vue de la page quand on update une humeur
      */
     public function update($pdo) {
-        $view = new View("/yellow-checkyourmood-yellow1/codeCYM/views/history");
+        $view = new View("/views/history");
         $pagination = HttpHelper::getParam('page');
         $time = HttpHelper::getParam("time");
         $libelle = HttpHelper::getParam("libelle");

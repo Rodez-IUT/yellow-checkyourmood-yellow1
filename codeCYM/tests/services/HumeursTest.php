@@ -33,6 +33,7 @@ class HumeursTest extends \PHPUnit\Framework\TestCase {
             $this->assertEquals($returnValue, new HumeursService());
     }
 
+    
     public function testGetListeHumeurs() {
 
         // WHEN : Je veux récupérer la liste de toutes les humeurs
@@ -47,6 +48,7 @@ class HumeursTest extends \PHPUnit\Framework\TestCase {
 
     }
 
+    
     public function testSetHumeur() {
         try {
             // GIVEN : Une connexion a une base de données
