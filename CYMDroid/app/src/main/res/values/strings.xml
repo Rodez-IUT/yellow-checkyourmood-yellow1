@@ -1,0 +1,30 @@
+<resources>
+    <!--  Titre de l'application  -->
+    <string name="app_name">Check Your Mood</string>
+
+    <!--  Navbar de l'application  -->
+    <string name="nav_accueil">Accueil</string>
+    <string name="nav_historique">Historique</string>
+    <string name="nav_humeurs">Humeurs</string>
+
+    <!--  Page de connexion  -->
+    <string name="title_connexion">Se connecter</string>
+    <string name="edit_utilisateur">Nom d\'utilisateur</string>
+    <string name="edit_mdp">Mot de passe</string>
+    <string name="text_affichage_mdp">Afficher le mot de passe</string>
+    <string name="button_valider">Valider</string>
+
+    <!--  Page de l'historique des humeurs  -->
+    <string name="title_historique">Historique des humeurs</string>
+    <string name="tab_humeur">Humeur</string>
+    <string name="tab_emoji">Emoji associé</string>
+    <string name="tab_date">Date/Heure</string>
+
+    <!--  Page d'ajout d'une humeur  -->
+    <string name="edit_humeur">Saisissez votre humeur (ex. Joie)</string>
+    <string name="show_emoji">"?"</string>
+    <string name="edit_desciption">Décrivez un contexte actuel (ex. Je viens de remporter l\'euro million !)</string>
+    <string name="presentation">Check Your Mood est une application vous permettant à tout moment d\'indiquer vos émotions à différents moments de la journée, consulter ces dernières pour suivre l’évolution de votre humeur. Les émotions se basent sur l’étude de Alan S. Cowen et Dacher Keltner , répertoriant un total de 27 émotions.</string>
+    <string name="message_connexion">Pour commencer à enregistrer vos émotions</string>
+    <string name="clic_message">Cliquez ici : Connexion</string>
+</resources>
