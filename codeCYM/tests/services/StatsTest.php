@@ -68,6 +68,14 @@ class StatsTest extends \PHPUnit\Framework\TestCase {
             // THEN : On retrouve bien l'humeur attendu
             $this->assertEquals($stringTest,"Joie/2/😁");
 
+            // GIVEN : Une connexion a une base de données et un ID 
+            $id = 2;
+
+            // WHEN : Je veux récupérer l'humeur que l'utilisateur a rentré le plus 
+            $returnValue = $this->statsService->getMaxHumeur($this->pdo, $id);
+            // THEN : On retourne un message d'erreur car l'utilisateur n'a rentré aucune erreur
+            $this->assertEquals($returnValue,"Vous n'avez saisi aucune humeur");
+
             $this->pdo->rollBack();
         } catch (PDOException) {
             $this->pdo->rollBack();
@@ -113,6 +121,17 @@ class StatsTest extends \PHPUnit\Framework\TestCase {
             // THEN : On retrouve bien que l'humeur est présente
             $this->assertTrue($returnValue);
 
+            // GIVEN : Une connexion a une base de données et un ID 
+            $id = 2;
+            $humeur = 'Joie';
+            $dateDebut = '2022-12-01 11:20:11';
+            $dateFin = '2022-12-12 15:53:13';
+
+            // WHEN : Je veux savoir si une humeur spécifique a été rentré entre un intervalle de date 
+            $returnValue = $this->statsService->verifHumeurEstPresente($this->pdo, $dateFin, $dateFin, $humeur, $id);
+            // THEN : On retourne faux car l'utilisateur n'a rentré aucune humeur
+            $this->assertFalse($returnValue);
+
             $this->pdo->rollBack();
         } catch (PDOException) {
             $this->pdo->rollBack();
@@ -131,6 +150,16 @@ class StatsTest extends \PHPUnit\Framework\TestCase {
             $returnValue = $this->statsService->verifIsThere($this->pdo, $dateDebut, $dateFin, $id);
             // THEN : On retrouve bien que au moins une humeur est présente
             $this->assertTrue($returnValue);
+
+            // GIVEN : Une connexion a une base de données et un ID 
+            $id = 2;
+            $dateDebut = '2022-12-01 11:20:11';
+            $dateFin = '2022-12-12 15:53:13';
+
+            // WHEN : Je veux savoir si une humeur a été rentré entre un intervalle de date 
+            $returnValue = $this->statsService->verifIsThere($this->pdo, $dateFin, $dateFin, $id);
+            // THEN : On retourne faux car l'utilisateur n'a rentré aucune humeur
+            $this->assertFalse($returnValue);
             
             $this->pdo->rollBack();
         } catch (PDOException) {

@@ -27,7 +27,7 @@ class RegisterTest extends \PHPUnit\Framework\TestCase {
         $this->registerService = new RegisterService();
     }
 
-    /*
+    
     public function testInsertUserValues() {
         try {
             // GIVEN : Une connexion a une base de données 
@@ -50,8 +50,8 @@ class RegisterTest extends \PHPUnit\Framework\TestCase {
             // THEN : On retrouve bien le compte crée précédemment
             $this->assertEquals($stringTest,"Max/Max.max@gmail.com/2002-10-14/Homme/$pwd");
             // WHEN : On veut créer une adresse mail déja existante THEN : On retourne un message d'erreur
-            //$returnValue = $this->registerService->insertUserValues($this->pdo, 'Edouard','edouard.balladur@gmail.com', '2002-10-14', 'Homme', 'pwd', 'pwd');
-            //$this->assertEquals($returnValue,"création du compte impossible (l'email est déjà utilisé) ou la base de données est inaccessible");
+            $returnValue = $this->registerService->insertUserValues($this->pdo, 'Edouard','edouard.balladur@gmail.com', '2002-10-14', 'Homme', 'pwd', 'pwd');
+            $this->assertEquals($returnValue,"création du compte impossible (l'email est déjà utilisé) ou la base de données est inaccessible");
             // WHEN : On veut créer un compte avec des mots de passe différents THEN : On retourne un message d'erreur
             $returnValue = $this->registerService->insertUserValues($this->pdo, 'Max','Max.max@gmail.com', '2002-10-14', 'Homme', 'd', 'pwd');
             $this->assertEquals($returnValue,"Les deux mots de passe ne sont pas identique");
@@ -63,7 +63,7 @@ class RegisterTest extends \PHPUnit\Framework\TestCase {
         } catch (PDOException) {
             $this->pdo->rollBack();
         }
-    }*/
+    }
 
     public function testGetLoginIn() {
         try {

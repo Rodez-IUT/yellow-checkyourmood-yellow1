@@ -34,7 +34,7 @@ class HumeursTest extends \PHPUnit\Framework\TestCase {
     }
 
 
-    /*
+    
     public function testGetListeHumeurs() {
 
         // WHEN : Je veux récupérer la liste de toutes les humeurs
@@ -43,11 +43,10 @@ class HumeursTest extends \PHPUnit\Framework\TestCase {
         foreach ($resultats as $val) {
             $stringTest .= $val."/";
         }
-
+        
         // THEN : On recupère la liste des humeurs
         $this->assertEquals($stringTest, 'Admiration/Adoration/Appréciation esthétique/Amusement/Colère/Anxiété/Émerveillement/Malaise/Ennui/Calme/Confusion/Envie/Dégoût/Douleur empathique/Intérêt étonné, intrigué/Excitation/Peur/Horreur/Intérêt/Joie/Nostalgie/Soulagement/Romance/Tristesse/Satisfaction/Désir sexuel/Surprise/');
-
-    }*/
+    }
 
     
     public function testSetHumeur() {
