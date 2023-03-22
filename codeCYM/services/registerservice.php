@@ -9,6 +9,16 @@ use PDOStatement;
 class RegisterService
 {
 
+    /* Singleton d'instanciation */
+    private static $defaultRegisterService;
+    public static function getDefaultRegisterService()
+    {
+        if (RegisterService::$defaultRegisterService == null) {
+            RegisterService::$defaultRegisterService = new RegisterService();
+        }
+        return RegisterService::$defaultRegisterService;
+    }
+
     /**
      * Création d'un compte, insertion des données de l'utilisateur
      * @param PDO $pdo  la connexion à la base de données

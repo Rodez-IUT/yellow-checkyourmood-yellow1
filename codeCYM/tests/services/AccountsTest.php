@@ -36,13 +36,13 @@ class AccountsTest extends \PHPUnit\Framework\TestCase {
             $resultats = $this->accountsService->getProfile($this->pdo, 1);
             $stringTest = "";
             while ($row = $resultats->fetch()) {
-                $stringTest .= $row->User_ID."/";
-                $stringTest .= $row->User_Name."/";
-                $stringTest .= $row->User_Email."/";
-                $stringTest .= $row->User_BirthDate."/";
-                $stringTest .= $row->User_Gender."/";
-                $stringTest .= $row->User_Password."/";
-                $stringTest .= $row->APIKEY;
+                $stringTest .= $row["User_ID"]."/";
+                $stringTest .= $row["User_Name"]."/";
+                $stringTest .= $row["User_Email"]."/";
+                $stringTest .= $row["User_BirthDate"]."/";
+                $stringTest .= $row["User_Gender"]."/";
+                $stringTest .= $row["User_Password"]."/";
+                $stringTest .= $row["APIKEY"];
             }
 
             // THEN : Me renvoie le bon compte

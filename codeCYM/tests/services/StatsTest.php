@@ -37,10 +37,10 @@ class StatsTest extends \PHPUnit\Framework\TestCase {
             $returnValue = $this->statsService->getHistorique($this->pdo, 1, $id);
             $stringTest = "";
             while ($resultats = $returnValue->fetch()) {
-                $stringTest .= $resultats->Humeur_Libelle."/";
-                $stringTest .= $resultats->Humeur_Emoji."/";
-                $stringTest .= $resultats->Humeur_Description."/";
-                $stringTest .= $resultats->Humeur_Time."/";
+                $stringTest .= $resultats["Humeur_Libelle"]."/";
+                $stringTest .= $resultats["Humeur_Emoji"]."/";
+                $stringTest .= $resultats["Humeur_Description"]."/";
+                $stringTest .= $resultats["Humeur_Time"]."/";
             }
 
             // THEN : On retrouve bien l'historique des humeurs attendus
@@ -61,9 +61,9 @@ class StatsTest extends \PHPUnit\Framework\TestCase {
             $returnValue = $this->statsService->getMaxHumeur($this->pdo, $id);
             $stringTest = "";
             while ($resultats = $returnValue->fetch()) {
-                $stringTest .= $resultats->Humeur_Libelle."/";
-                $stringTest .= $resultats->compteur."/";
-                $stringTest .= $resultats->Humeur_Emoji;
+                $stringTest .= $resultats["Humeur_Libelle"]."/";
+                $stringTest .= $resultats["compteur"]."/";
+                $stringTest .= $resultats["Humeur_Emoji"];
             }
             // THEN : On retrouve bien l'humeur attendu
             $this->assertEquals($stringTest,"Joie/2/😁");
@@ -87,8 +87,8 @@ class StatsTest extends \PHPUnit\Framework\TestCase {
             $stringTest = "";
 
             while($resultats = $returnValue->fetch()) {
-                $stringTest .= $resultats->Humeur_Libelle."/";
-                $stringTest .= $resultats->compteur."/";
+                $stringTest .= $resultats["Humeur_Libelle"]."/";
+                $stringTest .= $resultats["compteur"]."/";
             }
             // THEN : On retrouve bien les humeurs attendu
             $this->assertEquals($stringTest, "Joie/2/Anxiete/1/Degout/1/Ennui/1/");
@@ -148,8 +148,8 @@ class StatsTest extends \PHPUnit\Framework\TestCase {
         $returnValue = $this->statsService->getAllValue($this->pdo, $id);
         $stringTest = "";
         while($resultats = $returnValue->fetch()) {
-            $stringTest .= $resultats->Humeur_Libelle."/";
-            $stringTest .= $resultats->compteur."/";
+            $stringTest .= $resultats["Humeur_Libelle"]."/";
+            $stringTest .= $resultats["compteur"]."/";
         }
         // THEN : On retrouve bien les humeurs attendu
         $this->assertEquals($stringTest, "Joie/2/Anxiete/1/Degout/1/Ennui/1/");
