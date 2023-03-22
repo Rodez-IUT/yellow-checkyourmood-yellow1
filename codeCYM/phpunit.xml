@@ -6,6 +6,7 @@
     <coverage>
         <include>
             <directory suffix=".php">services</directory>
+            <directory suffix=".php">application</directory>
         </include>
     </coverage>
 </phpunit>
