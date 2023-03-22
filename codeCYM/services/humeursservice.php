@@ -9,9 +9,19 @@ use PDO;
 class HumeursService
 {
 
+     /* Singleton d'instanciation */
+     private static $defaultHumeursService;
+     public static function getDefaultHumeursService()
+     {
+         if (HumeursService::$defaultHumeursService == null) {
+             HumeursService::$defaultHumeursService = new HumeursService();
+         }
+         return HumeursService::$defaultHumeursService;
+     }
+
     /**
      * Permet d'obtenir la liste des humeurs depuis un fichier externes
-     * @return null ou PDOStatement liste contenant toutes les humeurs 
+     * @return iterable|object ou PDOStatement liste contenant toutes les humeurs 
      */
     public function getListeHumeurs() {
         try {

@@ -24,7 +24,7 @@ class StatsService
      * Récupère l'humeur qui apparait le plus ainsi que 
      * le nombre de fois où l'humeur a été saisie 
      * @param PDO $pdo  la connexion à la base de données
-     * @return String $req le résultat de la requête
+     * @return Object $req le résultat de la requête
      */
     public function getMaxHumeur($pdo, $id) {
         $req =$pdo->prepare("SELECT Humeur_Libelle, COUNT(Humeur_Libelle) as compteur, Humeur_Emoji from humeur join user ON user.User_ID = humeur.CODE_USER WHERE CODE_User = :id GROUP BY Humeur_Libelle, Humeur_Emoji  ORDER BY compteur DESC LIMIT 1");
@@ -38,7 +38,7 @@ class StatsService
     /**
      * Récupère le nombre total d'humeur saisie entre 2 intervales de temps
      * @param PDO $pdo  la connexion à la base de données
-     * @return String $req  le résultat de la requête
+     * @return Object $req  le résultat de la requête
      */
     public function getAllValueBetweenDates($pdo, $startDate, $endDate, $id) {
         $req = $pdo->prepare("SELECT Humeur_Libelle, COUNT(Humeur_Libelle) as compteur from humeur join user ON user.User_ID = humeur.CODE_USER WHERE CODE_User = :id AND Humeur_Time BETWEEN :startDate AND :endDate GROUP BY Humeur_Libelle");

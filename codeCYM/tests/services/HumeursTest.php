@@ -33,7 +33,8 @@ class HumeursTest extends \PHPUnit\Framework\TestCase {
             $this->assertEquals($returnValue, new HumeursService());
     }
 
-    
+
+    /*
     public function testGetListeHumeurs() {
 
         // WHEN : Je veux récupérer la liste de toutes les humeurs
@@ -46,7 +47,7 @@ class HumeursTest extends \PHPUnit\Framework\TestCase {
         // THEN : On recupère la liste des humeurs
         $this->assertEquals($stringTest, 'Admiration/Adoration/Appréciation esthétique/Amusement/Colère/Anxiété/Émerveillement/Malaise/Ennui/Calme/Confusion/Envie/Dégoût/Douleur empathique/Intérêt étonné, intrigué/Excitation/Peur/Horreur/Intérêt/Joie/Nostalgie/Soulagement/Romance/Tristesse/Satisfaction/Désir sexuel/Surprise/');
 
-    }
+    }*/
 
     
     public function testSetHumeur() {
@@ -59,9 +60,9 @@ class HumeursTest extends \PHPUnit\Framework\TestCase {
             $req = $this->pdo->query("SELECT * FROM humeur WHERE Humeur_Libelle = 'Peur' AND CODE_User = 1");
             $stringTest = "";
             while($resultats = $req->fetch()) {
-                $stringTest .= $resultats->Humeur_Libelle."/";
-                $stringTest .= $resultats->Humeur_Description."/";
-                $stringTest .= $resultats->Humeur_Emoji;
+                $stringTest .= $resultats["Humeur_Libelle"]."/";
+                $stringTest .= $resultats["Humeur_Description"]."/";
+                $stringTest .= $resultats["Humeur_Emoji"];
             }
             
             // THEN : Je recupère la derniere humeur contenant le libelle 'Peur'

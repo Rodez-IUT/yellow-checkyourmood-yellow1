@@ -51,6 +51,7 @@ class DefaultComponentFactory implements ComponentFactory
      */
     public function buildControllerByName(string $controller_name): mixed {
         return match ($controller_name) {
+            "Home" => $this->buildHomeController(),
             "home" => $this->buildHomeController(),
             "accounts" => $this->buildAccountController(),
             "humeurs" => $this->buildHumeurController(),
