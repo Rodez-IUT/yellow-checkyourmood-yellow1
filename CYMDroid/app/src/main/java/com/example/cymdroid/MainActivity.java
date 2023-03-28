@@ -32,6 +32,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -228,20 +229,15 @@ public class MainActivity extends AppCompatActivity {
      * Avec cette version : le résultat de la requête est affiché directement en tant
      * qu'objet Json.
      */
-    private void getApiKey() {
+    public void getApiKey() {
         String url = String.format(URL_API_KEY, nomUtilisateur, motDePasseUtilisateur);
 
-        /*
-         * on crée une requête GET, paramètrée par l'url préparée ci-dessus,
-         * Le résultat de cette requête sera un objet JSon, donc la requête est de type
-         * JsonObjectRequest
-         */
-        JsonArrayRequest requeteVolley = new JsonArrayRequest(Request.Method.GET, url,
+        JsonObjectRequest requeteVolley = new JsonObjectRequest(Request.Method.GET, url,
                 null,
                 // écouteur de la réponse renvoyée par la requête
-                new Response.Listener<JSONArray>() {
+                new Response.Listener<JSONObject>() {
                     @Override
-                    public void onResponse(JSONArray reponse) {
+                    public void onResponse(JSONObject reponse) {
                         setZoneResultatAvecObjetJson1(reponse);
                     }
                 },
@@ -249,11 +245,56 @@ public class MainActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError erreur) {
+                        test.setText(erreur.toString());
                     }
                 });
-
         // la requête est placée dans la file d'attente des requêtes
         getFileRequete().add(requeteVolley);
+
+//        StringRequest requeteVolley = new StringRequest(Request.Method.GET, url,
+//                // écouteur de la réponse renvoyée par la requête
+//                new Response.Listener<String>() {
+//                    @Override
+//                    public void onResponse(String reponse) {
+//                        test.setText("Début de la réponse obtenue"
+//                                + reponse.substring(0, Math.min(400, reponse.length())));
+//                    }
+//                },
+//                // écouteur du retour de la requête si aucun résultat n'est renvoyé
+//                new Response.ErrorListener() {
+//                    @Override
+//                    public void onErrorResponse(VolleyError erreur) {
+//                        test.setText("erreur");
+//                    }
+//                });
+//        // la requête est placée dans la file d'attente des requêtes
+//        getFileRequete().add(requeteVolley);
+
+        /*
+         * on crée une requête GET, paramètrée par l'url préparée ci-dessus,
+         * Le résultat de cette requête sera un objet JSon, donc la requête est de type
+         * JsonObjectRequest
+         */
+//        JsonArrayRequest requeteVolley = new JsonArrayRequest(Request.Method.GET, url,
+//                null,
+//                // écouteur de la réponse renvoyée par la requête
+//                new Response.Listener<JSONArray>() {
+//                    @Override
+//                    public void onResponse(JSONArray reponse) {
+//
+//                        setZoneResultatAvecObjetJson1(reponse);
+//                    }
+//                },
+//                // écouteur du retour de la requête si aucun résultat n'est renvoyé
+//                new Response.ErrorListener() {
+//                    @Override
+//                    public void onErrorResponse(VolleyError erreur) {
+//                        test.setText(erreur.toString());
+//                    }
+//                });
+//
+//        // la requête est placée dans la file d'attente des requêtes
+//        getFileRequete().add(requeteVolley);
     }
 
     /**
@@ -322,21 +363,54 @@ public class MainActivity extends AppCompatActivity {
      * dans le TextView de résultat
      * @param reponse  réponse à la requête, sous la forme d'un JSONArray
      */
-    public void setZoneResultatAvecObjetJson1(JSONArray reponse) {
-        JSONObject objetJson;
-        String resultatFormate="bb";
+    public void setZoneResultatAvecObjetJson1(JSONObject reponse) {
         try {
-//            for (int i = 0; i < reponse.length(); i++) {
-                try {
-                    // on récupère l’objet Json situé en position i dans le tableau
-                    objetJson = reponse.getJSONObject(0);
-                    resultatFormate=objetJson.getString("APIKEY");
-                } catch (JSONException erreur) {
-
-                }
-//            }
-            test.setText(resultatFormate);
-        } catch (Exception erreur) {
+            StringBuilder resultatFormate = new StringBuilder();
+            /*
+             * on extrait de l'objet Json reponse : le titre, l'année, les auteurs
+             * On construit la chaine resultatFormate avec des libellés et le chaînes
+             * extraites de l'objet Json
+             */
+            resultatFormate.append(reponse.getString("APIKEY"));
+            // on affiche la chaîne fomratée
+            test.setText(resultatFormate.toString());
+            apiKey = resultatFormate.toString();
+        } catch(JSONException erreur) {
+            test.setText("joqhboqupehbv");
         }
+
+//        JSONObject objetTypeClient; // contiendra successivement chacun des objets
+// // du tableau
+//        StringBuilder resultatFormate = new StringBuilder();
+//        try {
+//
+//            // on parcourt chacun des objets de l'objet reponse
+//            for (int i = 0; i < reponse.length(); i++) {
+//                // on récupère l'objet de rang i, en tant qu'objet Json
+//                objetTypeClient = reponse.getJSONObject(i);
+//                // on récupère la valeur du champs TYPE_CLIENT_DESIGNATION
+//                resultatFormate.append(objetTypeClient.getString("APIKEY"));
+//            }
+//            // on affiche la chaîne formatée
+//            test.setText(resultatFormate.toString());
+//            System.out.println(resultatFormate);
+//        } catch(JSONException erreur) {
+//            test.setText("joqhboqupehbv");
+//        }
+
+
+//        try {
+//            for (int i = 0; i < reponse.length(); i++) {
+//                try {
+//                    // on récupère l’objet Json situé en position i dans le tableau
+//                    objetJson = reponse.getJSONObject(i);
+//                    resultatFormate=objetJson.getString("APIKEY");
+//                } catch (JSONException erreur) {
+//                    resultatFormate = erreur.toString();
+//                }
+//            }
+//            test.setText(resultatFormate);
+//        } catch (Exception erreur) {
+//        }
     }
 }
