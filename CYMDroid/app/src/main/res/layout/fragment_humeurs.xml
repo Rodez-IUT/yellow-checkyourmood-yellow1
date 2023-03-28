@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <TextClock
+        android:id="@+id/heure"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:format12Hour="h:mm:ss a - d MMM, yyyy"
+        android:format24Hour="k:mm:ss"
+        android:timeZone="Europe/Paris"
+        android:textSize="56sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginBottom="30dp"/>
+
+    <TableLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="350dp"
+        android:layout_height="200dp"
+        android:background="@drawable/rectangle_connexion"
+        android:layout_gravity="center"
+        android:stretchColumns="0,2">
+
+        <TableRow>
+
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/show_emoji"
+                android:layout_column="2"/>
+        </TableRow>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/edit_desciption" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="fleche"
+            android:gravity="center"/>
+
+    </TableLayout>
+</LinearLayout>
