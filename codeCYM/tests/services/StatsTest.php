@@ -189,5 +189,157 @@ class StatsTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
+    public function testGetAllRow() {
+        try {
+            // GIVEN : Une connexion a une base de données et un ID
+            $this->pdo->beginTransaction();
+            $id = 1;
+            
+            // WHEN : Je veux récupèrer toutes les humeurs rentrés par l'utilisateur
+            $returnValue = $this->statsService->getAllRow($this->pdo, $id);
+            // THEN : Je retrouve le nombre attendu
+            $this->assertEquals($returnValue, 5);
+        
+            $this->pdo->rollBack();
+        } catch (PDOException) {
+            $this->pdo->rollBack();
+        }
+    }
+
+    public function testGetMostUsed() {
+        try {
+            // GIVEN : Une connexion a une base de données, un ID, une humeur et deux dates
+            $this->pdo->beginTransaction();
+            $id = 1;
+            $humeur = 'Joie';
+            $dateDebut = '2022-12-01 11:20:11';
+            $dateFin = '2022-12-12 15:53:13';
+
+            // WHEN : Je veux récupèrer le nombre de fois qu'un utilisateur a eu une humeur entre 2 dates
+            $returnValue = $this->statsService->getMostUsed($this->pdo, $dateDebut, $dateFin, $humeur, $id);
+            // THEN : Je retrouve le nombre attendu
+            $this->assertEquals(2, $returnValue[0][1]);
+
+            $this->pdo->rollBack();
+        } catch (PDOException) {
+            $this->pdo->rollBack();
+        }
+    }
+
+    public function testGetHumeurByTime() {
+        try {
+            // GIVEN : Une connexion a une base de données, un ID, une humeur et deux dates
+            $this->pdo->beginTransaction();
+            $id = 1;
+            $humeur = 'Joie';
+            $dateDebut = '2022-12-01 11:20:11';
+            $dateFin = '2022-12-12 15:53:13';
+
+            // WHEN : Je veux récupèrer le nombre de fois que l'utilisateur a eu une humeur entre 2 dates regroupé par jour
+            $returnValue = $this->statsService->getHumeurByTime($this->pdo, $dateDebut, $dateFin, $humeur, $id);
+            $stringTest = "";
+            while($resultats = $returnValue->fetch()) {
+                $stringTest .= $resultats["Humeur_Libelle"]."/"; 
+                $stringTest .= $resultats["nombreHumeur"]."/"; 
+                $stringTest .= $resultats["Date"]."/"; 
+            }
+            // THEN : Je récupère les humeurs par jour attendues
+            $this->assertEquals($stringTest, "Joie/1/01/12/2022/Joie/1/12/12/2022/");
+
+            $this->pdo->rollBack();
+        } catch (PDOException) {
+            $this->pdo->rollBack();
+        }
+    }
+
+    public function testGetNombreSaisiesHumeurSelectionnee() {
+        try {
+            // GIVEN : Une connexion a une base de données, un ID et une humeur 
+            $this->pdo->beginTransaction();
+            $id = 1;
+            $humeur = 'Joie';
+
+            // WHEN : Je veux récupèrer le nombre de saisies de l'humeur saisie par l'utilisateur
+            $returnValue = $this->statsService->getNombreSaisiesHumeurSelectionnee($this->pdo, $humeur, $id);
+            // THEN : Je récupère le nombre d'humeurs attendu
+            $this->assertEquals($returnValue, 2);
+
+            $this->pdo->rollBack();
+        } catch (PDOException) {
+            $this->pdo->rollBack();
+        }
+    }
+
+    public function testDelHumeur() {
+        try {
+            // GIVEN : Une connexion a une base de données, un ID, une humeur et une date
+            $this->pdo->beginTransaction();
+            $id = 1;
+            $humeur = 'Joie';
+            $date = '2022-12-01 11:20:11';
+            
+            // WHEN : Je supprime une humeur saisi par l'utilisateur 
+            $this->statsService->delHumeur($this->pdo, $date, $humeur, $id);
+            // et que je cherche le nombre de cette humeur après la supression
+            $req = $this->pdo->prepare("SELECT * FROM humeur WHERE Humeur_Libelle = :humeur AND CODE_User = :id");
+            $req->execute(['humeur'=>$humeur, 'id'=>$id]);
+            $resultats = $req->rowCount();
+            
+            // THEN : Je trouve le nombre d'humeur attendu
+            $this->assertEquals($resultats, 1);
+
+            $this->pdo->rollBack();
+        } catch (PDOException) {
+            $this->pdo->rollBack();
+        }
+    }
+    
+    public function testUpdateDesc() {
+        try {
+            // GIVEN : Une connexion a une base de données, un ID, une humeur, une date et une description
+            $this->pdo->beginTransaction();
+            $id = 1;
+            $humeur = 'Joie';
+            $date = '2022-12-01 11:20:11';
+            $description = 'Maintenant je suis joyeux !';
+
+            // WHEN : Je modifie la description d'une humeur
+            $this->statsService->updateDesc($this->pdo, $date, $humeur, $description, $id);
+            // et que je récupère la description actuelle pour vérifier la modification
+            $req = $this->pdo->prepare("SELECT Humeur_Description FROM Humeur WHERE Humeur_Libelle = :humeur AND CODE_User = :id");
+            $resultats = $req->execute(['humeur'=>$humeur, 'id'=>$id]);
+            // THEN : Je trouve bien la decription modifié antérieurement
+            $this->assertEquals($description, $resultats);
+
+            $this->pdo->rollBack();
+        } catch (PDOException) {
+            $this->pdo->rollBack();
+        }
+    }
+
+    public function testUpdateTime() {
+        try {
+            // GIVEN : Une connexion a une base de données, un ID, une humeur et deux dates
+            $this->pdo->beginTransaction();
+            $id = 1;
+            $humeur = 'Joie';
+            $dateActuelle = '2022-12-01 11:20:11';
+            $dateFinale = '2022-12-12 15:53:13';
+    
+            // WHEN : Je modifie la date de saisie d'une humeur 
+            $this->statsService->updateTime($this->pdo, $dateActuelle, $humeur, $dateFinale, $id);
+            // et que je verifie si elle a bien été modifié
+            $req = $this->pdo->prepare("SELECT Humeur_Time FROM Humeur WHERE Humeur_Libelle = :humeur AND CODE_User = :id");
+            $resultats = $req->execute(['humeur'=>$humeur, 'id'=>$id]);
+
+            //THEN : Je retrouve bien l'heure modifié
+            $this->assertEquals($resultats, $dateFinale);
+            
+            $this->pdo->rollBack();
+        } catch (PDOException) {
+            $this->pdo->rollBack();
+        }
+    }
+
 
 }
