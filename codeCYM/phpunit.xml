@@ -8,6 +8,7 @@
             <directory suffix=".php">services</directory>
             <directory suffix=".php">application</directory>
             <directory suffix=".php">controllers</directory>
+            <directory suffix=".php">tests</directory>
         </include>
     </coverage>
 </phpunit>
