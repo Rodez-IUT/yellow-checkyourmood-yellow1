@@ -36,9 +36,12 @@ class HumeursController {
         return $view;
     }
 
+    
     /**
      * insère l'humeur saisie par l'utilisateur si elle est correcte, 
      * sinon ne l'insère pas et indique à l'utilisateur que l'humeur est incorrecte
+     * @param PDO $pdo  la connexion à la base de données
+     * @return View
      */
     public function setHumeur($pdo) {
         $view = new View("/views/Humeurs");
@@ -54,6 +57,7 @@ class HumeursController {
         }
         $_SESSION['msgHumeur'] = $msgHumeur;
         header('Location: ?action=index&controller=humeurs#');
+        return $view;
     }
-
+            
 }

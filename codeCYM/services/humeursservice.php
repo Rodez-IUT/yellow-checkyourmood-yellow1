@@ -21,7 +21,7 @@ class HumeursService
 
     /**
      * Permet d'obtenir la liste des humeurs depuis un fichier externes
-     * @return iterable|object ou PDOStatement liste contenant toutes les humeurs 
+     * @return string[]|null liste contenant toutes les humeurs 
      */
     public function getListeHumeurs() {
         try {

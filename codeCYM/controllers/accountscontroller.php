@@ -28,13 +28,7 @@ class AccountsController {
         $resultats = $this->accountsService->getProfile($pdo, $id); 
 
         /* met dans la view les données récupérées */
-        while($row = $resultats->fetch()) {
-            $view->setVar('mail', $row["User_Email"]);
-            $view->setVar('username', $row["User_Name"]);
-            $view->setVar('password', $row["User_Password"]);
-            $view->setVar('birthDate', $row["User_BirthDate"]);
-            $view->setVar('gender', $row["User_Gender"]);
-        }
+        $view->setVar('resultats', $resultats);
 
         return $view;
     }
@@ -94,25 +88,12 @@ class AccountsController {
      */
     public function getDefaultProfile($pdo, $view) {
         $id = $_SESSION['UserID'];
-        $defaultEmail = '';
-        $defaultUsername = '';
-        $defaultBirthDate = '';
-        $defaultGender = '';
 
         /* récupère dans la base données les infos de l'utilisateur */
         $verif = $this->accountsService->getProfile($pdo, $id); 
 
         /* met dans la view les données récupérées */
-        while($row = $verif->fetch()) {
-            $defaultEmail = $row["User_Email"];
-            $defaultUsername = $row["User_Name"];
-            $defaultBirthDate = $row["User_BirthDate"];
-            $defaultGender = $row["User_Gender"];
-        }
-        $view->setVar('defaultEmail', $defaultEmail);
-        $view->setVar('defaultUsername', $defaultUsername);
-        $view->setVar('defaultBirthDate', $defaultBirthDate);
-        $view->setVar('defaultGender', $defaultGender);
+        $view->setVar('verif', $verif);
 
         return $view;
     }
@@ -271,6 +252,7 @@ class AccountsController {
         while($row = $stmt->fetch()) {
             $defaultPassword = $row["User_Password"];
         }
+        $view->setVar('stmt', $stmt);
         /* Vérification de l'ancien mot de passe */
         $testOldPassword = !empty(Passwords::$oldPassword) 
                            && strcmp($defaultPassword, md5(Passwords::$oldPassword)) == 0;

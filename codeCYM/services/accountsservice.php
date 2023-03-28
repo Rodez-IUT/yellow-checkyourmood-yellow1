@@ -12,7 +12,7 @@ class AccountsService
      * @param PDO $pdo  la connexion à la base de données
      * @return PDOStatement $resultats  le résulat de la requête (toutes les données d'un utilisateur)
      */
-    public static function getProfile($pdo, $id) {
+    public function getProfile($pdo, $id) {
 
         $requete = "SELECT * FROM User WHERE User_ID = $id";
         $resultats=$pdo->query($requete);

@@ -29,13 +29,7 @@ class RegisterController {
         if (isset($_SESSION['UserID'])) {
             $view = new View("/views/Account");
             $resultats = $this->accountService->getProfile($pdo, $_SESSION['UserID']);
-            while($row = $resultats->fetch()) {
-                $view->setVar('mail', $row["User_Email"]);
-                $view->setVar('username', $row["User_Name"]);
-                $view->setVar('password', $row["User_Password"]);
-                $view->setVar('birthDate', $row["User_BirthDate"]);
-                $view->setVar('gender', $row["User_Gender"]);
-            }
+            $view->setVar('resultats', $resultats);
         } else {
             $view = new View("/views/Register");
         }
