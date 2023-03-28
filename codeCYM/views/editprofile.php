@@ -26,6 +26,12 @@
         <div class="row">
             <form class="main" method="post">
                 <?php
+                    while($row = $verif->fetch()) {
+                        $defaultEmail = $row["User_Email"];
+                        $defaultUsername = $row["User_Name"];
+                        $defaultBirthDate = $row["User_BirthDate"];
+                        $defaultGender = $row["User_Gender"];
+                    }
                     $genderList = array("Homme", "Femme", "Autre"); // liste des genres disponibles
                     if($update) {
                         // Erreur si le mail est vide 

@@ -7,6 +7,7 @@
         <include>
             <directory suffix=".php">services</directory>
             <directory suffix=".php">application</directory>
+            <directory suffix=".php">controllers</directory>
         </include>
     </coverage>
 </phpunit>

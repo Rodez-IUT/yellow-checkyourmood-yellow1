@@ -28,6 +28,12 @@
             </div>
             <div class="main">  
             <?php
+                while($row = $resultats->fetch()) {
+                    $mail = $row["User_Email"];
+                    $username = $row["User_Name"];
+                    $birthDate = $row["User_BirthDate"];
+                    $gender = $row["User_Gender"];
+                }
                 echo "<div class='Profil-Main'>";
                     echo '<div class="Profil1">';
                         echo '<div class="Email">';
