@@ -112,7 +112,7 @@
 				$infos['Statut']="OK";
 				$infos['Message']="Connexion reussi";
 				$infos['APIKEY']= $aReturn;
-				sendJSON($infos, 401) ;
+				sendJSON($infos, 200) ;
 			}
 		} catch(PDOException $e){
 			$infos['Statut']="KO";
@@ -160,7 +160,7 @@
 				$infos['Statut']="OK";
 				$infos['Message']="Login Correct";
 				$infos['Code_User']= $code;
-				sendJSON($infos, 401) ;
+				sendJSON($infos, 200) ;
 			}
 		} catch(PDOException $e){
 			$infos['Statut']="KO";
