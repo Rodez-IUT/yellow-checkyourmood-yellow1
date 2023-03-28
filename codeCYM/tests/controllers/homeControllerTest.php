@@ -44,7 +44,7 @@ class HomeControllerTest extends TestCase
     {
         self::assertNotNull($this->homeController);
         // when call to index
-        $view = $this->homeController->index($this->pdo);
+        $view = $this->homeController->index();
         // then the view point to the expected view file
         self::assertEquals("/views/index", $view->getRelativePath());
     }
