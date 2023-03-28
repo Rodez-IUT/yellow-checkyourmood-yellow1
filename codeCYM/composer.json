@@ -12,7 +12,8 @@
         "psr-4": {
             "controllers\\": "controllers/",
             "services\\": "services/",
-            "application\\": "application/"
+            "application\\": "application/",
+            "test\\": "test/"
         }
     },
     "require": {
