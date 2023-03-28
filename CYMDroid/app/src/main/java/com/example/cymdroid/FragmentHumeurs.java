@@ -64,6 +64,9 @@ public class FragmentHumeurs extends Fragment {
             }
         });
 
+        // TODO tester si la connexion est reussi
+        vueDuFragment.setVisibility(View.INVISIBLE);
+
         return vueDuFragment;
     }
 

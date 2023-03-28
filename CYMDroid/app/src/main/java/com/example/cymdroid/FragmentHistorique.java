@@ -104,6 +104,8 @@ public class FragmentHistorique extends Fragment implements AdapterView.OnItemCl
         //On attribue à notre listView l'adapter que l'on vient de créer
         listeHumeurs.setAdapter(adaptateur);
 
+        // TODO tester si la connexion est reussi
+        vueDuFragment.setVisibility(View.INVISIBLE);
         return vueDuFragment;
     }
 
