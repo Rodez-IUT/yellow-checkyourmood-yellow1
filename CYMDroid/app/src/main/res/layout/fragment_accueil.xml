@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="350dp"
+        android:layout_height="300dp"
+        android:background="@drawable/rectangle_connexion"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:gravity="center"
+            android:layout_marginBottom="30dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="25sp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/presentation"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:layout_marginBottom="20sp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/message_connexion"
+            android:gravity="center"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/clic_message"
+            android:gravity="center"
+            android:textColor="@color/black"/>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/bouton_connexion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="connexion"
+        android:onClick="connecter"/>
+
+</LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!--<LinearLayout-->
+    <!--    xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--    xmlns:tools="http://schemas.android.com/tools"-->
+    <!--    android:layout_width="match_parent"-->
+    <!--    android:layout_height="match_parent"-->
+    <!--    tools:context=".MainActivity"-->
+    <!--    android:orientation="vertical"-->
+    <!--    android:gravity="center">-->
+
+    <!--    <androidx.constraintlayout.widget.ConstraintLayout-->
+    <!--        android:layout_width="350dp"-->
+    <!--        android:layout_height="300dp"-->
+    <!--        android:background="@drawable/rectangle_connexion">-->
+
+    <!--        <LinearLayout-->
+    <!--            android:id="@+id/linearLayout"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="49dp"-->
+    <!--            android:background="@drawable/litle_rectangle_connexion"-->
+    <!--            android:gravity="center"-->
+    <!--            app:layout_constraintTop_toTopOf="parent">-->
+
+    <!--            <TextView-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:text="@string/title_connexion"-->
+    <!--                android:textStyle="bold"-->
+    <!--                android:textSize="20sp"-->
+    <!--                android:textColor="#000000"/>-->
+    <!--        </LinearLayout>-->
+
+
+    <!--        <EditText-->
+    <!--            android:id="@+id/editText"-->
+    <!--            android:layout_width="266dp"-->
+    <!--            android:layout_height="38dp"-->
+    <!--            android:layout_marginTop="27dp"-->
+    <!--            android:hint="@string/edit_utilisateur"-->
+    <!--            app:layout_constraintEnd_toEndOf="parent"-->
+    <!--            app:layout_constraintStart_toStartOf="parent"-->
+    <!--            app:layout_constraintTop_toBottomOf="@+id/linearLayout"-->
+    <!--            android:background="@drawable/edittext_background"-->
+    <!--            android:paddingLeft="15dp"-->
+    <!--            android:textColorHint="#9E9E9E"-->
+    <!--            android:textSize="14sp"/>-->
+
+    <!--        <EditText-->
+    <!--            android:id="@+id/editText2"-->
+    <!--            android:layout_width="266dp"-->
+    <!--            android:layout_height="38dp"-->
+    <!--            android:layout_marginTop="17dp"-->
+    <!--            android:hint="@string/edit_mdp"-->
+    <!--            app:layout_constraintEnd_toEndOf="parent"-->
+    <!--            app:layout_constraintStart_toStartOf="parent"-->
+    <!--            app:layout_constraintTop_toBottomOf="@+id/editText"-->
+    <!--            android:background="@drawable/edittext_background"-->
+    <!--            android:paddingLeft="15dp"-->
+    <!--            android:textColorHint="#9E9E9E"-->
+    <!--            android:textSize="14sp"/>-->
+
+    <!--        <CheckBox-->
+    <!--            android:id="@+id/checkBox"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:text="@string/text_affichage_mdp"-->
+    <!--            app:layout_constraintEnd_toEndOf="parent"-->
+    <!--            app:layout_constraintStart_toStartOf="parent"-->
+    <!--            app:layout_constraintTop_toBottomOf="@+id/editText2"-->
+    <!--            android:textColor="#929292"/>-->
+
+    <!--        <Button-->
+    <!--            android:layout_width="130dp"-->
+    <!--            android:layout_height="45dp"-->
+    <!--            android:text="@string/button_valider"-->
+    <!--            android:layout_marginTop="10dp"-->
+    <!--            app:layout_constraintEnd_toEndOf="parent"-->
+    <!--            app:layout_constraintStart_toStartOf="parent"-->
+    <!--            app:layout_constraintTop_toBottomOf="@+id/checkBox"-->
+    <!--            android:textColor="#000000"-->
+    <!--            android:background="@drawable/button"-->
+    <!--            android:textAllCaps="false"-->
+    <!--            android:textSize="16sp"/>-->
+    <!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+
+    <!--</LinearLayout>-->

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:stretchColumns="0,1,2">
+
+    <TableRow
+        android:background="@drawable/rectangle_connexion"
+        android:gravity="center"
+        android:layout_margin="10dp">
+
+        <TextView
+            android:id="@+id/emoji"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="20dp"/>
+
+        <TextView
+            android:id="@+id/humeur"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </TableRow>
+
+
+</TableLayout>
