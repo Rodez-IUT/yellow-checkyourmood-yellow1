@@ -54,7 +54,9 @@ public class MainActivity extends AppCompatActivity {
      * clé pour utiliser le Web Service = 89f6b9ef
      */
     private static final String URL_API_KEY = "https://cymyellow1.000webhostapp.com/API/login/%s/%s";
-    private static final String URL_CODE_USER = "https://cymyellow1.000webhostapp.com/API/getCodeUser/%s/%s ";
+    private static final String URL_CODE_USER = "https://cymyellow1.000webhostapp.com/API/getCodeUser/%s/%s";
+
+    private static final String URL_LAST_HUMEUR = "https://cymyellow1.000webhostapp.com/API/fiveLastHumeurs";
 
     private String nomUtilisateur;
 
@@ -201,7 +203,8 @@ public class MainActivity extends AppCompatActivity {
         nomUtilisateur = utilisateur;
         motDePasseUtilisateur = motDePasse;
         getApiKey();
-//        getCodeUser();
+        getCodeUser();
+        getFiveHumeurs();
     }
 
 
@@ -306,17 +309,12 @@ public class MainActivity extends AppCompatActivity {
     private void getCodeUser() {
         String url = String.format(URL_CODE_USER, nomUtilisateur, motDePasseUtilisateur);
 
-        /*
-         * on crée une requête GET, paramètrée par l'url préparée ci-dessus,
-         * Le résultat de cette requête sera un objet JSon, donc la requête est de type
-         * JsonObjectRequest
-         */
-        JsonArrayRequest requeteVolley = new JsonArrayRequest(Request.Method.GET, url,
+        JsonObjectRequest requeteVolley = new JsonObjectRequest(Request.Method.GET, url,
                 null,
                 // écouteur de la réponse renvoyée par la requête
-                new Response.Listener<JSONArray>() {
+                new Response.Listener<JSONObject>() {
                     @Override
-                    public void onResponse(JSONArray reponse) {
+                    public void onResponse(JSONObject reponse) {
                         setZoneResultatAvecObjetJson(reponse);
                     }
                 },
@@ -324,9 +322,9 @@ public class MainActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError erreur) {
+                        test.setText(erreur.toString());
                     }
                 });
-
         // la requête est placée dans la file d'attente des requêtes
         getFileRequete().add(requeteVolley);
     }
@@ -338,21 +336,20 @@ public class MainActivity extends AppCompatActivity {
      * dans le TextView de résultat
      * @param reponse  réponse à la requête, sous la forme d'un JSONArray
      */
-    public void setZoneResultatAvecObjetJson(JSONArray reponse) {
-        JSONObject objetJson;
-        StringBuilder resultatFormate = new StringBuilder();
+    public void setZoneResultatAvecObjetJson(JSONObject reponse) {
         try {
-            for (int i = 0; i < reponse.length(); i++) {
-                try {
-                    // on récupère l’objet Json situé en position i dans le tableau
-                    objetJson = reponse.getJSONObject(i);
-                    resultatFormate.append(objetJson.getString("Code_User"));
-                } catch (JSONException erreur) {
-
-                }
-            }
+            StringBuilder resultatFormate = new StringBuilder();
+            /*
+             * on extrait de l'objet Json reponse : le titre, l'année, les auteurs
+             * On construit la chaine resultatFormate avec des libellés et le chaînes
+             * extraites de l'objet Json
+             */
+            resultatFormate.append(reponse.getString("Code_User"));
+            // on affiche la chaîne fomratée
             test.setText(resultatFormate.toString());
-        } catch (Exception erreur) {
+            codeCompte = resultatFormate.toString();
+        } catch(JSONException erreur) {
+            test.setText("joqhboqupehbv");
         }
     }
 
@@ -375,6 +372,7 @@ public class MainActivity extends AppCompatActivity {
             // on affiche la chaîne fomratée
             test.setText(resultatFormate.toString());
             apiKey = resultatFormate.toString();
+//            getFiveHumeurs();
         } catch(JSONException erreur) {
             test.setText("joqhboqupehbv");
         }
@@ -412,5 +410,130 @@ public class MainActivity extends AppCompatActivity {
 //            test.setText(resultatFormate);
 //        } catch (Exception erreur) {
 //        }
+    }
+
+    private void getFiveHumeurs() {
+
+        boolean toutOk;
+        /*
+         * préparation du nouveau client, à ajouter, en tant qu'objet Json
+         * Les informations le concernant sont renseignées avec des valeurs par défaut,
+         * sauf le nom du magasin qui est celui renseigné par l'utilisateur
+         */
+        toutOk = true;
+        JSONObject objetAEnvoyer = new JSONObject();
+        try {
+            objetAEnvoyer.put("code_user", codeCompte);
+        } catch (JSONException e) {
+            // l'exception ne doit pas se produire
+            toutOk = false;
+        }
+        if (toutOk) {
+            /*
+             * préparation du client modifié, en tant qu'objet Json
+             * Les informations le concernant sont renseignées avec des valeurs par
+             * défaut,
+             * sauf le nom du magasin qui est celui renseigné par l'utilisateur
+             */
+            JsonObjectRequest requeteVolley = new JsonObjectRequest(Request.Method.PUT,
+                    URL_LAST_HUMEUR, objetAEnvoyer,
+                    // Ecouteur pour la réception de la réponse de la requête
+                    new com.android.volley.Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject reponse) {
+                            // la zone de résultat est renseignée avec le résultat
+                            test.setText(reponse.toString());
+                        }
+                    },
+                    // Ecouteur en cas d'erreur
+                    new com.android.volley.Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            test.setText("erreur : " + error);
+                        }
+                    })
+                    // on ajoute un header, contenant la clé d'authentification
+            {
+                @Override
+                public Map getHeaders() throws AuthFailureError {
+                    HashMap<String, String> headers = new HashMap<>();
+                    headers.put("HTTP_CYMAPIKEY", apiKey);
+                    System.out.println(headers.toString());
+                    return headers;
+                }
+            };
+            // ajout de la requête dans la file d'attente Volley
+            getFileRequete().add(requeteVolley);
+        }
+
+
+//        JsonObjectRequest requeteVolley = new JsonObjectRequest(Request.Method.GET, URL_LAST_HUMEUR,
+//                null,
+//                // écouteur de la réponse renvoyée par la requête
+//                new Response.Listener<JSONObject>() {
+//                    @Override
+//                    public void onResponse(JSONObject reponse) {
+//                        setZoneResultatAvecObjetJson3(reponse);
+//                    }
+//                },
+//                // écouteur du retour de la requête si aucun résultat n'est renvoyé
+//                new Response.ErrorListener() {
+//                    @Override
+//                    public void onErrorResponse(VolleyError erreur) {
+//                        test.setText(erreur.toString());
+//                    }
+//                })
+//
+//                // on ajoute un header, contenant la clé d'authentification
+//        {
+//            @Override
+//            public Map getHeaders() throws AuthFailureError {
+//                HashMap<String, String> headers = new HashMap<>();
+//                headers.put("HTTP_CYMAPIKEY", apiKey);
+//                System.out.println(headers.toString());
+//                return headers;
+//            }
+//        };
+//        // la requête est placée dans la file d'attente des requêtes
+//        getFileRequete().add(requeteVolley);
+    }
+    /**
+     * Affiche dans la zone de résultat, seulement les libellés des types de client
+     * @param reponse objet Json contenant sous la forme d'un tableau le résultat de la
+     * recherche de tous les types de clients
+     */
+    public void setZoneResultatAvecObjetJson3(JSONObject reponse){
+//        JSONObject objetTypeClient; // contiendra successivement chacun des objets
+//        // du tableau
+//        try {
+//            StringBuilder resultatFormate = new StringBuilder();
+//            // on parcourt chacun des objets de l'objet reponse
+//            for (int i = 0; i < reponse.length(); i++) {
+//                // on récupère l'objet de rang i, en tant qu'objet Json
+//                objetTypeClient = reponse.getJSONObject(i);
+//                // on récupère la valeur du champs TYPE_CLIENT_DESIGNATION
+//                resultatFormate.append(
+//                                objetTypeClient.getString("Humeur_Libelle"))
+//                        .append(" - ");
+//            }
+//            // on affiche la chaîne formatée
+//            test.setText(resultatFormate.toString());
+//        } catch(JSONException erreur) {
+////            Toast.makeText(this, R.string.message_non_trouve, Toast.LENGTH_LONG).show();
+//        }
+
+        try {
+            StringBuilder resultatFormate = new StringBuilder();
+            /*
+             * on extrait de l'objet Json reponse : le titre, l'année, les auteurs
+             * On construit la chaine resultatFormate avec des libellés et le chaînes
+             * extraites de l'objet Json
+             */
+            resultatFormate.append(reponse.getString("Humeur_Libelle"));
+            // on affiche la chaîne fomratée
+            test.setText(resultatFormate.toString());
+        } catch(JSONException erreur) {
+            test.setText("joqhboqupehbv");
+        }
     }
 }
