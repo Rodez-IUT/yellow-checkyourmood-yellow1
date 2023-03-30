@@ -15,9 +15,13 @@
 					
 					// si apres le premier / il y a fiveLastHumeurs
 					case 'fiveLastHumeurs' :
-						$donnees = json_decode(file_get_contents("php://input"),true);
+						if (isset($url[1])) {
+							$donnees = $url[1];
+						} else {
+							$donnees = "";
+						}
 						// fonction qui verifie la validité de l'APIKEY
-						authentification($donnees['code_user']); 
+						authentification($donnees); 
 						// fonction qui renvoie les 5 dernieres humeurs
 						getFiveLastHumeurs($donnees);
 						break ;
