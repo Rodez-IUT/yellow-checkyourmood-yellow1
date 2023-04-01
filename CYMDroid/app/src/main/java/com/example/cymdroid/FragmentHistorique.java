@@ -150,10 +150,13 @@ public class FragmentHistorique extends Fragment implements AdapterView.OnItemCl
          * Si tel est le cas, il ne faut pas l'afficher. +9
          */
         if (codeCompte != null && apikey != null) {
-//            vueDuFragment.setVisibility(View.VISIBLE);
+            vueDuFragment.setVisibility(View.VISIBLE);
             recupererHumeurs(codeCompte,apikey);
+        } else {
+            vueDuFragment.setVisibility(View.INVISIBLE);
         }
         aaa = vueDuFragment.findViewById(R.id.aaa);
+
         return vueDuFragment;
 //        return vueDuFragment;
     }
@@ -214,6 +217,10 @@ public class FragmentHistorique extends Fragment implements AdapterView.OnItemCl
 
     }
     public void recupererHumeurs(String codeCompte, String apikey) {
+        if (getView() != null) {
+            getView().setVisibility(View.VISIBLE);
+        }
+
 //        zoneAleatoire.setText(getString(R.string.message_communication) + nombre);
         getFiveHumeurs(codeCompte,apikey);
         System.out.println("code : "+ codeCompte + " " + "Apikey : " + apikey);
