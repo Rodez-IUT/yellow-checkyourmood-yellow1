@@ -22,7 +22,6 @@ import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.gms.security.ProviderInstaller;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -147,7 +146,7 @@ public class FragmentHumeurs extends Fragment  implements View.OnClickListener {
 
         String url = String.format(URL_ADD_HUMEUR, codeCompteUtil);
 
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss", Locale.FRANCE);
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.FRANCE);
 
         String date = dateFormat.format(Calendar.getInstance().getTime());
 
@@ -173,6 +172,7 @@ public class FragmentHumeurs extends Fragment  implements View.OnClickListener {
             toutOk = false;
         }
         if (toutOk) {
+            System.out.println("Humeurs -----------> JSON : " + objetAEnvoyer);
             /*
              * Préparation de la requête Volley. La réponse attendue est de type
              * JsonObject
@@ -188,13 +188,7 @@ public class FragmentHumeurs extends Fragment  implements View.OnClickListener {
                         public void onResponse(JSONObject reponse) {
                             // la zone de résultat est renseignée avec le résultat
                             // de la requête
-//                            <zoneResultat>.setText(reponse.toString());
-                            try {
-                                ProviderInstaller.installIfNeeded(getContext());
-                                System.out.println(reponse.toString());
-                            } catch (Exception e) {
-                                e.getMessage();
-                            }
+//                            <zoneResultat>.setText(reponse.toString())
                             System.out.println(reponse.toString());
                         }
                     },
