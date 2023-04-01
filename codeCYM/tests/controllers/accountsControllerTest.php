@@ -24,7 +24,6 @@ use PDOStatement;
 use PHPUnit\Framework\TestCase;
 use services\AccountsService;
 use controllers\AccountsController;
-use yasmf\View;
 
 class AccountsControllerTest extends TestCase
 {

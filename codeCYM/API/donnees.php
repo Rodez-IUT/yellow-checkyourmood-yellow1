@@ -46,7 +46,7 @@
 			$stmt = $pdo->prepare($maRequete);						
 
 			// affectation des parametres pour sécuriser la requete
-			$stmt->bindParam("leCode", $donnees['code_user']);
+			$stmt->bindParam("leCode", $donnees);
 
 			// Execution de la requete
 			$stmt->execute();	
