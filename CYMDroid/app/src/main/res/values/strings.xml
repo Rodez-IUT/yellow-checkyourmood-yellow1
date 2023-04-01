@@ -57,4 +57,34 @@
         <item>Désir sexuel</item>
         <item>Surprise</item>
     </string-array>
+
+    <string-array name="emojis_humeurs">
+        <item>😊</item>
+        <item>🤤</item>
+        <item>🖼️</item>
+        <item>🥳</item>
+        <item>😠</item>
+        <item>😰</item>
+        <item>🤩</item>
+        <item>😖</item>
+        <item>🥱</item>
+        <item>😐</item>
+        <item>😕</item>
+        <item>🥵</item>
+        <item>🤢</item>
+        <item>💔</item>
+        <item>🤔</item>
+        <item>🤪</item>
+        <item>😨</item>
+        <item>😱</item>
+        <item>🧐</item>
+        <item>😄</item>
+        <item>🎆</item>
+        <item>😌</item>
+        <item>🌹</item>
+        <item>😥</item>
+        <item>👍</item>
+        <item>😏</item>
+        <item>🙀</item>
+    </string-array>
 </resources>

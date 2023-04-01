@@ -166,6 +166,8 @@ public class MainActivity extends AppCompatActivity implements FragmentAccueil.E
         System.out.println("apikeyMain : " + apiKey);
         FragmentHistorique fragmentAModifier =
                 (FragmentHistorique) getSupportFragmentManager().findFragmentByTag("f1");
+        FragmentHumeurs fragmentAModifier2 =
+                (FragmentHumeurs) getSupportFragmentManager().findFragmentByTag("f2");
         /* Si l'utilisateur n'a pas encore activé l'onglet numéro 2, le fragment f1 n'existe pas
          * encore. Dans ce cas, fragmentAModifier est égal à null. On ne peut donc pas lui
          * envoyer le nombre aléatoire à afficher
@@ -174,6 +176,10 @@ public class MainActivity extends AppCompatActivity implements FragmentAccueil.E
         if (fragmentAModifier != null) {
 //            fragmentHistorique.setVisibility(View.VISIBLE);
             fragmentAModifier.recupererHumeurs(codeCompte,apiKey);
+        }
+        if (fragmentAModifier2 != null) {
+//            fragmentHistorique.setVisibility(View.VISIBLE);
+            fragmentAModifier2.recevoirCodeEtApikey(codeCompte,apiKey);
         }
     }
 
