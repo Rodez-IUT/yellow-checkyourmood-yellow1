@@ -1,4 +1,5 @@
 <?php 
+namespace API;
 	
 	require_once("json.php");
 	require_once("donnees.php");

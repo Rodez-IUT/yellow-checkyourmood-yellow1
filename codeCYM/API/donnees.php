@@ -1,4 +1,8 @@
 <?php
+namespace API;
+
+use PDO;
+use PDOException;
 	// Données
 		
 	function getPDO(){
@@ -81,6 +85,7 @@
      */
 	function verifLogin($login, $password) {
 		try {
+			$aReturn = '';
 			// connexion a la bd
 			$pdo = getPDO();
 			// cryptage du mot de passe 
@@ -129,6 +134,7 @@
      */
 	function getCodeUser($login, $password) {
 		try {
+			$code = '';
 			// connexion a la bd
 			$pdo = getPDO();
 			// cryptage du mot de passe 

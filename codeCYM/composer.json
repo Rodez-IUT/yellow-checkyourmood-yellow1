@@ -13,7 +13,8 @@
             "controllers\\": "controllers/",
             "services\\": "services/",
             "application\\": "application/",
-            "test\\": "test/"
+            "test\\": "test/",
+            "API\\": "API/"
         }
     },
     "require": {

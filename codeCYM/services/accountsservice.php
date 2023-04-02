@@ -73,6 +73,7 @@ class AccountsService
         $newPassword = md5($newPassword);
         $stmt->bindParam('pwd', $newPassword);
         $stmt->execute();
+        
     }
 
     /**
