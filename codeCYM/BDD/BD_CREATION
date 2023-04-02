@@ -4,6 +4,9 @@ SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
+CREATE DATABASE IF NOT EXISTS CYM;
+USE CYM;
+
 CREATE TABLE `humeur` (
   `CODE_User` int NOT NULL,
   `Humeur_Libelle` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
