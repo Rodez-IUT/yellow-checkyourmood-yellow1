@@ -49,10 +49,12 @@ class RegisterService
             if ($birthDate >= $date) {
                 return "Date de naissance supérieur ou égale à la date du jour";
             }
-            /* cryptage du mot de passe en md5*/
+            
+            /* cryptage du mot de passe et de l'APIKEY en md5*/
             $password = md5($password);
             $crypate = md5($string);
             $insert->execute(array('username'=>$username,'email'=>$email,'birthDate'=>$birthDate,'gender'=>$gender,'pswd'=>$password,'cle'=>$crypate));
+
             return "";
         } catch (PDOException $e) {
             $errorMessage = "création du compte impossible (l'email est déjà utilisé) ou la base de données est inaccessible";
