@@ -180,7 +180,7 @@ public class FragmentHumeurs extends Fragment  implements View.OnClickListener {
              * l'objet Json à transmettre avec la méthode POST, en fait le body de la
              * requête
              */
-            JsonObjectRequest requeteVolley = new JsonObjectRequest(Request.Method.PUT,
+            JsonObjectRequest requeteVolley = new JsonObjectRequest(Request.Method.POST,
                     url, objetAEnvoyer,
                     // Ecouteur pour la réception de la réponse de la requête
                     new com.android.volley.Response.Listener<JSONObject>() {
