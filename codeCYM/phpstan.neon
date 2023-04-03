@@ -1,0 +1,7 @@
+parameters:
+    level: 3
+    scanDirectories:
+        - /services/
+        - /controllers/
+        - /API/
+        - /application/

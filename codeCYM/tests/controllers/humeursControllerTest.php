@@ -25,7 +25,6 @@ use PHPUnit\Framework\TestCase;
 use services\HumeursService;
 use controllers\HumeursController;
 use yasmf\View;
-use Boolean;
 
 class HumeursControllerTest extends TestCase
 {
@@ -70,6 +69,7 @@ class HumeursControllerTest extends TestCase
 
     public function testSetHumeur() 
     {
+        $_GET['description'] = 'test';
         // given an humeurs service and the method setHumeur will be used by the service
         $this->humeursService->method('setHumeur')->willReturn('');
         self::assertNotNull($this->humeursService);

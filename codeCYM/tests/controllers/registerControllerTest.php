@@ -38,7 +38,6 @@ class RegisterControllerTest extends TestCase
 
     public function setUp(): void
     {
-        parent::setUp();
         session_destroy();
 
         // given a register service and an accounts service
@@ -65,6 +64,14 @@ class RegisterControllerTest extends TestCase
 
     public function testRegister()
     {
+        $_GET['username'] = '';
+        $_GET['email'] = '';
+        $_GET['birthDate'] = '';
+        $_GET['gender'] = '';
+        $_GET['password'] = '';
+        $_GET['confirmPassword'] = '';
+        $_GET['login'] = '';
+
         // given an register service and the method insertUserValues will be used by the service
         $this->registerService->method('insertUserValues')->willReturn('');
         self::assertNotNull($this->accountsService);
