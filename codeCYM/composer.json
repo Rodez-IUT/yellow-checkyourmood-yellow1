@@ -13,7 +13,6 @@
             "controllers\\": "controllers/",
             "services\\": "services/",
             "application\\": "application/",
-            "test\\": "test/",
             "API\\": "API/"
         }
     },

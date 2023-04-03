@@ -73,7 +73,7 @@ namespace API;
 			}
 			break ;
 			
-		case "PUT" :
+		case "POST" :
 			if (!empty($_GET['demande'])) {
 				// Récupération des données envoyées
 				$url = explode("/", filter_var($_GET['demande'],FILTER_SANITIZE_URL));
