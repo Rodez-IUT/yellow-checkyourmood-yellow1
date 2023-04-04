@@ -1,10 +1,14 @@
 # CheckYourMood
 
 ## Description du projet : 
-Check Your Mood est une application web dont le but est de saisir son humeur à différents moments de la journée et ce pendant toute la durée de son utilisation, afin de mieux comprendre l’évolution de son humeur au fil du temps.
-Cette application web fonctionne avec une authentification, afin de faire en sorte que les données d’un utilisateur soient persistantes, et qu’il puisse retrouver en tout temps l’évolution de son humeur, en s’authentifiant.
-Il est possible de modifier la saisie d’une humeur dans un délai de 24h, afin de compléter le suivi d’humeur, dans un délai raisonnable. Notre application permet d’ajouter des informations supplémentaires à la saisie d’une humeur à tout moment, afin de suivre au mieux l’évolution de son humeur, et ce en plus d’obtenir des statistiques précises et personnalisables sur une période, en sélectionnant l’humeur dont on veut en savoir davantage. 
-L'application peut être utilisé depuis un appareil android grâce a l'application CYMDroid qui accède aux données de l'applications via une API REST.
+Check Your Mood est une application web dont le but est de saisir son humeur à différents moments de la journée. Il est ainsi possible, sur une accumulation d'humeurs,  de comprendre l’évolution de son humeur au fil du temps.
+Cette application web fonctionne avec une authentification afin de rendre les données utilisateurs persistantes. Il peut ainsi retrouver en tout temps l’évolution de son humeur, en s’authentifiant.
+Il est possible de modifier la saisie d’une humeur dans un délai de 24h, afin de compléter le suivi d’humeur dans un délai raisonnable.
+Notre application permet:
+    - d’ajouter des informations supplémentaires à la saisie d’une humeur à tout moment, afin de suivre au mieux l’évolution de son humeur
+    - d’obtenir des statistiques précises et personnalisables sur une période,
+    - de selectionner l’humeur dont on veut en savoir davantage. 
+L'application peut être utilisé depuis un appareil android grâce a l'application CYMDroid qui accède aux données de de l'utilisateur via une API REST.
 
 ## Équipe de développement : 
 - Trimouille Romain - Product Owner
