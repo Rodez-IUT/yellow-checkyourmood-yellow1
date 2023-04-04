@@ -30,3 +30,4 @@ L'application peut être utilisé depuis un appareil android grâce a l'applicat
 <br>Feuille de suivi des temps : https://docs.google.com/spreadsheets/d/14AUM0WpbvoREKICqUfBSUSM6Ors253kH8eTPyUDbkf0/edit?usp=sharing
 <br>Comptes rendus des réunions : https://drive.google.com/drive/folders/1hBO-7jkzeJQOli-h5gMLpaKdA2PfL-8w?usp=sharing
 <br>Bilans collectif et individuels : https://drive.google.com/drive/folders/179edBuhC3G5guOhnuTydO_ju8Ox-RQlP?usp=sharing
+<br>Diagrammes de cas d'utilisations : https://docs.google.com/document/d/1lWBNfPFBwZRpLBfui_CEuHOey9g3Wk_9w38tbnfCpRg/edit?usp=sharing
