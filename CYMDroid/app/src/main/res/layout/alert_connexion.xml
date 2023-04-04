@@ -9,12 +9,15 @@
         android:id="@+id/nom_utilisateur"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Pseudo"/>
+        android:hint="Pseudo"
+        android:maxLength="25"/>
 
     <EditText
         android:id="@+id/edit_mdp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Mot de passe"/>
+        android:hint="Mot de passe"
+        android:inputType="textPassword"
+        android:maxLength="250"/>
 
 </LinearLayout>

@@ -10,6 +10,8 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextClock;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -165,6 +167,9 @@ public class FragmentHumeurs extends Fragment  implements View.OnClickListener {
             objetAEnvoyer.put("libelle", nomHumeur);
             objetAEnvoyer.put("emoji", emoji);
             objetAEnvoyer.put("time", date);
+            if (description.equals("")) {
+                description = " ";
+            }
             objetAEnvoyer.put("description", description);
             objetAEnvoyer.put("timeConst", date);
         } catch (JSONException e) {
@@ -190,6 +195,7 @@ public class FragmentHumeurs extends Fragment  implements View.OnClickListener {
                             // de la requête
 //                            <zoneResultat>.setText(reponse.toString())
                             System.out.println(reponse.toString());
+                            Toast.makeText(getActivity(), R.string.confirmation_ajout, Toast.LENGTH_LONG).show();
                         }
                     },
                     // Ecouteur en cas d'erreur

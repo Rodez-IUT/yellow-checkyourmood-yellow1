@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
@@ -35,7 +36,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-public class FragmentHistorique extends Fragment implements AdapterView.OnItemClickListener {
+public class FragmentHistorique extends Fragment implements AdapterView.OnItemClickListener, View.OnClickListener {
 
     private static final String URL_LAST_HUMEUR = "https://cymyellow1.000webhostapp.com/API/fiveLastHumeurs/%s";
     private ListView listeHumeurs;
@@ -44,7 +45,8 @@ public class FragmentHistorique extends Fragment implements AdapterView.OnItemCl
     private String humeurs[];
 
     private String dates[];
-    private TextView aaa;
+    private String apiKey;
+    private String codeCompte;
     private RequestQueue fileRequete;
 
     private ArrayList<String> descriptionHumeurs;
@@ -81,6 +83,10 @@ public class FragmentHistorique extends Fragment implements AdapterView.OnItemCl
 //        listeHumeurs.setOnItemClickListener(this);
 
         listeHumeurs = (ListView) vueDuFragment.findViewById(R.id.listeHumeurs);
+
+        listeHumeurs.setOnItemClickListener(this);
+
+        vueDuFragment.findViewById(R.id.btn_refresh).setOnClickListener(this);
 //
 //        //Création de la ArrayList qui nous permettra de remplir la listView
 //        ArrayList<HashMap<String, String>> listItem = new ArrayList<HashMap<String, String>>();
@@ -129,8 +135,8 @@ public class FragmentHistorique extends Fragment implements AdapterView.OnItemCl
 //        vueDuFragment.setVisibility(View.INVISIBLE);
 
 //        View vueDuFragment;
-        String codeCompte;
-        String apikey;// nombre à afficher (c'est l'activité principale qui
+//        String codeCompte;
+//        String apikey;// nombre à afficher (c'est l'activité principale qui
         // va fournir ce nombre)
         // On récupère la vue associée au fragment deux, et le widget qui affichera le nombre
 //        vueDuFragment = inflater.inflate(R.layout.fragment_historique, container, false);
@@ -141,21 +147,21 @@ public class FragmentHistorique extends Fragment implements AdapterView.OnItemCl
          * actuellement géré par l'activité
          */
         codeCompte = ((MainActivity) getActivity()).getCodeCompte();
-        apikey = ((MainActivity) getActivity()).getApikey();
+        apiKey = ((MainActivity) getActivity()).getApikey();
         System.out.println("codeCompte : " + codeCompte);
-        System.out.println("apikey : " + apikey);
+        System.out.println("apikey : " + apiKey);
         /*
          * Dans le cas où aucun nombre aléatoire n'a été généré (ie l'utilisateur n'a pas encore
          * cliqué sur "Générer") , le nombre communiqué par l'activité principale est égal à -1.
          * Si tel est le cas, il ne faut pas l'afficher. +9
          */
-        if (codeCompte != null && apikey != null) {
+        if (codeCompte != null && apiKey != null) {
             vueDuFragment.setVisibility(View.VISIBLE);
-            recupererHumeurs(codeCompte,apikey);
+            recupererHumeurs(codeCompte,apiKey);
         } else {
             vueDuFragment.setVisibility(View.INVISIBLE);
         }
-        aaa = vueDuFragment.findViewById(R.id.aaa);
+//        aaa = vueDuFragment.findViewById(R.id.aaa);
 
         return vueDuFragment;
 //        return vueDuFragment;
@@ -164,10 +170,15 @@ public class FragmentHistorique extends Fragment implements AdapterView.OnItemCl
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 //        System.out.println("a aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa: ");
-//        if (descriptionHumeurs != null) {
-//            System.out.println("b : " + listeHumeurs.toString());
-//            Toast.makeText(getActivity(), descriptionHumeurs.get(i), Toast.LENGTH_LONG).show();
-//        }
+        if (descriptionHumeurs != null) {
+            if (descriptionHumeurs.get(i).equals(" ") || descriptionHumeurs.get(i).equals("")) {
+                Toast.makeText(getActivity(), R.string.description_erreur, Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(getActivity(), descriptionHumeurs.get(i), Toast.LENGTH_LONG).show();
+            }
+//            System.out.println("b :" + descriptionHumeurs.get(i) + "b");
+
+        }
     }
 
     private void getFiveHumeurs(String codeCompte, String apiKey) {
@@ -189,7 +200,7 @@ public class FragmentHistorique extends Fragment implements AdapterView.OnItemCl
                         @Override
                         public void onErrorResponse(VolleyError error) {
 //                            test.setText("erreur : " + error);
-                            aaa.setText(error.toString());
+//                            aaa.setText(error.toString());
                             System.out.println("noooooooooooooooooooooooooooooooooooooooooooooooooooooooooo : " + error.getMessage());
                         }
                     })
@@ -216,14 +227,15 @@ public class FragmentHistorique extends Fragment implements AdapterView.OnItemCl
             getFileRequete().add(requeteVolley);
 
     }
-    public void recupererHumeurs(String codeCompte, String apikey) {
+    public void recupererHumeurs(String codeCompteUser, String apikeyUser) {
         if (getView() != null) {
             getView().setVisibility(View.VISIBLE);
         }
-
+        codeCompte = codeCompteUser;
+        apiKey = apikeyUser;
 //        zoneAleatoire.setText(getString(R.string.message_communication) + nombre);
-        getFiveHumeurs(codeCompte,apikey);
-        System.out.println("code : "+ codeCompte + " " + "Apikey : " + apikey);
+        getFiveHumeurs(codeCompte,apiKey);
+        System.out.println("code : "+ codeCompte + " " + "Apikey : " + apiKey);
     }
 
     private RequestQueue getFileRequete() {
@@ -363,5 +375,10 @@ public class FragmentHistorique extends Fragment implements AdapterView.OnItemCl
 //        } catch(JSONException erreur) {
 ////            test.setText("joqhboqupehbv");
 //        }
+    }
+
+    @Override
+    public void onClick(View view) {
+        recupererHumeurs(codeCompte, apiKey);
     }
 }

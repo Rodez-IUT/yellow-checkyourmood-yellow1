@@ -46,7 +46,9 @@
             android:id="@+id/descriptionHumeur"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/edit_desciption" />
+            android:hint="@string/edit_desciption"
+            android:maxLength="250"
+            android:capitalize="sentences"/>
 
         <Button
             android:id="@+id/btn_ajout"

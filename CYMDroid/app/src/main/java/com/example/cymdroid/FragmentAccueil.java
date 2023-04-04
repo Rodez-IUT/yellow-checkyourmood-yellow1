@@ -44,9 +44,9 @@ public class FragmentAccueil extends Fragment implements View.OnClickListener {
     private String resultatApiKey;
     private String resultatCodeCompte;
     private RequestQueue fileRequete;
-    private TextView test;
-    private Button boutonConnexion;
     private EcouteurGeneration activiteQuiMEcoute;
+
+    private TextView erreurConnexion;
 
     public FragmentAccueil() {
     }
@@ -72,7 +72,9 @@ public class FragmentAccueil extends Fragment implements View.OnClickListener {
         // On récupère la vue (le layout) associée au fragment accueil et on la renvoie
         View vue = inflater.inflate(R.layout.fragment_accueil, container, false);
         vue.findViewById(R.id.bouton_connexion).setOnClickListener(this);
-        test = vue.findViewById(R.id.test);
+
+        erreurConnexion = vue.findViewById(R.id.message_erreur_connexion);
+
         return vue;
     }
 
@@ -189,7 +191,8 @@ public class FragmentAccueil extends Fragment implements View.OnClickListener {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError erreur) {
-                        test.setText(erreur.toString());
+//                        System.out.println("erreur : " + erreur);
+                        erreurConnexion.setText(R.string.message_erreur);
                     }
                 });
         // la requête est placée dans la file d'attente des requêtes
@@ -267,7 +270,6 @@ public class FragmentAccueil extends Fragment implements View.OnClickListener {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError erreur) {
-                        test.setText(erreur.toString());
                     }
                 });
         // la requête est placée dans la file d'attente des requêtes
@@ -292,10 +294,10 @@ public class FragmentAccueil extends Fragment implements View.OnClickListener {
 //            System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa : " + resultatFormate);
             resultatFormate.append(reponse.getString("Code_User"));
             // on affiche la chaîne fomratée
-            test.setText(resultatFormate.toString());
+//            test.setText(resultatFormate.toString());
             codeCompte = resultatFormate.toString();
         } catch(JSONException erreur) {
-            test.setText("joqhboqupehbv");
+//            test.setText("joqhboqupehbv");
         }
     }
 
@@ -317,13 +319,13 @@ public class FragmentAccueil extends Fragment implements View.OnClickListener {
             resultatFormate.append(reponse.getString("APIKEY"));
 //            System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa : " + resultatFormate);
             // on affiche la chaîne fomratée
-            test.setText(resultatFormate.toString());
+//            test.setText(resultatFormate.toString());
             apiKey = resultatFormate.toString();
 //            System.out.println("codeCompteGetApiKey : " + codeCompte);
             System.out.println("apikeyGetApiKey : " + apiKey);
 //            getFiveHumeurs();
         } catch(JSONException erreur) {
-            test.setText("joqhboqupehbv");
+//            test.setText("joqhboqupehbv");
         }
 
 //        JSONObject objetTypeClient; // contiendra successivement chacun des objets
@@ -480,14 +482,15 @@ public class FragmentAccueil extends Fragment implements View.OnClickListener {
              */
             resultatFormate.append(reponse.getString("Humeur_Libelle"));
             // on affiche la chaîne fomratée
-            test.setText(resultatFormate.toString());
+//            test.setText(resultatFormate.toString());
         } catch(JSONException erreur) {
-            test.setText("joqhboqupehbv");
+//            test.setText("joqhboqupehbv");
         }
     }
 
     @Override
     public void onClick(View view) {
+        erreurConnexion.setText("");
         connecter();
 //        System.out.println("codeCompteA : " + codeCompte);
 //        System.out.println("apikeyA : " + apiKey);

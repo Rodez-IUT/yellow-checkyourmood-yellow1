@@ -41,12 +41,12 @@
             android:gravity="center"
             android:textColor="@color/black"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/clic_message"
-            android:gravity="center"
-            android:textColor="@color/black"/>
+<!--        <TextView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="@string/clic_message"-->
+<!--            android:gravity="center"-->
+<!--            android:textColor="@color/black"/>-->
 
     </LinearLayout>
 
@@ -58,10 +58,10 @@
         android:onClick="connecter"/>
 
     <TextView
-        android:id="@+id/test"
+        android:id="@+id/message_erreur_connexion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="aaa"/>
+        android:textColor="@color/red"/>
 
 </LinearLayout>
 

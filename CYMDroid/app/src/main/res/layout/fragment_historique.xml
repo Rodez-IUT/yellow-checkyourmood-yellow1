@@ -11,7 +11,6 @@
         android:orientation="vertical"
         android:gravity="center">
         <TextView
-            android:id="@+id/aaa"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Historique des humeurs"
@@ -21,7 +20,7 @@
             android:gravity="center"/>
 
         <LinearLayout
-            android:layout_width="300dp"
+            android:layout_width="410dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:background="@drawable/rectangle_connexion">
@@ -30,6 +29,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
         </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_refresh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Actualiser"/>
     </LinearLayout>
 
 </LinearLayout>

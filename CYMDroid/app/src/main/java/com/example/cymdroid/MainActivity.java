@@ -65,6 +65,7 @@ public class MainActivity extends AppCompatActivity implements FragmentAccueil.E
 //    private String motDePasseUtilisateur;
     private String apiKey;
     private String codeCompte;
+
 //    private RequestQueue fileRequete;
 //    private TextView test;
     @Override
@@ -113,42 +114,6 @@ public class MainActivity extends AppCompatActivity implements FragmentAccueil.E
                 }).attach();
 
         // -------------------------------------- WEB SERVICE --------------------------------------
-
-        // on vérifie si la connexion à Internet est possible
-        ConnectivityManager gestionnaireConnexion =
-                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo informationReseau = gestionnaireConnexion.getActiveNetworkInfo();
-        if (informationReseau == null || ! informationReseau.isConnected()) {
-            // problème de connexion réseau
-        } else {
-            // on crée un écouteur pour les changements de connectivité
-            PhoneStateListener ecouteurConnectivite = new PhoneStateListener() {
-                @Override
-                public void onDataConnectionStateChanged(int etat) {
-                    switch(etat) {
-                        case TelephonyManager.DATA_CONNECTED :
-                            // appareil connecté et réseau disponible.
-                            break;
-                        case TelephonyManager.DATA_CONNECTING :
-                            // appareil en cours de connexion. TODO : Compléter
-                            break;
-                        case TelephonyManager.DATA_DISCONNECTED :
-                            // appareil déconnecté. TODO : Compléter
-                            break;
-                        case TelephonyManager.DATA_SUSPENDED :
-                            // apparail connecté mais transfert de données impossible.
-                            // TODO : Compléter
-                            break;
-                    }
-                    super.onDataConnectionStateChanged(etat);
-                }
-            };
-            // on associe l'écouteur au gestionnaire de téléphonie
-            TelephonyManager gestionnaireTelephonie =
-                    (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
-            gestionnaireTelephonie.listen(ecouteurConnectivite,
-                    PhoneStateListener.LISTEN_DATA_CONNECTION_STATE);
-        }
 
 //        apiKey = "";
 //        codeCompte = "";
