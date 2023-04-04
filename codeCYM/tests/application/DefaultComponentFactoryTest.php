@@ -55,6 +55,7 @@ class DefaultComponentFactoryTest extends TestCase
 
     public function testBuildControllerByName_Homeh()
     {
+        session_destroy();
         // when ask for home controller
         $controller = $this->componentFactory->buildControllerByName("home");
         // then the controller is HomeController instance
@@ -63,6 +64,8 @@ class DefaultComponentFactoryTest extends TestCase
 
     public function testBuildControllerByName_accounts()
     {
+        session_destroy();
+
         // when ask for home controller
         $controller = $this->componentFactory->buildControllerByName("accounts");
         // then the controller is HomeController instance
@@ -71,6 +74,7 @@ class DefaultComponentFactoryTest extends TestCase
 
     public function testBuildControllerByName_humeurs()
     {
+        session_destroy();
         // when ask for home controller
         $controller = $this->componentFactory->buildControllerByName("humeurs");
         // then the controller is HomeController instance
@@ -79,6 +83,7 @@ class DefaultComponentFactoryTest extends TestCase
 
     public function testBuildControllerByName_register()
     {
+        session_destroy();
         // when ask for home controller
         $controller = $this->componentFactory->buildControllerByName("register");
         // then the controller is HomeController instance
@@ -87,6 +92,7 @@ class DefaultComponentFactoryTest extends TestCase
 
     public function testBuildControllerByName_stats()
     {
+        session_destroy();
         // when ask for home controller
         $controller = $this->componentFactory->buildControllerByName("stats");
         // then the controller is HomeController instance
