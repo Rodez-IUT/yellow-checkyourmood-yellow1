@@ -41,7 +41,7 @@ import java.util.Locale;
 import java.util.Map;
 
 public class FragmentHumeurs extends Fragment  implements View.OnClickListener {
-    private static final String URL_ADD_HUMEUR = "https://cymyellow1.000webhostapp.com/API/addHumeur/%s";
+    private static final String URL_ADD_HUMEUR = "http://192.168.56.101/API/addHumeur/%s";
     private TextClock heure;
 
     private String[] lesHumeurs;

@@ -32,8 +32,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class FragmentAccueil extends Fragment implements View.OnClickListener {
-    private static final String URL_API_KEY = "https://cymyellow1.000webhostapp.com/API/login/%s/%s";
-    private static final String URL_CODE_USER = "https://cymyellow1.000webhostapp.com/API/getCodeUser/%s/%s";
+    private static final String URL_API_KEY = "http://192.168.56.101/API/login/%s/%s";
+    private static final String URL_CODE_USER = "http://192.168.56.101/API/getCodeUser/%s/%s";
 
     private String nomUtilisateur;
 

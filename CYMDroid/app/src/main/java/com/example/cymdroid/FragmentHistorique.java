@@ -38,7 +38,7 @@ import java.util.Map;
 
 public class FragmentHistorique extends Fragment implements AdapterView.OnItemClickListener, View.OnClickListener {
 
-    private static final String URL_LAST_HUMEUR = "https://cymyellow1.000webhostapp.com/API/fiveLastHumeurs/%s";
+    private static final String URL_LAST_HUMEUR = "http://192.168.56.101/API/fiveLastHumeurs/%s";
     private ListView listeHumeurs;
     private String emojis[];
 
